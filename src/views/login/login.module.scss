@@ -1,0 +1,53 @@
+.loginWrap {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .bg {
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
+
+  .formWrap {
+    width: 350px;
+    z-index: 10;
+
+    .title {
+      position: relative;
+      color: #FFFFFF;
+      text-align: center;
+
+      h1 {
+        font-weight: bold;
+        font-size: 22px;
+        color: #fff;
+        user-select: none;
+      }
+
+      p {
+        margin: 10px 0;
+        user-select: none;
+      }
+
+      &:before, &:after {
+        content: "";
+        width: 100px;
+        height: 2px;
+        position: absolute;
+        background: linear-gradient(to right, rgba(255, 255, 255, 0), #1976D2);
+        left: -20px;
+        top: 18px;
+      }
+
+      &:after {
+        left: auto;
+        background: linear-gradient(to left, rgba(255, 255, 255, 0), #1976D2);
+        right: -20px;
+      }
+    }
+  }
+}
