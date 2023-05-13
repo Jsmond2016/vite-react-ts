@@ -20,11 +20,11 @@ export default () => {
   const [ canLogin, setCanLogin ] = useState(false)
   // 组件加载完成
   useEffect(() => {
-    localStorage.clear()
+    // localStorage.clear()
     // 初始化背景
     initBg()
     // 获取验证码
-    getCode()
+    // getCode()
     window.onresize = () => {
       setTimeout(() => {
         initBg()
@@ -32,25 +32,26 @@ export default () => {
     }
   }, [])
   // 监听账号密码是否有值
-  useEffect(() => {
-    setCanLogin(userName !== "" && password !== "" && code !== "")
-  }, [ userName, password, code ])
+  // useEffect(() => {
+  //   setCanLogin(userName !== "" && password !== "" && code !== "")
+  // }, [ userName, password, code ])
   const getCode = () => {
     // 请求验证码
-    gteCodeApi().then((res) => {
-      console.log(res)
-    })
+    // gteCodeApi().then((res) => {
+    //   console.log(res)
+    // })
   }
   // 登录
   const doLoginFn = () => {
-    if (canLogin) {
-      setLoading(true)
-      setTimeout(() => {
-        setLoading(false)
-        localStorage.setItem("token", "this is token")
-        toMainPage()
-      }, 2000)
-    }
+    // if (canLogin) {
+    //   setLoading(true)
+    //   setTimeout(() => {
+    //     setLoading(false)
+    //     localStorage.setItem("token", "this is token")
+    //     toMainPage()
+    //   }, 2000)
+      toMainPage()
+    // }
   }
   // 登录成功之后跳转
   const toMainPage = () => {

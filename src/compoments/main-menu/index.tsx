@@ -6,6 +6,11 @@ import { useNavigate, useLocation } from "react-router-dom"
 type MenuItem = Required<MenuProps>["items"][number]
 const items: MenuItem[] = [
   {
+    label: "登录页面",
+    key: "/login/",
+    icon: <UserOutlined />,
+  },
+  {
     label: "首页",
     key: "/index",
     icon: <HomeOutlined />
@@ -60,6 +65,11 @@ const items: MenuItem[] = [
         ]
       }
     ]
+  },
+  {
+    label: "404页面",
+    key: "/not-found/",
+    icon: <UserOutlined />,
   }
 ]
 const getNodeMap = (node: any, parent?: string | undefined, leave: number = 0) => {
@@ -84,12 +94,12 @@ const MainMenu: React.FC = () => {
   // 编程式跳转路由,利用到 hooks
   const navigateTo = useNavigate()
   // 组件加载完成
-  useEffect(() => {
-    const token = localStorage.getItem("token")
-    if (!token) {
-      navigateTo("/login", { replace: true })
-    }
-  }, [])
+  // useEffect(() => {
+  //   const token = localStorage.getItem("token")
+  //   if (!token) {
+  //     navigateTo("/login", { replace: true })
+  //   }
+  // }, [])
   // 当前路由信息
   const currentRoute = useLocation()
   const getTreeMenuList = getTreeMap(items)
