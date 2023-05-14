@@ -4,7 +4,7 @@ import Search from './search/index';
 import List from './list/index';
 import moment from 'moment';
 // import http from '@/utils/req';
-// import http from '@/api';
+import http from '@/request/index';
 
 const Index = () => {
   const [dataSource, setDataSource] = useState<any>([]);
@@ -16,35 +16,35 @@ const Index = () => {
       age,
       birthday: moment(birthday).format('YYYY-MM-DD'),
     };
-    // setLoading(true);
-    // http({
-    //   url: '/search-user',
-    //   method: 'get',
-    //   params,
-    // }).then((res) => {
-    //   const { data } = res;
-    //   setDataSource(data);
-    // });
-    // .finally(() => {
-    //   setLoading(false);
-    // });
+    setLoading(true);
+    http({
+      url: '/search-user',
+      method: 'get',
+      params,
+    }).then((res) => {
+      const { data } = res;
+      setDataSource(data);
+    })
+    .finally(() => {
+      setLoading(false);
+    });
   };
 
   const handleDeleteItem = (id: string) => {
     if (id) {
       const url = '/delete-user';
       setLoading(true);
-      // http({
-      //   url,
-      //   method: 'delete',
-      //   data: { id },
-      // })
-      //   .then(() => {
-      //     message.success('删除成功！');
-      //   })
-      //   .finally(() => {
-      //     setLoading(false);
-      //   });
+      http({
+        url,
+        method: 'delete',
+        data: { id },
+      })
+        .then(() => {
+          message.success('删除成功！');
+        })
+        .finally(() => {
+          setLoading(false);
+        });
     }
     handleSearch({});
   };

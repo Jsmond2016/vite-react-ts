@@ -17,7 +17,7 @@ const List: React.FC<IProps> = (props: IProps) => {
   const { onDeleteItem } = props
 
   const onEditItem = (id: string) => {
-    const path = `/users/user-create?id=${id}`
+    const path = `/user/create?id=${id}`
     navigate(path)
   }
 
@@ -27,7 +27,7 @@ const List: React.FC<IProps> = (props: IProps) => {
       dataIndex: 'name',
       key: 'name',
       render: (text: any, record: any, index: any) => (
-        <a href="/users/user-detail">{text}</a>
+        <a href="/user/detail">{text}</a>
       )
     },
     {
@@ -83,7 +83,7 @@ const List: React.FC<IProps> = (props: IProps) => {
     <>
       <Layout>
         <Content style={{ margin: '24px 16px 0' }}>
-          <Table bordered dataSource={dataSource} columns={columns} />
+          <Table rowKey="id" bordered dataSource={dataSource} columns={columns} />
         </Content>
       </Layout>
     </>
