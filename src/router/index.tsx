@@ -9,7 +9,11 @@ import NotFind from "@/views/not-find"
  * 外框需要嵌套一层 loading => React.Suspense
  */
 const Index = lazy(() => import("@/views/index"))
+
 const Test01 = lazy(() => import("@/views/test/01"))
+const Demo1 = lazy(() => import("@/views/demo-1/index"))
+const Demo2 = lazy(() => import("@/views/demo-2/index"))
+
 const UserIndex = lazy(() => import("@/views/user/index"))
 const UserList = lazy(() => import("@/views/user/user-list/index"))
 const UserDetail = lazy(() => import("@/views/user/user-detail/index"))
@@ -33,6 +37,14 @@ const routes = [
       {
         path: "/index",
         element: widthLoading(<Index />),
+      },
+      {
+        path: "/demo-1/index",
+        element: widthLoading(<Demo1 />),
+      },
+      {
+        path: "/demo-2/index",
+        element: widthLoading(<Demo2 />),
       },
       {
         path: "/test/01",

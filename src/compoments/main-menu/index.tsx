@@ -11,6 +11,16 @@ const items: MenuItem[] = [
     icon: <UserOutlined />,
   },
   {
+    label: "案例-1",
+    key: "/demo-1/index",
+    icon: <HomeOutlined />
+  },
+  {
+    label: "案例-2",
+    key: "/demo-2/index",
+    icon: <HomeOutlined />
+  },
+  {
     label: "首页",
     key: "/index",
     icon: <HomeOutlined />
