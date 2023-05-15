@@ -11,15 +11,31 @@ const items: MenuItem[] = [
     icon: <UserOutlined />,
   },
   {
-    label: "案例-1",
-    key: "/demo-1/index",
-    icon: <HomeOutlined />
+    label: "面试测试",
+    key: "/demos/",
+    icon: <HomeOutlined />,
+    children: [
+      {
+        label: "图片文件查看器-新",
+        key: "/demos/demo-1/index",
+        icon: <HomeOutlined />
+      },
+      {
+        label: "图片文件查看器-旧",
+        key: "/demos/demo-2/index",
+        icon: <HomeOutlined />
+      },
+      {
+        label: "React 闭包陷阱",
+        key: "/demos/demo-3/index"
+      },
+      {
+        label: "水印案例",
+        key: "/demos/demo-4/index"
+      },
+    ]
   },
-  {
-    label: "案例-2",
-    key: "/demo-2/index",
-    icon: <HomeOutlined />
-  },
+  
   {
     label: "首页",
     key: "/index",
