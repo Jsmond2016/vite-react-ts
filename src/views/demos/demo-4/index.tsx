@@ -16,9 +16,9 @@ export default () => {
 
 	useEffect(() => {
     
-    var wrapperCanvas = document.createElement("canvas") as HTMLCanvasElement;
+    const wrapperCanvas = document.createElement("canvas") as HTMLCanvasElement;
     
-		var wrapperCanvasCtx = wrapperCanvas.getContext("2d") as CanvasRenderingContext2D;
+		const wrapperCanvasCtx = wrapperCanvas.getContext("2d") as CanvasRenderingContext2D;
     const fontHeight = 20
     wrapperCanvasCtx.font = `${fontHeight}px Microsoft Yahei`;
 		wrapperCanvasCtx.fillStyle = "#f00";
@@ -31,26 +31,26 @@ export default () => {
     // const _width = textWidth * Math.asin(Math.abs(angle))
     // // cons@ = b / c ==> b = c * arcos(@)
     // const _height = textWidth * Math.acos(Math.abs(angle))
-    
-    const realWidth = textWidth + fontHeight * 2
-    const realHeight = Math.abs(Math.atan(angle)) * (realWidth + fontHeight * 4)
-    console.log('realHeight: ', realHeight);
+    // 宽度 + 角落裁切空间
+    const realWidth = textWidth + fontHeight
+    // 高度 + 角落裁切空间
+    const realHeight = Math.abs(Math.atan(angle)) * realWidth + fontHeight
     watermarkCanvas.width = realWidth
     watermarkCanvas.height = realHeight
     const watermarkCtx = watermarkCanvas.getContext('2d') as CanvasRenderingContext2D
     watermarkCtx.fillStyle = "#690";
     watermarkCtx.font = `${fontHeight}px Microsoft Yahei`;
+    // 绕中心点旋转后还原；
     watermarkCtx.translate(realWidth / 2, realHeight / 2);
     watermarkCtx.rotate(angle);
     watermarkCtx.translate(-realWidth / 2, -realHeight / 2);
-		watermarkCtx.fillText(text, fontHeight/2, realHeight * 0.5);
+    // 居中绘制：realHeight* 0.5 + 0.25 * fontHeight --> 高度和行高 1.25
+		watermarkCtx.fillText(text, (realWidth-textWidth)/2, realHeight* 0.5 + 0.25 * fontHeight );
     
     const patt = wrapperCanvasCtx.createPattern(watermarkCanvas, 'repeat') as CanvasPattern
 
     fileRef.current!.onchange = async function(e: any) {
       var f1 = e.target!.files[0];
-      let name = f1.name
-
       const fileUrl = await toBase64(f1)
       const img = new Image()
       img.src = fileUrl as string
@@ -69,10 +69,6 @@ export default () => {
       }
     }
 
-
-
-    
-    
 		// 旋转前(红色矩形)
 		
     // 通过 - 文本长度-长
@@ -94,10 +90,13 @@ export default () => {
       <br />
       <input type="file" name="file" id="file" ref={fileRef} />
       <br />
+      <br />
       <img id='img-test-02' src="" alt="" />
       <br />
       <br />
-      <h2>水印文字</h2>
+      <h2>水印文字--一行展示情况</h2>
+      <br />
+      <p>只提供 文字、字体大小、角度大小 == 一行展示</p>
       <br />
       <canvas id="watermark" style={{ border: "1px solid blue" }} />
 		</div>
