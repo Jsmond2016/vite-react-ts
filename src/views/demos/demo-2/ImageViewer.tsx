@@ -56,8 +56,16 @@ const ImageViewer = (props: IImageViewer) => {
     curImage,
     visible: modalVisible,
   };
+  // const imageModalProps = {
+  //   onCancel: () => setModalVisible(true),
+  //   source,
+  //   curImage,
+  //   visible: modalVisible,
+  // }
 
-  // 默认组件
+  
+
+  // 默认组sdfsdf[件
   const ImageComponent = (imgProps: { onClick: () => void; imgSource: string | string[] }) => {
     const { onClick, imgSource } = imgProps;
     const defaultSrc = curImage || imgSource[0];
@@ -78,7 +86,13 @@ const ImageViewer = (props: IImageViewer) => {
         $maskDiv.removeEventListener('mouseleave', mouseLeaveFn);
       };
     }, []);
-
+    useEffect(() => {
+      if (!hoverImgRef.current) return;
+      const $maskDiv = hoverImgRef.current;
+      const mouseOverFn = () => setHoverVisible(true);
+      const mouseLeaveFn = () => setHoverVisible(false);
+      $maskDiv.addEventListener('mour')
+    }, [])
     return (
       <div
         ref={hoverImgRef}

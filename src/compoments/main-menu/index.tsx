@@ -33,6 +33,10 @@ const items: MenuItem[] = [
         label: "水印案例",
         key: "/demos/demo-4/index"
       },
+      {
+        label: "hook 返回组件",
+        key: "/demos/demo-5/index"
+      },
     ]
   },
   
