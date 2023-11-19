@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Spin, message } from 'antd';
 import Search from './search/index';
 import List from './list/index';
-import moment from 'moment';
+import dayjs from 'dayjs';
 // import http from '@/utils/req';
 import http from '@/request/index';
 
@@ -14,7 +14,7 @@ const Index = () => {
     const params = {
       username,
       age,
-      birthday: moment(birthday).format('YYYY-MM-DD'),
+      birthday: dayjs(birthday).format('YYYY-MM-DD'),
     };
     setLoading(true);
     http({

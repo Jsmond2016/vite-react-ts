@@ -11,7 +11,7 @@ import {
   Button,
 } from 'antd';
 import styles from './index.module.less';
-import moment from 'moment';
+import dayjs from 'dayjs'
 
 const FORM_ITEM_LAYOUT = {
   labelCol: { span: 8 },
@@ -26,7 +26,7 @@ const Sider = memo((props: any) => {
   const onSaveItem = () => {
     form.validateFields().then((values: any) => {
       const { publishTime } = values;
-      const time = moment(publishTime).format('YYYY-MM-DD');
+      const time = dayjs(publishTime).format('YYYY-MM-DD');
       const data = {
         ...item,
         ...values,

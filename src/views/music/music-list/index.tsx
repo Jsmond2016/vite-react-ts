@@ -3,7 +3,7 @@ import { Spin, message } from 'antd';
 import Search from './search/index';
 import List from './list/index';
 import Sider from './sider/index';
-import moment from 'moment';
+import dayjs from 'dayjs'
 import http from '@/request/index';
 
 const Index = () => {
@@ -16,7 +16,7 @@ const Index = () => {
     const params = {
       name,
       type,
-      publishTime: moment(publishTime).format('YYYY-MM-DD'),
+      publishTime: dayjs(publishTime).format('YYYY-MM-DD'),
     };
     setLoading(true);
     http
