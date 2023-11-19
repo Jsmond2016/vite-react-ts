@@ -4,10 +4,10 @@ import styles from './index.module.less';
 
 const FORM_ITEM_LAYOUT = {
   labelCol: {
-    span: 8,
+    span: 6,
   },
   wrapperCol: {
-    span: 16,
+    span: 18,
   },
 };
 
@@ -49,7 +49,6 @@ const Search: React.FC<IProps> = (props: IProps) => {
             <Form.Item
               label="姓名"
               name="username"
-              rules={[{ required: true, message: '请输入姓名!' }]}
             >
               <Input />
             </Form.Item>
@@ -59,7 +58,6 @@ const Search: React.FC<IProps> = (props: IProps) => {
               label="年龄"
               name="age"
               initialValue={18}
-              rules={[{ required: true, message: '请输入年龄!' }]}
             >
               <InputNumber
                 disabled
@@ -74,9 +72,8 @@ const Search: React.FC<IProps> = (props: IProps) => {
             <Form.Item
               label="出生日期"
               name="birthday"
-              rules={[{ required: true, message: '请选择出生日期!' }]}
             >
-              <DatePicker className={styles.datePicker} onChange={onDateChange} />
+              <DatePicker placeholder='请选择' className={styles.datePicker} onChange={onDateChange} />
             </Form.Item>
           </Col>
           <Col className="gutter-row" span={6}>
@@ -101,7 +98,6 @@ const Search: React.FC<IProps> = (props: IProps) => {
                   label="性别"
                   name="gender"
                   initialValue="male"
-                  rules={[{ required: true, message: '请选择性别!' }]}
                 >
                   <Select disabled onChange={onSelectChange}>
                     <Option value="male">男</Option>
