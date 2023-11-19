@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Row, Col, Form, Input, Button, Space, InputNumber, DatePicker, Select } from 'antd';
-import styles from './index.module.less';
 
 const FORM_ITEM_LAYOUT = {
   labelCol: {
@@ -42,7 +41,7 @@ const Search: React.FC<IProps> = (props: IProps) => {
         name="control-ref"
         form={form}
         onFinish={onSearch}
-        className={styles.wrapper}
+        className='mh-18 pt-24 bg-white'
       >
         <Row gutter={[8, 8]}>
           <Col className="gutter-row" span={6}>
@@ -61,7 +60,7 @@ const Search: React.FC<IProps> = (props: IProps) => {
             >
               <InputNumber
                 disabled
-                className={styles.inputStyl}
+                className='w-100'
                 min={1}
                 max={100}
                 onChange={onInputNumberChange}
@@ -73,7 +72,7 @@ const Search: React.FC<IProps> = (props: IProps) => {
               label="出生日期"
               name="birthday"
             >
-              <DatePicker placeholder='请选择' className={styles.datePicker} onChange={onDateChange} />
+              <DatePicker placeholder='请选择' className='w-100' onChange={onDateChange} />
             </Form.Item>
           </Col>
           <Col className="gutter-row" span={6}>

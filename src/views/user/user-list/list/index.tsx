@@ -1,7 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Table, Layout, Space, Popconfirm } from 'antd';
 import { useNavigate } from "react-router-dom";
-import styles from './index.module.less';
 
 const { Content } = Layout;
 
@@ -82,7 +81,7 @@ const List: React.FC<IProps> = (props: IProps) => {
   return (
     <>
       <Layout>
-        <Content style={{ margin: '24px 16px 0' }}>
+        <Content className='mt-24 mh-16' >
           <Table rowKey="id" bordered dataSource={dataSource} columns={columns} />
         </Content>
       </Layout>

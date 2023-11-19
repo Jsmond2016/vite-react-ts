@@ -10,8 +10,9 @@
 - React-Redux
 - redux-thunk
 - axios
-- msw: mock 工具
-- mrm: 生成项目配置工具
+- [msw: mock 工具](https://mswjs.io/docs/basics/intercepting-requests#http-requests)
+- [mrm: 生成项目配置工具](https://mrm.js.org/docs/getting-started)
+- [unocss](https://alfred-skyblue.github.io/unocss-docs-cn/)
 
 
 **资料参考：**

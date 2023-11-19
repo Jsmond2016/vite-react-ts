@@ -6,6 +6,8 @@ import { BrowserRouter } from "react-router-dom"
 import App from "./App"
 import "@/assets/style/reset.css"
 import "@/assets/style/gloab.scss"
+import 'uno.css'
+
 
 const module = import.meta.glob("./mocks/browser.js")
 
