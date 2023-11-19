@@ -21,11 +21,6 @@ const items: MenuItem[] = [
         icon: <HomeOutlined />
       },
       {
-        label: "图片文件查看器-旧",
-        key: "/demos/demo-2/index",
-        icon: <HomeOutlined />
-      },
-      {
         label: "React 闭包陷阱",
         key: "/demos/demo-3/index"
       },

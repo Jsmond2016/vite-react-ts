@@ -11,7 +11,6 @@ import NotFind from "@/views/not-find";
 const Index = lazy(() => import("@/views/index"));
 
 const Demo1 = lazy(() => import("@/views/demos/demo-1/index"));
-const Demo2 = lazy(() => import("@/views/demos/demo-2/index"));
 
 const Demo3 = lazy(() => import("@/views/demos/demo-3/index"));
 const Demo4 = lazy(() => import("@/views/demos/demo-4/index"));
@@ -49,10 +48,10 @@ const routes = [
 						path: "/demos/demo-1/index",
 						element: widthLoading(<Demo1 />),
 					},
-					{
-						path: "/demos/demo-2/index",
-						element: widthLoading(<Demo2 />),
-					},
+					// {
+					// 	path: "/demos/demo-2/index",
+					// 	element: widthLoading(<Demo2 />),
+					// },
           {
 						path: "/demos/demo-3/index",
 						element: widthLoading(<Demo3 />),

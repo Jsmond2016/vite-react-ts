@@ -2,9 +2,6 @@ import React, { useRef, useState } from 'react';
 import { Button, Modal } from 'antd';
 import type { DraggableData, DraggableEvent } from 'react-draggable';
 import Draggable from 'react-draggable';
-import img1 from '../demo-2/img-1.png'
-import img2 from '../demo-2/img-2.png'
-import img3 from '../demo-2/img-3.png'
 
 import styles from './index.module.less'
 
@@ -93,7 +90,8 @@ const Index: React.FC = () => {
         </p>
         <br />
         <p>Day before yesterday I saw a rabbit, and yesterday a deer, and today, you.</p>
-        <img src={img1} alt="img1" />
+        <img src="https://source.unsplash.com/random/200x200?sig=3" alt="img1" />
+        {/* https://stackoverflow.com/questions/60797390/generate-random-image-by-url */}
       </Modal>
     </div>
   );
