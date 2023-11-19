@@ -1,10 +1,12 @@
-import { useState, useEffect } from 'react';
-import { Spin, message } from 'antd';
-import Search from './search/index';
-import List from './list/index';
-import Sider from './sider/index';
-import dayjs from 'dayjs'
+import { message, Spin } from 'antd';
+import dayjs from 'dayjs';
+import { useEffect, useState } from 'react';
+
 import http from '@/request/index';
+
+import List from './List';
+import Search from './Search';
+import Sider from './Sider';
 
 const Index = () => {
   const [dataSource, setDataSource] = useState<any>([]);

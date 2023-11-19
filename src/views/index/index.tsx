@@ -1,12 +1,13 @@
-import { useSelector, useDispatch } from "react-redux"
-import numStore from "@/store/num"
+import { useDispatch, useSelector } from 'react-redux';
 
-export default () => {
+import numStore from '@/store/num';
+
+const Index = () => {
   // 获取 store 数据方式
-  const { num } = useSelector((state: RootStateType) => state.num)
-  const { role } = useSelector((state: RootStateType) => state.user)
+  const { num } = useSelector((state: RootStateType) => state.num);
+  const { role } = useSelector((state: RootStateType) => state.user);
   // 触发 store 中的事件方法
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const changeNum = () => {
     // 同步写法
     // dispatch({ type: "add" })
@@ -17,17 +18,19 @@ export default () => {
     //   }, 1000)
     // })
     // 等同于
-    dispatch(numStore.asyncActions.newAdd)
-  }
+    dispatch(numStore.asyncActions.newAdd as any);
+  };
   const changeRole = () => {
-    dispatch({ type: "setRole", value: [ 1, 2, 3 ] })
-  }
+    dispatch({ type: 'setRole', value: [1, 2, 3] });
+  };
   return (
     <div>
-      <div onClick={ changeNum }>{ num }</div>
-      <button onClick={ changeNum }>改变数字</button>
-      <p>{ role }</p>
-      <button onClick={ changeRole }>改变Role</button>
+      <div onClick={changeNum}>{num}</div>
+      <button onClick={changeNum}>改变数字</button>
+      <p>{role}</p>
+      <button onClick={changeRole}>改变Role</button>
     </div>
-  )
-}
+  );
+};
+
+export default Index;

@@ -2,15 +2,19 @@
   "name": "react18-demo",
   "private": true,
   "version": "1.0.0",
-  "type": "module",
   "scripts": {
     "dev": "vite --host --port 3000",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "lint": "eslint . --cache --fix --ext .ts,.tsx",
+    "__mrm 配置__": "如下",
+    "__lint__bak": "eslint . --cache --fix --ext .ts,.tsx",
+    "__format_ba": "prettier --loglevel warn --write \"**/*.{ts,tsx,css,md}\"",
+    "__posttest_bak": "npm run format",
+    "__eslint__refer": "eslint 配置来源:=> https://github.com/TheSwordBreaker/vite-reactts-eslint-prettier/blob/main/package.json",
     "pretest": "npm run lint",
-    "format": "prettier --loglevel warn --write \"**/*.{ts,tsx,css,md}\"",
-    "posttest": "npm run format",
+    "lint:fix": "eslint ./src --ext .jsx,.js,.ts,.tsx --quiet --fix --ignore-path ./.gitignore",
+    "lint:format": "prettier  --loglevel warn --write \"./**/*.{js,jsx,ts,tsx,css,md,json}\" ",
+    "lint": "yarn lint:format && yarn lint:fix ",
     "prepare": "husky install"
   },
   "dependencies": {
@@ -34,6 +38,7 @@
     "@types/react-router-dom": "^5.3.3",
     "@typescript-eslint/eslint-plugin": "^6.11.0",
     "@typescript-eslint/parser": "^6.11.0",
+    "@umijs/fabric": "^4.0.1",
     "@unocss/preset-attributify": "^0.57.5",
     "@unocss/preset-icons": "^0.57.5",
     "@unocss/preset-uno": "^0.57.5",
@@ -51,7 +56,10 @@
     "typescript": "^5.2.2",
     "unocss": "^0.57.5",
     "vite": "^5.0.0",
-    "vite-plugin-style-import": "^2.0.0"
+    "vite-plugin-style-import": "^2.0.0",
+    "eslint-plugin-jsx-a11y": "^6.8.0",
+    "eslint-plugin-prettier": "^5.0.1",
+    "eslint-plugin-simple-import-sort": "^10.0.0"
   },
   "msw": {
     "workerDirectory": "public"

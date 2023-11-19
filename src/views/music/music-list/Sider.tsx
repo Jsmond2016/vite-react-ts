@@ -1,17 +1,7 @@
-import React, { useState, useEffect, memo } from 'react';
-import {
-  Drawer,
-  Form,
-  Input,
-  Row,
-  Col,
-  DatePicker,
-  Select,
-  Radio,
-  Button,
-} from 'antd';
-import styles from './index.module.less';
-import dayjs from 'dayjs'
+import { Button, Col, DatePicker, Drawer, Form, Input, Radio, Row, Select } from 'antd';
+import dayjs from 'dayjs';
+
+// import styles from './index.module.less';
 
 const FORM_ITEM_LAYOUT = {
   labelCol: { span: 8 },
@@ -20,7 +10,7 @@ const FORM_ITEM_LAYOUT = {
 
 const { Option } = Select;
 
-const Sider = memo((props: any) => {
+const Sider = (props: any) => {
   const { toggleSider, drawerVisible, item, toFinish } = props;
   const [form] = Form.useForm();
   const onSaveItem = () => {
@@ -38,12 +28,12 @@ const Sider = memo((props: any) => {
 
   const FooterBtn = () => (
     <Row gutter={6}>
-      <Col span={12} className={styles.btnWrapper}>
+      <Col span={12} className="ta-c">
         <Button type="default" onClick={() => toggleSider(false)}>
           取消
         </Button>
       </Col>
-      <Col span={12} className={styles.btnWrapper}>
+      <Col span={12} className="ta-c">
         <Button type="primary" htmlType="submit" onClick={onSaveItem}>
           确定
         </Button>
@@ -114,9 +104,9 @@ const Sider = memo((props: any) => {
               <Form.Item
                 label="发布年份"
                 name="publishTime"
-                initialValue={publishTime && moment(publishTime.toString())}
+                initialValue={publishTime && dayjs(publishTime.toString())}
               >
-                <DatePicker picker="year" className={styles.datePicker} />
+                <DatePicker picker="year" className="w-100" />
               </Form.Item>
             </Col>
           </Row>
@@ -137,11 +127,7 @@ const Sider = memo((props: any) => {
           </Row>
           <Row>
             <Col span={24}>
-              <Form.Item
-                label="场景"
-                name="environment"
-                initialValue={environment}
-              >
+              <Form.Item label="场景" name="environment" initialValue={environment}>
                 <Select>
                   <Option value="sports">运动</Option>
                   <Option value="driving">驾驶</Option>
@@ -169,6 +155,6 @@ const Sider = memo((props: any) => {
       </Drawer>
     </>
   );
-});
+};
 
 export default Sider;

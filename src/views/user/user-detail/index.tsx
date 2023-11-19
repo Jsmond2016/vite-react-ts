@@ -1,7 +1,9 @@
-import React, { useState, useEffect } from 'react';
-import styles from './index.module.less';
-import { Layout, Row, Col, Form, Spin, Card, Space, Tooltip } from 'antd';
+import { Card, Col, Form, Layout, Row, Space, Spin, Tooltip } from 'antd';
+import React, { useEffect, useState } from 'react';
+
 import http from '@/request/index';
+
+import styles from './index.module.less';
 
 const FORM_ITEM_LAYOUT = {
   labelCol: { span: 8 },
@@ -46,8 +48,8 @@ export default function UserDetail() {
     fetchUser();
     return () => {
       setLoading(false);
-      setUserInfo({})
-    }
+      setUserInfo({});
+    };
   }, []);
 
   const map: any = {

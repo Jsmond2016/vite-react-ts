@@ -1,6 +1,5 @@
-import React, { useState, memo } from 'react';
-import { Table, Layout, Space, Popconfirm } from 'antd';
-import { useNavigate } from 'react-router-dom'
+import { Layout, Popconfirm, Space, Table } from 'antd';
+import React, { memo } from 'react';
 
 const { Content } = Layout;
 
@@ -38,9 +37,10 @@ interface IProps {
   openDrawer: (flag: boolean) => void;
 }
 
+// eslint-disable-next-line react/display-name
 const List: React.FC<IProps> = memo((props: IProps) => {
   const { onDeleteItem, openDrawer } = props;
-  const navigateTo = useNavigate();
+
   const columns = [
     {
       title: '姓名',

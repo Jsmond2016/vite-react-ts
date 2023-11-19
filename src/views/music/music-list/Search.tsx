@@ -1,17 +1,5 @@
-import React, { useState, memo } from 'react';
-import {
-  Row,
-  Col,
-  Divider,
-  Form,
-  Input,
-  Button,
-  Space,
-  InputNumber,
-  DatePicker,
-  Select,
-} from 'antd';
-import styles from './index.module.less';
+import { Button, Col, DatePicker, Form, Input, Row, Select, Space } from 'antd';
+import React, { useState } from 'react';
 
 const FORM_ITEM_LAYOUT = {
   labelCol: {
@@ -28,14 +16,14 @@ interface IProps {
   onSearch: (values: any) => void;
 }
 
-const Search: React.FC<IProps> = memo((props: IProps) => {
+const Search: React.FC<IProps> = (props: IProps) => {
   const { onSearch } = props;
   const [visible, toogleSearch] = useState(false);
   const [form] = Form.useForm();
 
-  const onInputNumberChange = (value: any) => {
-    console.log('onInputNumberChange', value);
-  };
+  // const onInputNumberChange = (value: any) => {
+  //   console.log('onInputNumberChange', value);
+  // };
 
   const onDateChange = (val: any, datestring: any) => {
     console.log('onDateChange', val);
@@ -53,34 +41,22 @@ const Search: React.FC<IProps> = memo((props: IProps) => {
         name="control-ref"
         form={form}
         onFinish={onSearch}
-        className={styles.wrapper}
+        className="w-100"
       >
         <Row gutter={16}>
           <Col className="gutter-row" span={6}>
-            <Form.Item
-              label="歌手姓名"
-              name="name"
-              rules={[{ required: true, message: '歌手姓名!' }]}
-            >
+            <Form.Item label="歌手姓名" name="name">
               <Input />
             </Form.Item>
           </Col>
           <Col className="gutter-row" span={6}>
-            <Form.Item
-              label="专辑名"
-              name="album"
-              rules={[{ required: true, message: '请输入专辑名!' }]}
-            >
+            <Form.Item label="专辑名" name="album">
               <Input />
             </Form.Item>
           </Col>
           <Col className="gutter-row" span={6}>
             <Form.Item label="发布年份" name="publishTime">
-              <DatePicker
-                picker="year"
-                className={styles.datePicker}
-                onChange={onDateChange}
-              />
+              <DatePicker picker="year" className="w-100" onChange={onDateChange} />
             </Form.Item>
           </Col>
           <Col className="gutter-row" span={6}>
@@ -138,11 +114,7 @@ const Search: React.FC<IProps> = memo((props: IProps) => {
                 </Form.Item>
               </Col>
               <Col className="gutter-row" span={6}>
-                <Form.Item
-                  label="场景"
-                  name="environment"
-                  initialValue="sports"
-                >
+                <Form.Item label="场景" name="environment" initialValue="sports">
                   <Select onChange={onSelectChange}>
                     <Option value="sports">运动</Option>
                     <Option value="driving">驾驶</Option>
@@ -169,6 +141,6 @@ const Search: React.FC<IProps> = memo((props: IProps) => {
       </Form>
     </>
   );
-});
+};
 
 export default Search;

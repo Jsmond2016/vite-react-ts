@@ -1,9 +1,9 @@
-import { Outlet } from "react-router-dom"
+import { Outlet } from 'react-router-dom';
 
 export default () => {
   return (
-    <div className='music-container'>
+    <div className="music-container">
       <Outlet />
     </div>
-  )
-}
+  );
+};

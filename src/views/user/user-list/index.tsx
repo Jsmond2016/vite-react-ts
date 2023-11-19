@@ -1,10 +1,12 @@
-import React, { useState, useEffect } from 'react';
-import { Spin, message } from 'antd';
-import Search from './search/index';
-import List from './list/index';
+import { message, Spin } from 'antd';
 import dayjs from 'dayjs';
+import React, { useEffect, useState } from 'react';
+
 // import http from '@/utils/req';
 import http from '@/request/index';
+
+import List from './list/index';
+import Search from './search/index';
 
 const Index = () => {
   const [dataSource, setDataSource] = useState<any>([]);
@@ -21,13 +23,14 @@ const Index = () => {
       url: '/search-user',
       method: 'get',
       params,
-    }).then((res) => {
-      const { data } = res;
-      setDataSource(data);
     })
-    .finally(() => {
-      setLoading(false);
-    });
+      .then((res) => {
+        const { data } = res;
+        setDataSource(data);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   };
 
   const handleDeleteItem = (id: string) => {

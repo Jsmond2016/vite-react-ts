@@ -1,33 +1,29 @@
+import { Layout, Popconfirm, Space, Table } from 'antd';
 import React from 'react';
-import { Table, Layout, Space, Popconfirm } from 'antd';
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
 
 const { Content } = Layout;
 
-
 interface IProps {
-  dataSource: [],
-  onDeleteItem: (id: string) => void,
+  dataSource: [];
+  onDeleteItem: (id: string) => void;
 }
 
 const List: React.FC<IProps> = (props: IProps) => {
-
   const navigate = useNavigate();
-  const { onDeleteItem } = props
+  const { onDeleteItem } = props;
 
   const onEditItem = (id: string) => {
-    const path = `/user/create?id=${id}`
-    navigate(path)
-  }
+    const path = `/user/create?id=${id}`;
+    navigate(path);
+  };
 
   const columns = [
     {
       title: '姓名',
       dataIndex: 'name',
       key: 'name',
-      render: (text: any, record: any, index: any) => (
-        <a href="/user/detail">{text}</a>
-      )
+      render: (text: any, record: any, index: any) => <a href="/user/detail">{text}</a>,
     },
     {
       title: '性别',
@@ -58,30 +54,30 @@ const List: React.FC<IProps> = (props: IProps) => {
       title: '操作',
       dataIndex: 'operate',
       key: 'operate',
-      render: (_:any, record: any) => {
+      render: (_: any, record: any) => {
         return (
           <Space size="middle">
-          <Popconfirm
-            title="确定删除吗？"
-            onConfirm={() => onDeleteItem(record.id)}
-            okText="是"
-            cancelText="否"
-          >
-            <a>删除</a>
-          </Popconfirm>
-          <a onClick={() => onEditItem(record.id)}>编辑</a>
+            <Popconfirm
+              title="确定删除吗？"
+              onConfirm={() => onDeleteItem(record.id)}
+              okText="是"
+              cancelText="否"
+            >
+              <a>删除</a>
+            </Popconfirm>
+            <a onClick={() => onEditItem(record.id)}>编辑</a>
           </Space>
-        )
-      }
-    }
+        );
+      },
+    },
   ];
 
-  const { dataSource } = props
+  const { dataSource } = props;
 
   return (
     <>
       <Layout>
-        <Content className='mt-24 mh-16' >
+        <Content className="mt-24 mh-16">
           <Table rowKey="id" bordered dataSource={dataSource} columns={columns} />
         </Content>
       </Layout>

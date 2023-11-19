@@ -1,19 +1,19 @@
-"use strict"
+'use strict';
 const actions: any = {
   add: (newState: { num: number }) => {
-    newState.num++
-  }
-}
+    newState.num++;
+  },
+};
 export default {
   state: {
-    num: 20
+    num: 20,
   },
   actions,
   asyncActions: {
-    newAdd: (dispatch: Function) => {
+    newAdd: (dispatch: ({ type }: { type: string }) => void) => {
       setTimeout(() => {
-        dispatch({ type: "add" })
-      }, 1000)
-    }
-  }
-}
+        dispatch({ type: 'add' });
+      }, 1000);
+    },
+  },
+};

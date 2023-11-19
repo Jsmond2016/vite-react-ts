@@ -1,24 +1,29 @@
-import React, { useRef, useState } from 'react';
 import { Button, Modal } from 'antd';
+import React, { useRef, useState } from 'react';
 import type { DraggableData, DraggableEvent } from 'react-draggable';
 import Draggable from 'react-draggable';
 
-import styles from './index.module.less'
+import styles from './index.module.less';
 
 const Index: React.FC = () => {
   const [open, setOpen] = useState(false);
   const [disabled, setDisabled] = useState(true);
-  const [bounds, setBounds] = useState({ left: 0, top: 0, bottom: 0, right: 0 });
+  const [bounds, setBounds] = useState({
+    left: 0,
+    top: 0,
+    bottom: 0,
+    right: 0,
+  });
   const draggleRef = useRef<HTMLDivElement>(null);
 
   const showModal = () => {
     setOpen(true);
   };
 
-  const handleOk = (e: React.MouseEvent<HTMLElement>) => {
-    console.log(e);
-    setOpen(false);
-  };
+  // const handleOk = (e: React.MouseEvent<HTMLElement>) => {
+  //   console.log(e);
+  //   setOpen(false);
+  // };
 
   const handleCancel = (e: React.MouseEvent<HTMLElement>) => {
     console.log(e);
@@ -52,7 +57,7 @@ const Index: React.FC = () => {
               width: '100%',
               cursor: 'move',
               border: '1px solid red',
-              padding: '16px 16px'
+              padding: '16px 16px',
             }}
             onMouseOver={() => {
               if (disabled) {
@@ -86,7 +91,8 @@ const Index: React.FC = () => {
         )}
       >
         <p>
-          Just don&apos;t learn physics at school and your life will be full of magic and miracles.
+          Just don&apos;t learn physics at school and your life will be full of magic and
+          miracles.
         </p>
         <br />
         <p>Day before yesterday I saw a rabbit, and yesterday a deer, and today, you.</p>

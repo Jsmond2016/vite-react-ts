@@ -1,5 +1,15 @@
+import {
+  Button,
+  Col,
+  DatePicker,
+  Form,
+  Input,
+  InputNumber,
+  Row,
+  Select,
+  Space,
+} from 'antd';
 import React, { useState } from 'react';
-import { Row, Col, Form, Input, Button, Space, InputNumber, DatePicker, Select } from 'antd';
 
 const FORM_ITEM_LAYOUT = {
   labelCol: {
@@ -41,26 +51,19 @@ const Search: React.FC<IProps> = (props: IProps) => {
         name="control-ref"
         form={form}
         onFinish={onSearch}
-        className='mh-18 pt-24 bg-white'
+        className="mh-18 pt-24 bg-white"
       >
         <Row gutter={[8, 8]}>
           <Col className="gutter-row" span={6}>
-            <Form.Item
-              label="姓名"
-              name="username"
-            >
+            <Form.Item label="姓名" name="username">
               <Input />
             </Form.Item>
           </Col>
           <Col className="gutter-row" span={6}>
-            <Form.Item
-              label="年龄"
-              name="age"
-              initialValue={18}
-            >
+            <Form.Item label="年龄" name="age" initialValue={18}>
               <InputNumber
                 disabled
-                className='w-100'
+                className="w-100"
                 min={1}
                 max={100}
                 onChange={onInputNumberChange}
@@ -68,11 +71,12 @@ const Search: React.FC<IProps> = (props: IProps) => {
             </Form.Item>
           </Col>
           <Col className="gutter-row" span={6}>
-            <Form.Item
-              label="出生日期"
-              name="birthday"
-            >
-              <DatePicker placeholder='请选择' className='w-100' onChange={onDateChange} />
+            <Form.Item label="出生日期" name="birthday">
+              <DatePicker
+                placeholder="请选择"
+                className="w-100"
+                onChange={onDateChange}
+              />
             </Form.Item>
           </Col>
           <Col className="gutter-row" span={6}>
@@ -93,11 +97,7 @@ const Search: React.FC<IProps> = (props: IProps) => {
           <React.Fragment>
             <Row gutter={[8, 8]}>
               <Col className="gutter-row" span={6}>
-                <Form.Item
-                  label="性别"
-                  name="gender"
-                  initialValue="male"
-                >
+                <Form.Item label="性别" name="gender" initialValue="male">
                   <Select disabled onChange={onSelectChange}>
                     <Option value="male">男</Option>
                     <Option value="female">女</Option>
