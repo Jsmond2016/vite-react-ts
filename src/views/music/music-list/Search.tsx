@@ -41,7 +41,7 @@ const Search: React.FC<IProps> = (props: IProps) => {
         name="control-ref"
         form={form}
         onFinish={onSearch}
-        className="w-100"
+        className="w-full"
       >
         <Row gutter={16}>
           <Col className="gutter-row" span={6}>
@@ -56,7 +56,7 @@ const Search: React.FC<IProps> = (props: IProps) => {
           </Col>
           <Col className="gutter-row" span={6}>
             <Form.Item label="发布年份" name="publishTime">
-              <DatePicker picker="year" className="w-100" onChange={onDateChange} />
+              <DatePicker picker="year" className="w-full" onChange={onDateChange} />
             </Form.Item>
           </Col>
           <Col className="gutter-row" span={6}>

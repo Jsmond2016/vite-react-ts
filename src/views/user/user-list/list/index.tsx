@@ -77,7 +77,7 @@ const List: React.FC<IProps> = (props: IProps) => {
   return (
     <>
       <Layout>
-        <Content className="mt-24 mh-16">
+        <Content className="mt-24px mx-16px">
           <Table rowKey="id" bordered dataSource={dataSource} columns={columns} />
         </Content>
       </Layout>

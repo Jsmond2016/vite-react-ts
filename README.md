@@ -21,3 +21,13 @@
 - [React-Router6指北+项目权限设计](https://juejin.cn/post/7071086182116884487#heading-6)
 - blog: https://www.jiafeng.co/details/243
 - github: https://github.com/zjiafeng/vite-react
+
+## 新技术学习计划
+
+- zustand
+
+  - [zustand-doc](https://zustand-demo.pmnd.rs/)
+  - [精读《zustand 源码》](https://juejin.cn/post/7056568996157456398?from=search-suggest)
+
+- jotai
+  - [jotai-doc](https://jotai.org/)

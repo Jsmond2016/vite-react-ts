@@ -51,7 +51,7 @@ const Search: React.FC<IProps> = (props: IProps) => {
         name="control-ref"
         form={form}
         onFinish={onSearch}
-        className="mh-18 pt-24 bg-white"
+        className="mx-18px pt-24px"
       >
         <Row gutter={[8, 8]}>
           <Col className="gutter-row" span={6}>
@@ -63,7 +63,7 @@ const Search: React.FC<IProps> = (props: IProps) => {
             <Form.Item label="年龄" name="age" initialValue={18}>
               <InputNumber
                 disabled
-                className="w-100"
+                className="w-full"
                 min={1}
                 max={100}
                 onChange={onInputNumberChange}
@@ -74,7 +74,7 @@ const Search: React.FC<IProps> = (props: IProps) => {
             <Form.Item label="出生日期" name="birthday">
               <DatePicker
                 placeholder="请选择"
-                className="w-100"
+                className="w-full"
                 onChange={onDateChange}
               />
             </Form.Item>
