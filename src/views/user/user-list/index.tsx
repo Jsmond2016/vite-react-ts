@@ -5,8 +5,8 @@ import React, { useEffect, useState } from 'react';
 // import http from '@/utils/req';
 import http from '@/request/index';
 
-import List from './list/index';
-import Search from './search/index';
+import List from './List';
+import Search from './Search';
 
 const Index = () => {
   const [dataSource, setDataSource] = useState<any>([]);
@@ -20,7 +20,7 @@ const Index = () => {
     };
     setLoading(true);
     http({
-      url: '/search-user',
+      url: '/getProductList',
       method: 'get',
       params,
     })
