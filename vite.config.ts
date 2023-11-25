@@ -5,9 +5,15 @@ import { presetAttributify, presetIcons, presetUno } from 'unocss';
 // import styleImport, { AntdResolve } from "vite-plugin-style-import"
 import Unocss from 'unocss/vite';
 import { defineConfig } from 'vite';
+// import commonjs from 'vite-plugin-commonjs';
+// import commonjsExternals from 'vite-plugin-commonjs-externals';
+
+// const externals = ['path', /^electron(\/.+)?$/];
 
 export default defineConfig({
   plugins: [
+    // commonjs(),
+    // commonjsExternals({ externals }),
     react(),
     Unocss({
       presets: [presetUno(), presetAttributify(), presetIcons()],

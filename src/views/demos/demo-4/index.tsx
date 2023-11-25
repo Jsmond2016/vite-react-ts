@@ -1,7 +1,6 @@
 import { Button, Input } from 'antd';
 import { useEffect, useRef, useState } from 'react';
 
-
 const toBase64 = (file: any) =>
   new Promise((resolve, reject) => {
     const reader = new FileReader();
