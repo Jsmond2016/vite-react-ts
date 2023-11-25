@@ -87,7 +87,7 @@ const List: React.FC<IProps> = (props: IProps) => {
     {
       title: '商品状态',
       dataIndex: 'status',
-      width: 80,
+      width: 100,
       render: productStatusRender,
     },
     {

@@ -2,12 +2,7 @@ import { DashOutlined, RiseOutlined } from '@ant-design/icons';
 import { Badge, Space } from 'antd';
 import React from 'react';
 
-import {
-  ProductStatus,
-  ProductStatusOptions,
-  ProductTrendStatus,
-  statusColorMap,
-} from '@/constants';
+import { ProductStatus, ProductStatusOptions, ProductTrendStatus } from '@/constants';
 import { IProduct } from '@/types/product';
 
 export const trendStatusIconMap = {
@@ -15,6 +10,13 @@ export const trendStatusIconMap = {
   [ProductTrendStatus.Flat]: <DashOutlined />,
   [ProductTrendStatus.Up]: <RiseOutlined style={{ color: '#2f8600' }} />,
 } as const;
+
+const statusColorMap = {
+  [ProductStatus.Off_Shelf]: 'purple',
+  [ProductStatus.To_Be_Sale]: 'cyan',
+  [ProductStatus.On_Sale]: 'green',
+  [ProductStatus.Sold_Out]: 'red',
+};
 
 export const priceRender = (value: number) => `￥${value.toFixed(2)}`;
 export const productStatusRender = (value: ProductStatus) => (

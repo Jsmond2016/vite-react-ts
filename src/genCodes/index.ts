@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
-const demo = require('./demo.config');
-const product = require('./product.config');
+const demo = require('./demo.constants');
+const product = require('./product.constants');
 
 module.exports = [...demo, ...product];
