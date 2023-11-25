@@ -2,16 +2,31 @@
 
 使用 Vite / React / TypeScript / AntD 写的一些小案例用于学习；
 
-相关技术栈：
+## 特点
 
-- Vite / React / TypeScript / AntD
-- React-Router-Dom
-- React-Redux
+- [x] 使用 Vite / React / TypeScript / AntD 搭建项目；
+- [] 配置自动化生成工具，生成常用代码：
+  - [x] enums 和 options 枚举和选项；
+  - [ ]List 和 Detail 页面；
+- [x] Mockjs 配置；
+
+## 相关技术栈：
+
+- [Vite](https://cn.vitejs.dev/guide/)
+- [React](https://zh-hans.react.dev/learn)
+- [TypeScript](https://www.typescriptlang.org/docs/)
+- [AntD v.5.x](https://ant-design.antgroup.com/components/layout-cn)
+- [React-Router-Dom](https://reactrouter.com/en/main/start/tutorial)
+- [Redux](https://cn.redux.js.org/introduction/getting-started)
 - redux-thunk
 - axios
 - [msw: mock 工具](https://mswjs.io/docs/basics/intercepting-requests#http-requests)
 - [mrm: 生成项目配置工具](https://mrm.js.org/docs/getting-started)
 - [unocss](https://alfred-skyblue.github.io/unocss-docs-cn/)
+
+## 工具
+
+- [taliwindcss 速查文档](https://www.tailwindcss.cn/docs/installation) 设置 CSS 样式
 
 **资料参考：**
 
@@ -27,6 +42,9 @@
 
 ## 新技术学习计划
 
+- ahooks
+  - useRequest
+- react-query
 - zustand
 
   - [zustand-doc](https://zustand-demo.pmnd.rs/)
