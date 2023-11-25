@@ -41,22 +41,22 @@ const items: MenuItem[] = [
     icon: <HomeOutlined />,
   },
   {
-    label: '个人中心',
-    key: '/user/',
+    label: '商品管理',
+    key: '/product/',
     icon: <UserOutlined />,
     children: [
       {
         label: '列表页',
-        key: '/user/list',
+        key: '/product/list',
       },
       {
         label: '详情页',
-        key: '/user/detail',
+        key: '/product/detail/-1',
       },
-      {
-        label: '创建页',
-        key: '/user/create',
-      },
+      // {
+      //   label: '创建页',
+      //   key: '/product/create',
+      // },
     ],
   },
   {

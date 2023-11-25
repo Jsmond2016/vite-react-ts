@@ -17,10 +17,9 @@ const Demo3 = lazy(() => import('@/views/demos/demo-3/index'));
 const Demo4 = lazy(() => import('@/views/demos/demo-4/index'));
 const Demo5 = lazy(() => import('@/views/demos/demo-5/index'));
 
-const UserIndex = lazy(() => import('@/views/user/index'));
-const UserList = lazy(() => import('@/views/user/user-list/index'));
-const UserDetail = lazy(() => import('@/views/user/user-detail/index'));
-const UserCreate = lazy(() => import('@/views/user/user-create/index'));
+const UserIndex = lazy(() => import('@/views/product/index'));
+const UserList = lazy(() => import('@/views/product/list/index'));
+const UserDetail = lazy(() => import('@/views/product/detail/index'));
 
 const MusicList = lazy(() => import('@/views/music/music-list/index'));
 const MusicDetail = lazy(() => import('@/views/music/music-detail/index'));
@@ -68,21 +67,21 @@ const routes = [
         ],
       },
       {
-        path: '/user/',
+        path: '/product/',
         element: widthLoading(<UserIndex />),
         children: [
           {
-            path: '/user/list',
+            path: '/product/list',
             element: widthLoading(<UserList />),
           },
           {
-            path: '/user/detail',
+            path: '/product/detail/:id',
             element: widthLoading(<UserDetail />),
           },
-          {
-            path: '/user/create',
-            element: widthLoading(<UserCreate />),
-          },
+          // {
+          //   path: '/user/create',
+          //   element: widthLoading(<UserCreate />),
+          // },
         ],
       },
       {

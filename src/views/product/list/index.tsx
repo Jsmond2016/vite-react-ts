@@ -12,12 +12,16 @@ const Index = () => {
   const [dataSource, setDataSource] = useState<any>([]);
   const [loadingFlag, setLoading] = useState<boolean>(false);
   const handleSearch = (values: any) => {
-    const { username, age, birthday } = values;
+    const { productId, productName, status, colorArray, capacity, netTypeArray } = values;
     const params = {
-      username,
-      age,
-      birthday: dayjs(birthday).format('YYYY-MM-DD'),
+      productId,
+      productName,
+      status,
+      colorArray,
+      capacity,
+      netTypeArray,
     };
+    console.log('筛选params', params);
     setLoading(true);
     http({
       url: '/getProductList',

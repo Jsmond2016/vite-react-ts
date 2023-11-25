@@ -1,10 +1,10 @@
 import React from 'react';
-import { BrowserRouter, Outlet, Route, Routes } from 'react-router-dom';
+import { Outlet } from 'react-router-dom';
 
-export default () => {
+export default function Index() {
   return (
     <div className="user-container">
       <Outlet />
     </div>
   );
-};
+}

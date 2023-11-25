@@ -21,6 +21,9 @@
 - [React-Router6指北+项目权限设计](https://juejin.cn/post/7071086182116884487#heading-6)
 - blog: https://www.jiafeng.co/details/243
 - github: https://github.com/zjiafeng/vite-react
+- mockjs:
+  - [mockjs 官网](http://mockjs.com/examples.html#Number)
+  - [博客-mockjs 基本使用-按指定规则生成随机测试数据](https://www.cnblogs.com/suwanbin/p/13200521.html)
 
 ## 新技术学习计划
 

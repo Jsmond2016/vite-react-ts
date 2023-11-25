@@ -1,8 +1,21 @@
-import { DashOutlined, RiseOutlined } from '@ant-design/icons';
-import { Badge, Image, Layout, Popconfirm, Space, Table, Tag, Typography } from 'antd';
+import {
+  Alert,
+  Button,
+  Image,
+  Layout,
+  Popconfirm,
+  Row,
+  Space,
+  Table,
+  Typography,
+} from 'antd';
 import { ColumnsType } from 'antd/es/table';
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+
+import { NetType, NetTypeOptions, ProductColor, ProductColorOptions } from '@/constants';
+import { IProduct } from '@/types/product';
+import { priceRender, productStatusRender, renderTrendWithText } from '@/utils/renders';
 
 const { Content } = Layout;
 
@@ -31,97 +44,6 @@ const renderProduct = ({
   );
 };
 
-enum ProductColor {
-  Blue = 1,
-  Black = 2,
-}
-
-const ProductColorOptions = {
-  [ProductColor.Black]: '星空黑',
-  [ProductColor.Blue]: '海军蓝',
-};
-
-enum NetType {
-  _4G = 1,
-  _4G_Global = 2,
-  _5G = 3,
-  _5G_Global = 4,
-}
-const NetTypeOptions = {
-  [NetType._4G]: '4G',
-  [NetType._4G_Global]: '4G全网通',
-  [NetType._5G]: '5G',
-  [NetType._5G_Global]: '5G全网通',
-};
-
-enum ProductStatus {
-  /** 未上架 */
-  Off_Shelf = 0,
-  /** 待售 */
-  To_Be_Sale,
-  /** 在售 */
-  On_Sale,
-  /** 售罄 */
-  Sold_Out,
-}
-const ProductStatusOptions = {
-  [ProductStatus.Off_Shelf]: '未上架',
-  [ProductStatus.To_Be_Sale]: '待售',
-  [ProductStatus.On_Sale]: '在售',
-  [ProductStatus.Sold_Out]: '售罄',
-};
-
-type IProduct = {
-  productId: string;
-  productName: string;
-  originPrice: number;
-  price: number;
-  saleCount: number;
-  deliverMethod: string;
-  productColors: ProductColor[];
-  capacity: number;
-  netType: NetType[];
-  imageUrl: string;
-  serviceYearNum: number;
-  productInventory: number;
-  status: ProductStatus;
-  trendStatus: ProductTrendStatus;
-};
-
-const statusColorMap = {
-  [ProductStatus.Off_Shelf]: 'purple',
-  [ProductStatus.To_Be_Sale]: 'cyan',
-  [ProductStatus.On_Sale]: 'green',
-  [ProductStatus.Sold_Out]: 'red',
-};
-
-enum ProductTrendStatus {
-  Down = -1,
-  Flat = 0,
-  Up = 1,
-}
-
-const trendStatusIconMap = {
-  [ProductTrendStatus.Down]: <RiseOutlined style={{ color: '#cf1322' }} />,
-  [ProductTrendStatus.Flat]: <DashOutlined />,
-  [ProductTrendStatus.Up]: <RiseOutlined style={{ color: '#3f8600' }} />,
-};
-
-const priceRender = (value: number) => `￥${value.toFixed(2)}`;
-const statusRender = (value: ProductStatus) => (
-  <Badge color={statusColorMap[value]} text={ProductStatusOptions[value]} />
-);
-const renderTrendWithText = (
-  record: Pick<IProduct, 'trendStatus' | 'productInventory'>,
-) => {
-  return (
-    <Space direction="horizontal">
-      <span>{record.productInventory}</span>
-      {trendStatusIconMap[record.trendStatus]}
-    </Space>
-  );
-};
-
 const List: React.FC<IProps> = (props: IProps) => {
   const navigate = useNavigate();
   const { onDeleteItem } = props;
@@ -136,7 +58,7 @@ const List: React.FC<IProps> = (props: IProps) => {
       title: '商品ID',
       dataIndex: 'productId',
       width: 120,
-      render: (id: string) => <a href={`/user/detail/${id}`}>{id}</a>,
+      render: (id: string) => <a href={`/product/detail/${id}`}>{id}</a>,
     },
     {
       title: '商品名字',
@@ -166,7 +88,7 @@ const List: React.FC<IProps> = (props: IProps) => {
       title: '商品状态',
       dataIndex: 'status',
       width: 80,
-      render: statusRender,
+      render: productStatusRender,
     },
     {
       title: '配送方式',
@@ -228,14 +150,56 @@ const List: React.FC<IProps> = (props: IProps) => {
 
   const { dataSource } = props;
 
+  const [selectedRowKeys, setSelectedRowKeys] = useState<string[]>([]);
+  const onSelectChange = (newSelectedRowKeys: React.Key[]) => {
+    console.log('selectedRowKeys changed: ', newSelectedRowKeys);
+    setSelectedRowKeys(newSelectedRowKeys as string[]);
+  };
+
+  const rowSelection = {
+    selectedRowKeys,
+    onChange: onSelectChange,
+  };
+
+  const totalPrice = dataSource
+    .filter((item: IProduct) => selectedRowKeys.includes(item.productId))
+    .reduce((pre: number, cur: IProduct) => ((pre += cur.price), pre), 0);
+
   return (
-    <>
-      <Layout>
-        <Content className="mt-24px mx-16px">
-          <Table rowKey="productId" bordered dataSource={dataSource} columns={columns} />
-        </Content>
-      </Layout>
-    </>
+    <div>
+      <Row justify="end" className="mx-16px">
+        <Space direction="horizontal" size="small">
+          <Button onClick={() => {}}>导入</Button>
+          <Button onClick={() => {}}>导出</Button>
+          <Button onClick={() => {}} type="primary">
+            新建
+          </Button>
+        </Space>
+      </Row>
+      <Content className="mt-12px mx-16px">
+        <Space direction="vertical" size="middle" className="w-full">
+          <Alert
+            type="info"
+            message={
+              <Typography.Text>
+                累计价格{' '}
+                <Typography.Text strong type="danger">
+                  {totalPrice.toFixed(3)}
+                </Typography.Text>{' '}
+                元
+              </Typography.Text>
+            }
+          />
+          <Table
+            rowKey="productId"
+            rowSelection={rowSelection}
+            bordered
+            dataSource={dataSource}
+            columns={columns}
+          />
+        </Space>
+      </Content>
+    </div>
   );
 };
 

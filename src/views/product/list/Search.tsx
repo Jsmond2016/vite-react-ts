@@ -55,28 +55,23 @@ const Search: React.FC<IProps> = (props: IProps) => {
       >
         <Row gutter={[8, 8]}>
           <Col className="gutter-row" span={6}>
-            <Form.Item label="姓名" name="username">
-              <Input />
+            <Form.Item label="商品ID" name="productId">
+              <Input allowClear />
             </Form.Item>
           </Col>
           <Col className="gutter-row" span={6}>
-            <Form.Item label="年龄" name="age" initialValue={18}>
-              <InputNumber
-                disabled
-                className="w-full"
-                min={1}
-                max={100}
-                onChange={onInputNumberChange}
-              />
+            <Form.Item label="商品名字" name="productName">
+              <Input allowClear />
             </Form.Item>
           </Col>
           <Col className="gutter-row" span={6}>
-            <Form.Item label="出生日期" name="birthday">
-              <DatePicker
-                placeholder="请选择"
-                className="w-full"
-                onChange={onDateChange}
-              />
+            <Form.Item label="状态" name="status">
+              <Select allowClear>
+                <Option value="Off_Shelf">未上架</Option>
+                <Option value="To_Be_Sale">待售</Option>
+                <Option value="On_Sale">在售</Option>
+                <Option value="Sold_Out">售罄</Option>
+              </Select>
             </Form.Item>
           </Col>
           <Col className="gutter-row" span={6}>
@@ -97,47 +92,25 @@ const Search: React.FC<IProps> = (props: IProps) => {
           <React.Fragment>
             <Row gutter={[8, 8]}>
               <Col className="gutter-row" span={6}>
-                <Form.Item label="性别" name="gender" initialValue="male">
-                  <Select disabled onChange={onSelectChange}>
-                    <Option value="male">男</Option>
-                    <Option value="female">女</Option>
+                <Form.Item label="机身颜色" name="colorArray">
+                  <Select mode="multiple" allowClear>
+                    <Option value="Black">星空黑</Option>
+                    <Option value="Blue">海军蓝</Option>
                   </Select>
                 </Form.Item>
               </Col>
               <Col className="gutter-row" span={6}>
-                <Form.Item label="学号" name="idNumber">
-                  <Input />
+                <Form.Item label="容量" name="capacity">
+                  <Input suffix="GB" allowClear />
                 </Form.Item>
               </Col>
               <Col className="gutter-row" span={6}>
-                <Form.Item label="年级" name="grade" initialValue="5">
-                  <Select onChange={onSelectChange}>
-                    <Option value="1">一年级</Option>
-                    <Option value="2">二年级</Option>
-                    <Option value="3">三年级</Option>
-                    <Option value="4">四年级</Option>
-                    <Option value="5">五年级</Option>
-                    <Option value="6">六年级</Option>
-                  </Select>
-                </Form.Item>
-              </Col>
-            </Row>
-            <Row gutter={[8, 8]}>
-              <Col className="gutter-row" span={6}>
-                <Form.Item label="爱好" name="hobby">
-                  <Input />
-                </Form.Item>
-              </Col>
-              <Col className="gutter-row" span={6}>
-                <Form.Item label="技能" name="skill">
-                  <Input />
-                </Form.Item>
-              </Col>
-              <Col className="gutter-row" span={6}>
-                <Form.Item label="户口性质" name="country" initialValue="contryside">
-                  <Select onChange={onSelectChange}>
-                    <Option value="town">城镇</Option>
-                    <Option value="contryside">农村</Option>
+                <Form.Item label="网络类型" name="netTypeArray">
+                  <Select mode="multiple" allowClear>
+                    <Option value="_4G">4G</Option>
+                    <Option value="_4G_Global">4G全网通</Option>
+                    <Option value="_5G">5G</Option>
+                    <Option value="_5G_Global">5G全网通</Option>
                   </Select>
                 </Form.Item>
               </Col>
