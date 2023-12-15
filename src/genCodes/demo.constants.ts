@@ -11,4 +11,4 @@ const enums = [
   ],
 ];
 
-module.exports = enums;
+export default enums;

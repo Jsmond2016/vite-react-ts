@@ -30,6 +30,7 @@ type Api = IState & {
 function useFormComponent(api: Api) {
   const Form = useMemo(
     () =>
+      // eslint-disable-next-line react/display-name
       ({ children, ...others }: any) => {
         console.log('others: ', others);
         const { formContext } = Form.api;

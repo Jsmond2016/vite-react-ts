@@ -1,4 +1,4 @@
-module.exports = [
+const Product = [
   [
     ['ProductColor', '商品颜色'],
     ['Blue', 1, '海军蓝'],
@@ -25,3 +25,5 @@ module.exports = [
     ['Up', 1, '上升'],
   ],
 ];
+
+export default Product;

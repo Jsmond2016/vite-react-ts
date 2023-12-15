@@ -1,10 +1,8 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
-const fs = require('fs');
-const path = require('path');
-const { exec } = require('child_process');
-// const { Eslint } = require('eslint');
+import { ESLint } from 'eslint';
+import * as fs from 'fs';
+import * as path from 'path';
 
-const genConfig = require('../genCodes/index.ts');
+import genConfig from '../genCodes/index';
 
 type EnumItem = string | number;
 
@@ -64,9 +62,14 @@ const content = genConfig
 const genCode = async () => {
   try {
     console.log('正在生成 enum-options ...');
-    await fs.writeFileSync(CONSTANT_PATH, [prefixWarningText, ...content].join(''));
+    // reference: https://eslint.org/docs/latest/integrate/nodejs-api
+    const eslint = new ESLint({ fix: true });
+    const sourceCode = [prefixWarningText, ...content].join('');
+    await fs.writeFileSync(CONSTANT_PATH, sourceCode);
+
     console.log('正在格式化 enum-options ...');
-    exec(`cd ../../ && npx eslint ${CONSTANT_PATH} --fix`);
+    const resultCode = await eslint.lintFiles(CONSTANT_PATH);
+    await ESLint.outputFixes(resultCode);
   } catch (error) {
     console.log('enum - options 生成失败！！', error);
   }

@@ -1,6 +1,5 @@
 import { DashOutlined, RiseOutlined } from '@ant-design/icons';
 import { Badge, Space } from 'antd';
-import React from 'react';
 
 import { ProductStatus, ProductStatusOptions, ProductTrendStatus } from '@/constants';
 import { IProduct } from '@/types/product';

@@ -1,5 +1,4 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
-const demo = require('./demo.constants');
-const product = require('./product.constants');
+import Demo from './demo.constants';
+import Product from './product.constants';
 
-module.exports = [...demo, ...product];
+export default [...Demo, ...Product];
