@@ -5,6 +5,8 @@ import MainLayout from '@/compoments/main-layout';
 import Login from '@/views/login';
 import NotFind from '@/views/not-find';
 
+// TODO: 使用 import.glob 重构 https://cn.vitejs.dev/guide/features#glob-import
+
 /**
  * 路由懒加载
  * 外框需要嵌套一层 loading => React.Suspense
@@ -16,6 +18,7 @@ const Demo1 = lazy(() => import('@/views/demos/demo-1/index'));
 const Demo3 = lazy(() => import('@/views/demos/demo-3/index'));
 const Demo4 = lazy(() => import('@/views/demos/demo-4/index'));
 const Demo5 = lazy(() => import('@/views/demos/demo-5/index'));
+const Demo6 = lazy(() => import('@/views/demos/demo-6/index'));
 
 const UserIndex = lazy(() => import('@/views/product/index'));
 const UserList = lazy(() => import('@/views/product/list/index'));
@@ -63,6 +66,10 @@ const routes = [
           {
             path: '/demos/demo-5/index',
             element: widthLoading(<Demo5 />),
+          },
+          {
+            path: '/demos/demo-6/index',
+            element: widthLoading(<Demo6 />),
           },
         ],
       },

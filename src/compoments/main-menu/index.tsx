@@ -16,6 +16,11 @@ const items: MenuItem[] = [
     icon: <HomeOutlined />,
     children: [
       {
+        label: '页面生成器',
+        key: '/demos/demo-6/index',
+        icon: <HomeOutlined />,
+      },
+      {
         label: '图片文件查看器-新',
         key: '/demos/demo-1/index',
         icon: <HomeOutlined />,
