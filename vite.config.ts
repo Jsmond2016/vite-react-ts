@@ -1,19 +1,20 @@
 import transformerAttributifyJsx from '@unocss/transformer-attributify-jsx';
 import react from '@vitejs/plugin-react';
 import path from 'path';
+// import commonjs from 'vite-plugin-commonjs';
+// import commonjsExternals from 'vite-plugin-commonjs-externals';
+// const externals = ['path', /^electron(\/.+)?$/];
+// import nodePolyfills from 'rollup-plugin-polyfill-node';
 import { presetAttributify, presetIcons, presetUno } from 'unocss';
 // import styleImport, { AntdResolve } from "vite-plugin-style-import"
 import Unocss from 'unocss/vite';
 import { defineConfig } from 'vite';
-// import commonjs from 'vite-plugin-commonjs';
-// import commonjsExternals from 'vite-plugin-commonjs-externals';
-
-// const externals = ['path', /^electron(\/.+)?$/];
 
 export default defineConfig({
   plugins: [
     // commonjs(),
     // commonjsExternals({ externals }),
+    // nodePolyfills({ include: null }),
     react(),
     Unocss({
       presets: [presetUno(), presetAttributify(), presetIcons()],
@@ -28,6 +29,10 @@ export default defineConfig({
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),
+      // process: 'process/browser',
+      // stream: 'stream-browserify',
+      // zlib: 'browserify-zlib',
+      // util: 'util/',
     },
   },
 });

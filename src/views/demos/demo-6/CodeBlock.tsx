@@ -53,6 +53,7 @@ const CodeBlock = forwardRef<{ highlightBlock: () => void }, any>(
 
     return (
       <div className="code-block" style={{ position: 'relative', marginTop: 8 }}>
+        {/* <pre className="theme-atom-one-dark  shadow-3xl text-sm relative overflow-hidden max-w-full tab-size h-full"> */}
         <pre className="theme-atom-one-dark  shadow-3xl text-sm relative overflow-hidden max-w-full tab-size h-full">
           <code
             id={language}

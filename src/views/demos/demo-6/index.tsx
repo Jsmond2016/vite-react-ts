@@ -3,7 +3,9 @@ import { useRef, useState } from 'react';
 
 // import Highlight from 'react-highlight';
 import CodeBlock from './CodeBlock';
-import { generateColumnsCode, generateFilterCode } from './generateCode';
+import { generateColumnsCode } from './genColumnCode';
+import { generateFilterCode } from './genFormItemCode';
+import { GenFiltersButton } from './DragList';
 
 type FormData = {
   sourceCode: string;
@@ -17,9 +19,7 @@ type IOperateButtonProps = {
 };
 
 const OperateButtons = ({ form, setCode, toggleHighlight }: IOperateButtonProps) => {
-  const setCodeAndHighlight = async (
-    generator: (sourceCode: string) => Promise<string>,
-  ) => {
+  const setCodeAndHighlight = async (generator: (sourceCode: string) => Promise<string>) => {
     const { sourceCode } = await form.getFieldsValue();
     const result = await generator(sourceCode);
     setCode(result);
@@ -37,9 +37,10 @@ const OperateButtons = ({ form, setCode, toggleHighlight }: IOperateButtonProps)
   };
   return (
     <Space direction="vertical" size="large" align="center">
-      <Button type="primary" onClick={generateFilters}>
+      {/* <Button type="primary" onClick={generateFilters}>
         生成 Filters
-      </Button>
+      </Button> */}
+      <GenFiltersButton form={form} />
       <Button type="primary" onClick={generateColumns}>
         生成 Columns
       </Button>
@@ -88,6 +89,15 @@ export interface Filters {
      * 标签
      */
     tags: Tag[];
+    /**
+     * 开始时间
+     */
+    startTime: number;
+    /**
+     * 结束时间
+     */
+    endTime: number; 
+
 }
 
 /**
@@ -152,9 +162,10 @@ export interface Tag {
           </Form.Item>
         </Col>
         <Col span={4} className="text-center">
-          <OperateButtons
+          {/* <OperateButtons form={form} setCode={setCode} toggleHighlight={toggleHighlight} /> */}
+          <GenFiltersButton
             form={form}
-            setCode={setCode}
+            setOutputCodeString={setCode}
             toggleHighlight={toggleHighlight}
           />
         </Col>

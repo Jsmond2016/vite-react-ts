@@ -1,3 +1,49 @@
+# 记录
+
+- [apifox 示例项目](https://app.apifox.com/project/3427245)
+- [JSON.stringify](https://stackoverflow.com/questions/6754919/json-stringify-function)
+- [JSONfn](https://github.com/vkiryukhin/jsonfn?tab=readme-ov-file)
+
+```js
+JSON.stringify(objWithFunction, function (key, val) {
+  if (typeof val === 'function') {
+    return val + ''; // implicitly `toString` it
+  }
+  return val;
+});
+
+// NOTE: 实际上，使用这个方式的结果，是类似如下
+
+const obj = {
+  a: 1,
+  b: (b, c) => {
+    return b + c;
+  },
+};
+JSON.stringify(obj, function (key, val) {
+  if (typeof val === 'function') {
+    return val + ''; // implicitly `toString` it
+  }
+  return val;
+});
+// result: '{"a":1,"b":"(b, c) => {return b+c}"}'
+
+JSON.parse('{"a":1,"b":"(b, c) => {return b+c}"}');
+// {a: 1, b: '(b, c) => { return b+c}' }
+
+// 而我实际需要的是这样的，最终还是放弃 JSON.stringify， 使用 ES6 的目标字符串
+
+// {a: 1, b: (b, c) => { return b+c } }
+```
+
+## ts-morph
+
+> 用于解析 ts 类型；
+
+- [github/ts-morph](https://github.com/dsherret/ts-morph#readme)
+- [docs/ts-morph](https://ts-morph.com/details/index)
+- [ts-ast-viewer](https://ts-ast-viewer.com/)
+
 # vite-react-ts
 
 使用 Vite / React / TypeScript / AntD 写的一些小案例用于学习；
@@ -27,8 +73,10 @@
 ## 工具
 
 - [taliwindcss 速查文档](https://www.tailwindcss.cn/docs/installation) 设置 CSS 样式
+- [highlight.js](https://highlightjs.org/demo#lang=javascript&v=1&theme=atom-one-dark)
+- [github/highlight.js](https://github.com/highlightjs/highlight.js)
 
-**资料参考：**
+  **资料参考：**
 
 - [Vite 搭建 React18 项目，分享一些使用技巧](https://juejin.cn/post/7182098358536765495)
 - [Vite2 + Vue3 + TypeScript + Pinia 搭建一套企业级的开发脚手架【值得收藏】](https://juejin.cn/post/7036745610954801166#heading-14)

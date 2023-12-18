@@ -1,19 +1,3 @@
-import { SourceFile } from 'ts-morph';
-
-export function getEnumOptions(sourceFile: SourceFile, enumName: string) {
-  const myEnum = sourceFile.getEnum(enumName);
-  if (!myEnum) return [];
-  const members = myEnum.getMembers();
-  const enumInfo = members.map((member) => {
-    return {
-      value: member.getValue() || 0,
-      label: member.getJsDocs().map((desc) => desc.getDescription())[0],
-      // docs: member.getJsDocs().map(doc => doc.getDescription()),
-    };
-  });
-  return enumInfo;
-}
-
 function inputItemGenerator(propertyName: string, labelName: string) {
   return {
     type: 'input',
@@ -22,7 +6,7 @@ function inputItemGenerator(propertyName: string, labelName: string) {
   };
 }
 
-type IOption = {
+export type IOption = {
   label: string;
   value: string | number;
 };
@@ -32,7 +16,7 @@ function selectItemGenerator(
   options: IOption[],
 ) {
   return {
-    type: 'select',
+    type: 'select' as 'select',
     label: labelName,
     key: propertyName,
     options,
