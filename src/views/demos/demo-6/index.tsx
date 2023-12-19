@@ -5,7 +5,7 @@ import { useRef, useState } from 'react';
 import CodeBlock from './CodeBlock';
 import { generateColumnsCode } from './genColumnCode';
 import { generateFilterCode } from './genFormItemCode';
-import { GenFiltersButton } from './DragList';
+import { GenFiltersButton, GenerateType } from './DragList';
 
 type FormData = {
   sourceCode: string;
@@ -163,11 +163,20 @@ export interface Tag {
         </Col>
         <Col span={4} className="text-center">
           {/* <OperateButtons form={form} setCode={setCode} toggleHighlight={toggleHighlight} /> */}
-          <GenFiltersButton
-            form={form}
-            setOutputCodeString={setCode}
-            toggleHighlight={toggleHighlight}
-          />
+          <Space direction="vertical" size="middle">
+            <GenFiltersButton
+              type={GenerateType.Filters}
+              form={form}
+              setOutputCodeString={setCode}
+              toggleHighlight={toggleHighlight}
+            />
+            <GenFiltersButton
+              type={GenerateType.Column}
+              form={form}
+              setOutputCodeString={setCode}
+              toggleHighlight={toggleHighlight}
+            />
+          </Space>
         </Col>
         <Col span={10}>
           <CodeBlock language="javascript" ref={codeRef} code={code} />
