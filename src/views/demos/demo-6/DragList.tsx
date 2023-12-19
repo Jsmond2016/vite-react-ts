@@ -9,7 +9,17 @@ import {
 } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 import React, { useEffect, useState } from 'react';
-import { Button, FormInstance, Modal, Table } from 'antd';
+import {
+  Button,
+  FormInstance,
+  Input,
+  Modal,
+  Select,
+  Table,
+  Typography,
+  Popconfirm,
+  Form,
+} from 'antd';
 import type { ColumnsType } from 'antd/es/table';
 import { FilterItem, generateFilterCode, generateFilterCodeString } from './genFormItemCode';
 import { generateColumnsCode, generateColumnsToString } from './genColumnCode';
@@ -19,6 +29,38 @@ interface DataType {
   labelName: string;
   componentType: string;
 }
+
+interface EditCellProps extends React.HTMLAttributes<HTMLElement> {
+  editable?: boolean;
+  editing: boolean;
+  dataIndex: string | string[];
+  component?: React.ReactNode;
+  children: any;
+}
+
+const EditCell = (props: EditCellProps) => {
+  const { editable, title, children, editing, dataIndex, component, ...restProps } = props;
+  return (
+    <td {...restProps}>
+      {editing ? (
+        <Form.Item
+          name={dataIndex}
+          style={{ margin: 0 }}
+          rules={[
+            {
+              required: true,
+              message: `Please Input ${title}!`,
+            },
+          ]}
+        >
+          {component}
+        </Form.Item>
+      ) : (
+        children
+      )}
+    </td>
+  );
+};
 
 interface RowProps extends React.HTMLAttributes<HTMLTableRowElement> {
   'data-row-key': string;
@@ -80,6 +122,7 @@ const DragTable: React.FC<DragTableProps> = ({ columns, dataSource, setDataSourc
           components={{
             body: {
               row: Row,
+              cell: EditCell,
             },
           }}
           rowKey="key"
@@ -103,20 +146,114 @@ type GenFiltersButtonProps = {
   type: GenerateType;
 };
 
-const filterColumns: ColumnsType<DataType> = [
-  {
-    title: '字段描述',
-    dataIndex: 'label',
-  },
-  {
-    title: '字段名',
-    dataIndex: 'key',
-  },
-  {
-    title: '组件',
-    dataIndex: 'type',
-  },
-];
+const genCodeType = ['input', 'textarea', 'select', 'multi-select', 'checkbox', 'radio'];
+const genCodeTypeOptions = genCodeType.map((item) => ({ label: item, value: item }));
+
+type EditColumnProps = {
+  form: FormInstance;
+  dataSource: any[];
+  setData: any;
+};
+
+const useEditColumns = ({ form, dataSource, setData }: EditColumnProps) => {
+  const [editingKey, setEditingKey] = useState('');
+  const isEditing = (record) => record.key === editingKey;
+  const onCancel = () => setEditingKey('');
+  const onSave = async (key: string) => {
+    try {
+      const { sourceCode, ...row } = await form.validateFields();
+      console.log('row: ', row);
+
+      const newData = [...dataSource];
+      const index = newData.findIndex((item) => key === item.key);
+      if (index > -1) {
+        const item = newData[index];
+        newData.splice(index, 1, {
+          ...item,
+          ...row,
+        });
+        setData(newData);
+        setEditingKey('');
+      } else {
+        newData.push(row);
+        setData(newData);
+        setEditingKey('');
+      }
+    } catch (errInfo) {
+      console.log('Validate Failed:', errInfo);
+    }
+  };
+  const onEdit = (record) => {
+    console.log('record: ', record);
+    form.setFieldsValue(record);
+    setEditingKey(record.key);
+  };
+
+  const filterColumns = [
+    {
+      title: '字段描述',
+      dataIndex: 'label',
+      editable: true,
+      width: 140,
+      component: <Input />,
+    },
+    {
+      title: '字段名',
+      dataIndex: 'key',
+      editable: true,
+      width: 140,
+      component: <Input />,
+    },
+    {
+      title: '组件',
+      dataIndex: 'type',
+      editable: true,
+      width: 180,
+      component: <Select options={genCodeTypeOptions} />,
+    },
+    {
+      title: '编辑',
+      dataIndex: 'operator',
+      editable: false,
+      width: 160,
+      render: (_: any, record) => {
+        const editable = isEditing(record);
+        return editable ? (
+          <span>
+            <Typography.Link onClick={() => onSave(record.key)} style={{ marginRight: 8 }}>
+              保存
+            </Typography.Link>
+            <Popconfirm title="Sure to cancel?" onConfirm={onCancel}>
+              <a>取消</a>
+            </Popconfirm>
+          </span>
+        ) : (
+          <Typography.Link disabled={editingKey !== ''} onClick={() => onEdit(record)}>
+            编辑
+          </Typography.Link>
+        );
+      },
+    },
+  ];
+
+  const mergedColumns = filterColumns.map((col) => {
+    if (!col.editable) {
+      return col;
+    }
+    return {
+      ...col,
+      onCell: (record) => ({
+        record,
+        component: col.component,
+        dataIndex: col.dataIndex,
+        title: col.title,
+        editing: isEditing(record),
+      }),
+    };
+  });
+
+  return mergedColumns;
+};
 
 const tableColumns = [
   {
@@ -130,6 +267,21 @@ const tableColumns = [
   {
     title: 'render类型',
     dataIndex: 'renderType',
+  },
+];
+
+const filterColumns: ColumnsType<DataType> = [
+  {
+    title: '字段描述',
+    dataIndex: 'label',
+  },
+  {
+    title: '字段名',
+    dataIndex: 'key',
+  },
+  {
+    title: '组件',
+    dataIndex: 'type',
   },
 ];
 
@@ -178,13 +330,22 @@ const GenFiltersButton = ({
     setOpen(false);
   };
 
+  const editColumns = useEditColumns({ form, dataSource: data, setData });
+
   return (
     <>
       <Button type="primary" onClick={handleClick}>
         {btnText}
       </Button>
-      <Modal title="修改字段顺序" open={open} onOk={handleOk} onCancel={() => setOpen(false)}>
-        <DragTable columns={columns} dataSource={data} setDataSource={setData} />
+      <Modal
+        width={800}
+        title={`修改${btnText.slice(2)}顺序`}
+        open={open}
+        onOk={handleOk}
+        onCancel={() => setOpen(false)}
+      >
+        {/* <DragTable columns={columns} dataSource={data} setDataSource={setData} /> */}
+        <DragTable columns={editColumns} dataSource={data} setDataSource={setData} />
       </Modal>
     </>
   );
