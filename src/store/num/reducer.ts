@@ -1,10 +1,7 @@
 'use strict';
 import handleNum from './index';
 
-const reducer = (
-  state = { ...handleNum.state },
-  action: { type: string; value: any },
-) => {
+const reducer = (state = { ...handleNum.state }, action: { type: string; value: any }) => {
   const newState = JSON.parse(JSON.stringify(state));
   const actionList = Object.keys(handleNum.actions);
   if (actionList.some((item) => item === action.type)) {

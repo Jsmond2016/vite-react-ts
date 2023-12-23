@@ -1,4 +1,5 @@
 import { PropertySignature } from 'ts-morph';
+
 import { sourceFile } from './generateCode';
 
 export interface ColumnItemType {
@@ -78,14 +79,14 @@ function getRender(propertyName: string, labelName: string, property: PropertySi
   return 'textRender';
 }
 
-const tableTemplate = (columns: any[]) => {
-  `
-  <Table dataSource={dataSource} columns={columns} />;
-  `;
-};
-export const genTableCode = async (sourceCode: string, interfaceName: string = 'Filters') => {
-  const columns = await generateColumnsCode(sourceCode, interfaceName);
-};
+// const tableTemplate = (columns: any[]) => {
+//   `
+//   <Table dataSource={dataSource} columns={columns} />;
+//   `;
+// };
+// export const genTableCode = async (sourceCode: string, interfaceName: string = 'Filters') => {
+//   const columns = await generateColumnsCode(sourceCode, interfaceName);
+// };
 
 export const generateColumnsToString = (list: ColumnItemType[]) => {
   const operateColumnItem = `{
@@ -93,7 +94,7 @@ export const generateColumnsToString = (list: ColumnItemType[]) => {
     dataIndex: "operate"
     render: (v, record) => (
       <Space direction="horizontal">
-        <Button onClick={() => history.push(\`/todoUrl/\$\{record.id\}\`)}>查看详情</Button>
+        <Button onClick={() => history.push(\`/todoUrl/$\{record.id}\`)}>查看详情</Button>
         <Button onClick={() => onEdit(record)}>编辑</Button>
         <Button onClick={() => onDelete(record)}>删除</Button>
       </Space>)

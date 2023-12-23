@@ -4,12 +4,11 @@ import { Button, Input, Space } from 'antd';
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 
-import { gteCodeApi } from '@/request/api';
-
+// import { gteCodeApi } from '@/request/api';
 import initBg from './init';
 import styles from './login.module.scss';
 
-export default () => {
+const Login = () => {
   // 路由跳转方式
   const navigateTo = useNavigate();
   // 地址栏参数
@@ -17,10 +16,10 @@ export default () => {
   const [size] = useState(15);
   const [userName, setUserName] = useState('');
   const [code, setCode] = useState('');
-  const [codeUrl, setCodeUrl] = useState('');
+  // const [codeUrl, setCodeUrl] = useState('');
   const [password, setPassword] = useState('');
-  const [loading, setLoading] = useState(false);
-  const [canLogin, setCanLogin] = useState(false);
+  // const [loading, setLoading] = useState(false);
+  // const [canLogin, setCanLogin] = useState(false);
   // 组件加载完成
   useEffect(() => {
     // localStorage.clear()
@@ -38,12 +37,12 @@ export default () => {
   // useEffect(() => {
   //   setCanLogin(userName !== "" && password !== "" && code !== "")
   // }, [ userName, password, code ])
-  const getCode = () => {
-    // 请求验证码
-    // gteCodeApi().then((res) => {
-    //   console.log(res)
-    // })
-  };
+  // const getCode = () => {
+  // 请求验证码
+  // gteCodeApi().then((res) => {
+  //   console.log(res)
+  // })
+  // };
   // 登录
   const doLoginFn = () => {
     // if (canLogin) {
@@ -76,6 +75,7 @@ export default () => {
     setCode(e.target.value);
   };
   return (
+    // eslint-disable-next-line jsx-a11y/no-static-element-interactions
     <div className={styles.loginWrap} onKeyDown={onKeyDown}>
       <canvas id="canvas" className={styles.bg}></canvas>
       <div className={styles.formWrap + ' login-box'}>
@@ -84,12 +84,7 @@ export default () => {
             <h1>通用后台系统</h1>
             <p>Strive Everyday</p>
           </div>
-          <Input
-            value={userName}
-            placeholder="用户名"
-            allowClear
-            onChange={changeUserName}
-          />
+          <Input value={userName} placeholder="用户名" allowClear onChange={changeUserName} />
           <Input.Password
             value={password}
             placeholder="密码"
@@ -105,10 +100,11 @@ export default () => {
               onChange={changeCode}
             />
             <div className="captcha-image">
-              <img src={codeUrl} alt="" onClick={getCode} />
+              {/* <img src={codeUrl} alt="" onClick={getCode} /> */}
             </div>
           </div>
-          <Button type="primary" loading={loading} block onClick={doLoginFn}>
+          {/* <Button type="primary" loading={loading} block onClick={doLoginFn}> */}
+          <Button type="primary" block onClick={doLoginFn}>
             登录
           </Button>
         </Space>
@@ -116,3 +112,5 @@ export default () => {
     </div>
   );
 };
+
+export default Login;

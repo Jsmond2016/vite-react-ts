@@ -1,8 +1,6 @@
 import { message, Spin } from 'antd';
-import dayjs from 'dayjs';
 import React, { useEffect, useState } from 'react';
 
-// import http from '@/utils/req';
 import http from '@/request/index';
 
 import List from './List';

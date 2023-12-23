@@ -1,37 +1,37 @@
-import React, { ReactElement, useMemo, useState } from 'react';
+// import React, { ReactElement, useMemo, useState } from 'react';
 
-type ComponentFactory<P> = (props: P) => ReactElement | null;
+// type ComponentFactory<P> = (props: P) => ReactElement | null;
 
-export function useComponent<P>(component: ComponentFactory<P>, props: P): ReactElement {
-  const memoizedComponent = useMemo(() => component, [component]);
+// export function useComponent<P>(component: ComponentFactory<P>, props: P): ReactElement {
+//   const memoizedComponent = useMemo(() => component, [component]);
 
-  const Comp = useMemo(() => {
-    return React.createElement(memoizedComponent, props);
-  }, [memoizedComponent, props]);
+//   const Comp = useMemo(() => {
+//     return React.createElement(memoizedComponent, props);
+//   }, [memoizedComponent, props]);
 
-  return Comp;
-}
+//   return Comp;
+// }
 
-type ButtonProps1 = {
-  handleClick: React.MouseEventHandler<HTMLButtonElement> | undefined;
-};
-const useEditButton = () => {
-  const [state, setState] = useState(0);
-  const EditButton = useComponent(
-    ({ handleClick }: ButtonProps1) => <button onClick={handleClick}>click me</button>,
-    { handleClick: () => setState(state + 1) },
-  );
-  return EditButton;
-};
+// type ButtonProps1 = {
+//   handleClick: React.MouseEventHandler<HTMLButtonElement> | undefined;
+// };
+// const useEditButton = () => {
+//   const [state, setState] = useState(0);
+//   const EditButton = useComponent(
+//     ({ handleClick }: ButtonProps1) => <button onClick={handleClick}>click me</button>,
+//     { handleClick: () => setState(state + 1) },
+//   );
+//   return EditButton;
+// };
 
-const APP = () => {
-  const EditButton = useEditButton();
-  return (
-    <div>
-      <EditButton />
-    </div>
-  );
-};
+// const APP = () => {
+//   const EditButton = useEditButton();
+//   return (
+//     <div>
+//       <EditButton />
+//     </div>
+//   );
+// };
 
 // const Component = (props) => {
 //   // Your component logic here

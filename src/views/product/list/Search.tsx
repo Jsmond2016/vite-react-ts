@@ -1,14 +1,4 @@
-import {
-  Button,
-  Col,
-  DatePicker,
-  Form,
-  Input,
-  InputNumber,
-  Row,
-  Select,
-  Space,
-} from 'antd';
+import { Button, Col, Form, Input, Row, Select, Space } from 'antd';
 import React, { useState } from 'react';
 
 const FORM_ITEM_LAYOUT = {
@@ -31,18 +21,18 @@ const Search: React.FC<IProps> = (props: IProps) => {
   const [visible, toogleSearch] = useState(false);
   const [form] = Form.useForm();
 
-  const onInputNumberChange = (value: any) => {
-    console.log('onInputNumberChange', value);
-  };
+  // const onInputNumberChange = (value: any) => {
+  //   console.log('onInputNumberChange', value);
+  // };
 
-  const onDateChange = (val: any, datestring: any) => {
-    console.log('onDateChange', val);
-    console.log('dateString', datestring);
-  };
+  // const onDateChange = (val: any, datestring: any) => {
+  //   console.log('onDateChange', val);
+  //   console.log('dateString', datestring);
+  // };
 
-  const onSelectChange = (value: any) => {
-    console.log('onSelectChange', value);
-  };
+  // const onSelectChange = (value: any) => {
+  //   console.log('onSelectChange', value);
+  // };
 
   return (
     <>

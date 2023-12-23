@@ -1,14 +1,4 @@
-import {
-  Alert,
-  Button,
-  Image,
-  Layout,
-  Popconfirm,
-  Row,
-  Space,
-  Table,
-  Typography,
-} from 'antd';
+import { Alert, Button, Image, Layout, Popconfirm, Row, Space, Table, Typography } from 'antd';
 import { ColumnsType } from 'antd/es/table';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -24,10 +14,7 @@ interface IProps {
   onDeleteItem: (id: string) => void;
 }
 
-const renderProduct = ({
-  productName,
-  imageUrl,
-}: Pick<IProduct, 'productName' | 'imageUrl'>) => {
+const renderProduct = ({ productName, imageUrl }: Pick<IProduct, 'productName' | 'imageUrl'>) => {
   return (
     <Space>
       <Image
@@ -35,9 +22,7 @@ const renderProduct = ({
         src={imageUrl}
         // src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
       />
-      <Typography.Paragraph
-        ellipsis={{ tooltip: true, rows: 2, expandable: true, symbol: 'more' }}
-      >
+      <Typography.Paragraph ellipsis={{ tooltip: true, rows: 2, expandable: true, symbol: 'more' }}>
         {productName}
       </Typography.Paragraph>
     </Space>
@@ -141,7 +126,9 @@ const List: React.FC<IProps> = (props: IProps) => {
             >
               <a>删除</a>
             </Popconfirm>
-            <a onClick={() => onEditItem(record.id)}>编辑</a>
+            <Button type="link" onClick={() => onEditItem(record.id)}>
+              编辑
+            </Button>
           </Space>
         );
       },

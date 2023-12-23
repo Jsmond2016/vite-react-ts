@@ -1,9 +1,10 @@
 import { DashOutlined, RiseOutlined } from '@ant-design/icons';
-import { Badge, Button, Space, Typography } from 'antd';
+import { Badge, Space, Typography } from 'antd';
+import dayjs from 'dayjs';
 
 import { ProductStatus, ProductStatusOptions, ProductTrendStatus } from '@/constants';
 import { IProduct } from '@/types/product';
-import dayjs from 'dayjs';
+
 import { DATE_FORMAT, DATE_TIME_FORMAT, DATE_TIME_MINUTE_FORMAT } from './constants';
 
 export const trendStatusIconMap = {
@@ -23,9 +24,7 @@ export const priceRender = (value: number) => `￥${value.toFixed(2)}`;
 export const productStatusRender = (value: ProductStatus) => (
   <Badge color={statusColorMap[value]} text={ProductStatusOptions[value]} />
 );
-export const renderTrendWithText = (
-  record: Pick<IProduct, 'trendStatus' | 'productInventory'>,
-) => {
+export const renderTrendWithText = (record: Pick<IProduct, 'trendStatus' | 'productInventory'>) => {
   return (
     <Space direction="horizontal">
       <span>{record.productInventory}</span>
@@ -105,8 +104,7 @@ export const toRMBFenRender = (value: number) => `${toRMBFen(value)} 分`;
  * @param value number 元
  * @returns string
  */
-export const toThousandsRMBYuanRender = (value: number) =>
-  `${thousands(toRMBYuan(value))} 元`;
+export const toThousandsRMBYuanRender = (value: number) => `${thousands(toRMBYuan(value))} 元`;
 
 // ======= url 相关=================
 
@@ -119,8 +117,10 @@ type LinkItem = { url: string; name: string | number };
 export const linkRender = (v: LinkItem | LinkItem[] | undefined | null) => {
   if (!v) return '';
   if (Array.isArray(v)) {
-    return v.map((link) => (
-      <Typography.Link href={link.url}>{link.name}</Typography.Link>
+    return v.map((link, index) => (
+      <Typography.Link key={index} href={link.url}>
+        {link.name}
+      </Typography.Link>
     ));
   }
   return <Typography.Link href={v.url}>{v.name}</Typography.Link>;
@@ -136,8 +136,10 @@ export const textRender = (v: string | string[]) => {
   if (Array.isArray(v)) {
     return (
       <Space direction="horizontal" split=",">
-        {v.map((text) => (
-          <Typography.Text style={commonStyle}>{text}</Typography.Text>
+        {v.map((text, index) => (
+          <Typography.Text key={index} style={commonStyle}>
+            {text}
+          </Typography.Text>
         ))}
       </Space>
     );

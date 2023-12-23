@@ -1,7 +1,7 @@
 import React, { lazy } from 'react';
 import { Navigate } from 'react-router-dom';
 
-import MainLayout from '@/compoments/main-layout';
+import MainLayout from '@/components/main-layout';
 import Login from '@/views/login';
 import NotFind from '@/views/not-find';
 

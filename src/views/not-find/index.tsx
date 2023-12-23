@@ -5,7 +5,8 @@ import { useNavigate } from 'react-router-dom';
 
 const NotFind: React.FC = () => {
   const navigateTo = useNavigate();
-  const toHome = () => {
+  const toHome = (event: React.MouseEvent<HTMLSpanElement, MouseEvent>) => {
+    console.log('event: ', event);
     navigateTo('/');
   };
   return (
@@ -19,7 +20,7 @@ const NotFind: React.FC = () => {
           <span>4</span>
         </section>
         <p>哎呀，找不到了</p>
-        <span className="go-home" onClick={toHome}>
+        <span className="go-home" onClick={toHome} role="button" tabIndex={0}>
           返回首页
         </span>
       </div>

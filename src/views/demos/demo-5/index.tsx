@@ -3,7 +3,7 @@ import React, { useContext, useMemo, useState } from 'react';
 // how to return component in custom hooks 这是作者 2019 年的方案；貌似不是最优解；
 // refer-video: https://www.youtube.com/watch?v=-UjbTFc9NL4
 
-const formContext = React.createContext<Pick<Api, 'values' | 'setValues'>>({});
+const formContext = React.createContext<Pick<Api, 'values' | 'setValues'>>({} as any);
 
 function useForm() {
   const [values, setValues] = useState({});
@@ -33,9 +33,13 @@ function useFormComponent(api: Api) {
       // eslint-disable-next-line react/display-name
       ({ children, ...others }: any) => {
         console.log('others: ', others);
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-expect-error
         const { formContext } = Form.api;
         console.log('render---->>> form');
         return (
+          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+          // @ts-expect-error
           <formContext.Provider value={Form.api}>
             <form>{children}</form>
           </formContext.Provider>
@@ -43,6 +47,8 @@ function useFormComponent(api: Api) {
       },
     [],
   );
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-expect-error
   Form.api = api;
   return Form;
 }

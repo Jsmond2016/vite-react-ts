@@ -1,7 +1,7 @@
+/* eslint-disable prefer-const */
 export default function initLoginBg() {
   const windowWidth = document.documentElement.clientWidth || document.body.clientWidth;
-  const windowHeight =
-    document.documentElement.clientHeight || document.body.clientHeight;
+  const windowHeight = document.documentElement.clientHeight || document.body.clientHeight;
   let canvas = document.getElementById('canvas') as HTMLCanvasElement,
     ctx = canvas.getContext('2d') as CanvasRenderingContext2D,
     w = (canvas.width = windowWidth),
@@ -80,13 +80,7 @@ export default function initLoginBg() {
       this.alpha += 0.05;
     }
     ctx.globalAlpha = this.alpha;
-    ctx.drawImage(
-      canvas2,
-      x - this.radius / 2,
-      y - this.radius / 2,
-      this.radius,
-      this.radius,
-    );
+    ctx.drawImage(canvas2, x - this.radius / 2, y - this.radius / 2, this.radius, this.radius);
     this.timePassed += this.speed;
   };
   for (let i = 0; i < maxStars; i++) {

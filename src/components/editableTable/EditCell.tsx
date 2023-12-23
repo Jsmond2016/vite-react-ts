@@ -1,5 +1,5 @@
-import { ReactNode } from 'react';
 import { Form } from 'antd';
+import { ReactNode } from 'react';
 
 export interface EditCellProps extends React.HTMLAttributes<HTMLElement> {
   editable?: boolean;
@@ -10,7 +10,7 @@ export interface EditCellProps extends React.HTMLAttributes<HTMLElement> {
 }
 
 const EditCell = (props: EditCellProps) => {
-  const { editable, title, children, editing, dataIndex, cellComponent, ...restProps } = props;
+  const { title, children, editing, dataIndex, cellComponent, ...restProps } = props;
   return (
     <td {...restProps}>
       {editing && cellComponent ? (

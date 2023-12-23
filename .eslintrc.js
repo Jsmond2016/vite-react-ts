@@ -43,6 +43,9 @@ module.exports = {
     'simple-import-sort/imports': 'error',
     'simple-import-sort/exports': 'error',
     '@typescript-eslint/no-explicit-any': 'off',
+    'jsx-a11y/click-events-have-key-events': 'off',
+    'jsx-a11y/interactive-supports-focus': 'off',
+    'jsx-a11y/no-static-element-interactions': 'off',
     'jsx-a11y/anchor-is-valid': [
       'error',
       {

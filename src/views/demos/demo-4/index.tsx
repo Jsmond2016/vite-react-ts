@@ -1,4 +1,4 @@
-import { Button, Input } from 'antd';
+import { Input } from 'antd';
 import { useEffect, useRef, useState } from 'react';
 
 const toBase64 = (file: any) =>
@@ -44,16 +44,9 @@ const Index = () => {
     watermarkCtx.rotate(angle);
     watermarkCtx.translate(-realWidth / 2, -realHeight / 2);
     // 居中绘制：realHeight* 0.5 + 0.25 * fontHeight --> 高度和行高 1.25
-    watermarkCtx.fillText(
-      text,
-      (realWidth - textWidth) / 2,
-      realHeight * 0.5 + 0.25 * fontHeight,
-    );
+    watermarkCtx.fillText(text, (realWidth - textWidth) / 2, realHeight * 0.5 + 0.25 * fontHeight);
 
-    const patt = wrapperCanvasCtx.createPattern(
-      watermarkCanvas,
-      'repeat',
-    ) as CanvasPattern;
+    const patt = wrapperCanvasCtx.createPattern(watermarkCanvas, 'repeat') as CanvasPattern;
 
     fileRef.current!.onchange = async function (e: any) {
       const f1 = e.target!.files[0];

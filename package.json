@@ -7,16 +7,25 @@
     "build": "tsc && vite build",
     "genCodes": "ts-node --project tsconfig.node.json ./src/tools/genCode.ts",
     "preview": "vite preview",
+    "lint:format": "prettier  --loglevel warn --write \"./**/*.{js,jsx,ts,tsx,css,md,json}\" ",
+    "lint": "yarn lint:format && yarn lint:fix ",
+    "prepare": "husky install",
+    "pretest": "npm run lint",
+    "commit": "git cz",
+    "lint:fix": "eslint ./src --ext .jsx,.js,.ts,.tsx --quiet --fix --ignore-path ./.eslintignore",
     "__mrm 配置__": "如下",
     "__lint__bak": "eslint . --cache --fix --ext .ts,.tsx",
     "__format_ba": "prettier --loglevel warn --write \"**/*.{ts,tsx,css,md}\"",
     "__posttest_bak": "npm run format",
     "__eslint__refer": "eslint 配置来源:=> https://github.com/TheSwordBreaker/vite-reactts-eslint-prettier/blob/main/package.json",
-    "pretest": "npm run lint",
-    "lint:fix": "eslint ./src --ext .jsx,.js,.ts,.tsx --quiet --fix --ignore-path ./.gitignore",
-    "lint:format": "prettier  --loglevel warn --write \"./**/*.{js,jsx,ts,tsx,css,md,json}\" ",
-    "lint": "yarn lint:format && yarn lint:fix ",
-    "prepare": "husky install"
+    "__lint-staged": {
+      "**/*.less": "stylelint --syntax less",
+      "**/*.{js,jsx,ts,tsx}": "eslint --ext .js,.jsx,.ts,.tsx",
+      "**/*.{js,jsx,tsx,ts,less,md,json}": [
+        "prettier --write",
+        "git add"
+      ]
+    }
   },
   "dependencies": {
     "@ant-design/icons": "^5.2.6",
@@ -29,7 +38,6 @@
     "axios": "^1.6.2",
     "clipboard": "^2.0.11",
     "dayjs": "^1.11.10",
-    "eslint-config-prettier": "^9.1.0",
     "highlight.js": "^11.9.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -38,10 +46,11 @@
     "react-router-dom": "^6.19.0",
     "redux": "^4.2.1",
     "redux-thunk": "^2.4.2",
-    "ts-morph": "^21.0.1",
-    "ts-node": "^10.9.1"
+    "ts-morph": "^21.0.1"
   },
   "devDependencies": {
+    "@commitlint/cli": "^18.4.3",
+    "@commitlint/config-conventional": "^18.4.3",
     "@types/eslint": "^8.44.9",
     "@types/node": "^20.9.2",
     "@types/react": "^18.2.37",
@@ -56,11 +65,16 @@
     "@unocss/preset-uno": "^0.57.5",
     "@unocss/transformer-attributify-jsx": "^0.57.6",
     "@vitejs/plugin-react": "^4.2.0",
+    "commitizen": "^4.3.0",
+    "commitlint-config-cz": "^0.13.3",
+    "cz-conventional-changelog": "^3.3.0",
+    "cz-customizable": "^7.0.0",
     "eslint": "^8.55.0",
+    "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-jsx-a11y": "^6.8.0",
     "eslint-plugin-prettier": "^5.0.1",
     "eslint-plugin-simple-import-sort": "^10.0.0",
-    "husky": "^8.0.3",
+    "husky": "^8.0.0",
     "less": "^4.2.0",
     "lint-staged": "^15.1.0",
     "mockjs": "^1.1.0",
@@ -69,6 +83,7 @@
     "prettier": "^3.1.0",
     "sass": "^1.69.5",
     "stylus": "^0.62.0",
+    "ts-node": "^10.9.1",
     "typescript": "^5.2.2",
     "unocss": "^0.57.5",
     "vite": "^5.0.0",
@@ -76,5 +91,11 @@
   },
   "msw": {
     "workerDirectory": "public"
+  },
+  "config": {
+    "commitizen": {
+      "__bak_path": "./node_modules/cz-conventional-changelog",
+      "path": "./node_modules/cz-customizable"
+    }
   }
 }

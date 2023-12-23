@@ -39,7 +39,8 @@ interface IProps {
 
 // eslint-disable-next-line react/display-name
 const List: React.FC<IProps> = memo((props: IProps) => {
-  const { onDeleteItem, openDrawer } = props;
+  // const { onDeleteItem, openDrawer } = props;
+  const { onDeleteItem } = props;
 
   const columns = [
     {
@@ -99,7 +100,8 @@ const List: React.FC<IProps> = memo((props: IProps) => {
             >
               <a>删除</a>
             </Popconfirm>
-            <a onClick={() => openDrawer(record)}>编辑</a>
+            {/* <a onClick={() => openDrawer(record)}>编辑</a> */}
+            <a>编辑</a>
           </Space>
         );
       },

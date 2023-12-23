@@ -10,13 +10,9 @@ export type IOption = {
   label: string;
   value: string | number;
 };
-function selectItemGenerator(
-  propertyName: string,
-  labelName: string,
-  options: IOption[],
-) {
+function selectItemGenerator(propertyName: string, labelName: string, options: IOption[]) {
   return {
-    type: 'select' as 'select',
+    type: 'select' as const,
     label: labelName,
     key: propertyName,
     options,

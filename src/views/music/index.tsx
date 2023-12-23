@@ -1,9 +1,11 @@
 import { Outlet } from 'react-router-dom';
 
-export default () => {
+const Index = () => {
   return (
     <div className="music-container">
       <Outlet />
     </div>
   );
 };
+
+export default Index;

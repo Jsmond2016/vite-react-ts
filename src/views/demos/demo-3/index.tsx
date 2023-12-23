@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 
+// eslint-disable-next-line react/display-name
 export default () => {
   const [value, setValue] = useState(0);
   const [value2, setValue2] = useState(0);

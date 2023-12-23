@@ -118,7 +118,7 @@ export default function UserDetail() {
       <DescriptionsRender
         title="商品基本信息"
         column={3}
-        items={configItems}
+        items={configItems as any}
         info={productInfo}
       />
     </Spin>

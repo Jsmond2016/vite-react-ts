@@ -91,8 +91,7 @@ const Index: React.FC = () => {
         )}
       >
         <p>
-          Just don&apos;t learn physics at school and your life will be full of magic and
-          miracles.
+          Just don&apos;t learn physics at school and your life will be full of magic and miracles.
         </p>
         <br />
         <p>Day before yesterday I saw a rabbit, and yesterday a deer, and today, you.</p>

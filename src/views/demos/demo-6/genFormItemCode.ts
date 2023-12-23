@@ -1,7 +1,7 @@
 import { PropertySignature } from 'ts-morph';
 
 import { getEnumOptions, getPropertiesFromInterface, sourceFile } from './generateCode';
-import { IOption, formItemUtil } from './tool';
+import { formItemUtil, IOption } from './tool';
 
 type EnumGeneratorParams = {
   property: PropertySignature;
@@ -29,7 +29,7 @@ export interface FilterItem {
   type: 'input' | 'select';
   label: string;
   key: string;
-  options?: IOption[]
+  options?: IOption[];
 }
 
 export function generateFilterCode(sourceCode: string): FilterItem[] {
@@ -86,7 +86,7 @@ export function generateFilterCode(sourceCode: string): FilterItem[] {
 
     // 其他情况
     const restItem = {
-      type: 'input' as 'input',
+      type: 'input' as const,
       label: labelName,
       key: propertyName,
     };

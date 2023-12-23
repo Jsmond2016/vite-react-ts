@@ -1,52 +1,52 @@
-import { Button, Col, Form, FormInstance, Input, Row, Space } from 'antd';
+import { Col, Form, Input, Row, Space } from 'antd';
 import { useRef, useState } from 'react';
 
 // import Highlight from 'react-highlight';
 import CodeBlock from './CodeBlock';
-import { generateColumnsCode } from './genColumnCode';
-import { generateFilterCode } from './genFormItemCode';
-import { GenFiltersButton, GenerateType } from './DragList';
+import { GenerateType, GenFiltersButton } from './DragList';
+// import { generateColumnsCode } from './genColumnCode';
+// import { generateFilterCode } from './genFormItemCode';
 
-type FormData = {
-  sourceCode: string;
-  targetCode: string;
-};
+// type FormData = {
+//   sourceCode: string;
+//   targetCode: string;
+// };
 
-type IOperateButtonProps = {
-  form: FormInstance<FormData>;
-  setCode: (code: string) => void;
-  toggleHighlight: () => void;
-};
+// type IOperateButtonProps = {
+//   form: FormInstance<FormData>;
+//   setCode: (code: string) => void;
+//   toggleHighlight: () => void;
+// };
 
-const OperateButtons = ({ form, setCode, toggleHighlight }: IOperateButtonProps) => {
-  const setCodeAndHighlight = async (generator: (sourceCode: string) => Promise<string>) => {
-    const { sourceCode } = await form.getFieldsValue();
-    const result = await generator(sourceCode);
-    setCode(result);
-    setTimeout(() => {
-      toggleHighlight();
-    });
-  };
+// const OperateButtons = ({ form, setCode, toggleHighlight }: IOperateButtonProps) => {
+//   const setCodeAndHighlight = async (generator: (sourceCode: string) => Promise<string>) => {
+//     const { sourceCode } = await form.getFieldsValue();
+//     const result = await generator(sourceCode);
+//     setCode(result);
+//     setTimeout(() => {
+//       toggleHighlight();
+//     });
+//   };
 
-  const generateFilters = async () => {
-    setCodeAndHighlight(generateFilterCode);
-  };
+//   const generateFilters = async () => {
+//     setCodeAndHighlight(generateFilterCode);
+//   };
 
-  const generateColumns = async () => {
-    setCodeAndHighlight(generateColumnsCode);
-  };
-  return (
-    <Space direction="vertical" size="large" align="center">
-      {/* <Button type="primary" onClick={generateFilters}>
-        生成 Filters
-      </Button> */}
-      <GenFiltersButton form={form} />
-      <Button type="primary" onClick={generateColumns}>
-        生成 Columns
-      </Button>
-    </Space>
-  );
-};
+//   const generateColumns = async () => {
+//     setCodeAndHighlight(generateColumnsCode);
+//   };
+//   return (
+//     <Space direction="vertical" size="large" align="center">
+//       {/* <Button type="primary" onClick={generateFilters}>
+//         生成 Filters
+//       </Button> */}
+//       <GenFiltersButton form={form} />
+//       <Button type="primary" onClick={generateColumns}>
+//         生成 Columns
+//       </Button>
+//     </Space>
+//   );
+// };
 
 const Index = () => {
   const [form] = Form.useForm();

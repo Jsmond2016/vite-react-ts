@@ -25,7 +25,7 @@ const Index = () => {
   };
   return (
     <div>
-      <div onClick={changeNum}>{num}</div>
+      <div>{num}</div>
       <button onClick={changeNum}>改变数字</button>
       <p>{role}</p>
       <button onClick={changeRole}>改变Role</button>

@@ -1,5 +1,3 @@
-
-
 /** 年-月-日 */
 export const DATE_FORMAT = 'YYYY-MM-DD';
 /** 年-月-日 时:分 */

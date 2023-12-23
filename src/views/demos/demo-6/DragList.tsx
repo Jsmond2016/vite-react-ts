@@ -1,17 +1,11 @@
-import React, { useEffect, useState } from 'react';
 import { Button, FormInstance, Input, Modal, Select } from 'antd';
-import type { ColumnType, ColumnsType } from 'antd/es/table';
-import { FilterItem, generateFilterCode, generateFilterCodeString } from './genFormItemCode';
+import type { ColumnsType, ColumnType } from 'antd/es/table';
+import React, { useState } from 'react';
+
+import { EditableTable } from '@/components/editableTable';
+
 import { generateColumnsCode, generateColumnsToString } from './genColumnCode';
-import { EditableTable } from '@/compoments/editableTable';
-
-type DragItem = FilterItem & { id: number };
-
-// type DragTableProps = {
-//   columns: ColumnsType[];
-//   dataSource: DragItem[];
-//   setDataSource: React.Dispatch<React.SetStateAction<DragItem[]>>;
-// };
+import { generateFilterCode, generateFilterCodeString } from './genFormItemCode';
 
 export enum GenerateType {
   Column = 'Column',
@@ -27,12 +21,6 @@ type GenFiltersButtonProps = {
 
 const genCodeType = ['input', 'textarea', 'select', 'multi-select', 'checkbox', 'radio'];
 const genCodeTypeOptions = genCodeType.map((item) => ({ label: item, value: item }));
-
-// type EditColumnProps = {
-//   form: FormInstance;
-//   dataSource: any[];
-//   setData: any;
-// };
 
 const tableColumns = [
   {
@@ -106,6 +94,7 @@ const GenFiltersButton = ({
   };
 
   const handleOk = () => {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const resultCode = generatorToString(data.map(({ id, ...rest }) => rest));
     setOutputCodeString(resultCode);
     setTimeout(toggleHighlight);
@@ -127,7 +116,7 @@ const GenFiltersButton = ({
       >
         {/* <DragTable columns={columns} dataSource={data} setDataSource={setData} /> */}
         {/* <DragTable columns={editColumns} dataSource={data} setDataSource={setData} /> */}
-        <EditableTable columns={columns} dataSource={data} pagination={false} />
+        <EditableTable columns={columns as any} dataSource={data} pagination={false} />
       </Modal>
     </>
   );
