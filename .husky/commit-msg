@@ -2,3 +2,6 @@
 . "$(dirname -- "$0")/_/husky.sh"
 
 npx commitlint --edit 
+# https://blog.csdn.net/qq_41308489/article/details/121734786
+# https://commitlint.js.org/#/reference-cli
+# npx --no-install commitlint --edit

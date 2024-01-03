@@ -12,7 +12,7 @@
     "prepare": "husky install",
     "pretest": "npm run lint",
     "commit": "git cz",
-    "lint:fix": "eslint ./src --ext .jsx,.js,.ts,.tsx --quiet --fix --ignore-path ./.eslintignore",
+    "lint:fix": "eslint --cache ./src --ext .jsx,.js,.ts,.tsx --quiet --fix --ignore-path ./.eslintignore",
     "__mrm 配置__": "如下",
     "__lint__bak": "eslint . --cache --fix --ext .ts,.tsx",
     "__format_ba": "prettier --loglevel warn --write \"**/*.{ts,tsx,css,md}\"",

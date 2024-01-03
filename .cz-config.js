@@ -13,7 +13,7 @@ module.exports = {
     { value: '⏪chore', name: '其他:    如发版等' },
     { value: '⏪pkg', name: '依赖变化:    如何依赖变更、升级等' },
   ],
-  scopes: [{ name: 'react' }, { name: 'js' }, { name: 'ts' }, { name: 'node' }],
+  scopes: [],
   // it needs to match the value for field type. Eg.: 'fix'
   /*  scopeOverrides: {
     fix: [
@@ -26,9 +26,9 @@ module.exports = {
   // override the messages, defaults are as follows
   messages: {
     type: '选择一种你的提交类型:',
-    scope: '选择一个scope (可选):',
+    scope: '选择一个影响范围 (可选):',
     // used if allowCustomScopes is true
-    customScope: 'Denote the SCOPE of this change:',
+    customScope: '自定义修改模块名:',
     subject: '短说明:\n',
     body: '长说明，使用"|"换行(可选)：\n',
     breaking: '非兼容性说明 (可选):\n',
@@ -37,6 +37,10 @@ module.exports = {
   },
   allowCustomScopes: true,
   allowBreakingChanges: ['特性', '修复'],
+  allowEmptyScopes: true,
+  customScopesAlign: 'bottom',
+  customScopesAlias: 'custom',
+  emptyScopesAlias: 'empty',
   // limit subject length
   subjectLimit: 100,
 };
