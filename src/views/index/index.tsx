@@ -1,3 +1,6 @@
+import { Divider, Input, Space } from 'antd';
+import { evolve, lensPath, pipe, set } from 'ramda';
+import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import numStore from '@/store/num';
@@ -29,8 +32,48 @@ const Index = () => {
       <button onClick={changeNum}>改变数字</button>
       <p>{role}</p>
       <button onClick={changeRole}>改变Role</button>
+      <RamdaDemo />
+      <Divider />
+      <TextareaDemo />
     </div>
   );
 };
+
+function RamdaDemo() {
+  const obj = {
+    a: 1,
+    b: {
+      c: 'abc',
+    },
+  };
+  const newObj = pipe(
+    evolve({
+      a: (v: number) => v + 1,
+    }),
+    set(lensPath(['b', 'c']), 'def'),
+  )(obj);
+
+  console.log('newObj', newObj);
+  return <h2>ramda</h2>;
+}
+
+function TextareaDemo() {
+  const [value, setValue] = useState('');
+
+  return (
+    <Space>
+      <Input.TextArea
+        rows={4}
+        value={value}
+        onChange={(ev) => {
+          setValue(ev.target.value);
+          console.log('value', value);
+        }}
+      />
+      <Divider />
+      <pre>{value}</pre>
+    </Space>
+  );
+}
 
 export default Index;

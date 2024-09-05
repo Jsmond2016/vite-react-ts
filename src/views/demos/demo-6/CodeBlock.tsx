@@ -6,8 +6,17 @@ import React, { forwardRef, useEffect, useImperativeHandle, useRef, useState } f
 
 import hljs from './hljs';
 
+type Props = {
+  language: string;
+  code: string;
+};
+
+type RefProps = {
+  highlightBlock: () => void;
+};
+
 // eslint-disable-next-line react/display-name
-const CodeBlock = forwardRef<{ highlightBlock: () => void }, any>(({ language, code }, ref) => {
+const CodeBlock = forwardRef<RefProps, Props>(({ language, code }, ref) => {
   console.log('code: ', code);
   const preRef = useRef<HTMLElement>(null);
   const [copied, setCopied] = useState(false);

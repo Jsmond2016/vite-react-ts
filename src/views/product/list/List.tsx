@@ -1,8 +1,10 @@
+import { ExportOutlined, UploadOutlined } from '@ant-design/icons';
 import { Alert, Button, Image, Layout, Popconfirm, Row, Space, Table, Typography } from 'antd';
 import { ColumnsType } from 'antd/es/table';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+import { ButtonColor } from '@/components/ButtonColor/ButtonColor';
 import { NetType, NetTypeOptions, ProductColor, ProductColorOptions } from '@/constants';
 import { IProduct } from '@/types/product';
 import { priceRender, productStatusRender, renderTrendWithText } from '@/utils/renders';
@@ -156,8 +158,17 @@ const List: React.FC<IProps> = (props: IProps) => {
     <div>
       <Row justify="end" className="mx-16px">
         <Space direction="horizontal" size="small">
-          <Button onClick={() => {}}>导入</Button>
-          <Button onClick={() => {}}>导出</Button>
+          <ButtonColor overrideColor="00b96b" type="primary" icon={<UploadOutlined />}>
+            导入
+          </ButtonColor>
+          <ButtonColor
+            overrideColor="FFAF45"
+            type="primary"
+            icon={<ExportOutlined />}
+            onClick={() => {}}
+          >
+            导出
+          </ButtonColor>
           <Button onClick={() => {}} type="primary">
             新建
           </Button>

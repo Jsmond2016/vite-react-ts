@@ -2,7 +2,7 @@ import { ESLint } from 'eslint';
 import * as fs from 'fs';
 import * as path from 'path';
 
-import genConfig from '../genCodes/index';
+import genConfig from '../genCodes/constants/index';
 
 type EnumItem = string | number;
 
@@ -12,13 +12,17 @@ const createEnum = (item: EnumItem[][]) => {
   const [enumName, enumDesc] = firstItem;
   return `
   
-  /** ${enumDesc} */
+  /**
+   * ${enumDesc}
+   */
   export enum ${enumName} {
   ${restItem
     .map(
       (item) =>
         `
-        /** ${item[2]} */
+        /**
+         * ${item[2]}
+         */
         ${item[0]} = ${typeof item[1] === 'number' ? item[1] : withString(item[1])}`,
     )
     .join(', \n  ')}    
@@ -29,7 +33,9 @@ const createOptions = (item: EnumItem[][]) => {
   const [firstItem, ...restItem] = item;
   const [enumName, enumDesc] = firstItem;
   return `
-  /** ${enumDesc}Options */
+  /**
+   * ${enumDesc}Options
+   */
   export const ${enumName}Options = {
     ${restItem.map((item) => `[${enumName}.${item[0]}]: "${item[2]}" `).join(',\n  ')}
   }

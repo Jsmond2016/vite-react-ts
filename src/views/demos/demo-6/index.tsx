@@ -1,4 +1,5 @@
 import { Col, Form, Input, Row, Space } from 'antd';
+// import { ElementRef, ElementType, RefObject, useRef, useState } from 'react';
 import { useRef, useState } from 'react';
 
 // import Highlight from 'react-highlight';
@@ -47,6 +48,18 @@ import { GenerateType, GenFiltersButton } from './DragList';
 //     </Space>
 //   );
 // };
+
+// type CodeRefProps = React.ElementRef<typeof CodeBlock>;
+
+// type CodeProps = React.ComponentProps<typeof CodeBlock> & {
+//   ref: RefObject<CodeRefProps>;
+// };
+
+// type EE = NonNullable<CodeProps['ref']['current']>;
+
+// const resf: EE = {};
+
+// const bb = resf.highlightBlock();
 
 const Index = () => {
   const [form] = Form.useForm();

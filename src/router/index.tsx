@@ -19,6 +19,7 @@ const Demo3 = lazy(() => import('@/views/demos/demo-3/index'));
 const Demo4 = lazy(() => import('@/views/demos/demo-4/index'));
 const Demo5 = lazy(() => import('@/views/demos/demo-5/index'));
 const Demo6 = lazy(() => import('@/views/demos/demo-6/index'));
+const Demo7 = lazy(() => import('@/views/demos/demo-7/index'));
 
 const UserIndex = lazy(() => import('@/views/product/index'));
 const UserList = lazy(() => import('@/views/product/list/index'));
@@ -70,6 +71,10 @@ const routes = [
           {
             path: '/demos/demo-6/index',
             element: widthLoading(<Demo6 />),
+          },
+          {
+            path: '/demos/demo-7/index',
+            element: widthLoading(<Demo7 />),
           },
         ],
       },
