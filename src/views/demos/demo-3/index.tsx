@@ -1,4 +1,4 @@
-import { evolve, pipe, set } from 'ramda';
+// import { evolve, pipe, set } from 'ramda';
 import { useEffect, useState } from 'react';
 
 // eslint-disable-next-line react/display-name
@@ -40,19 +40,19 @@ export default () => {
 };
 
 function RamdaDemo() {
-  const obj = {
-    a: 1,
-    b: {
-      c: 'abc',
-    },
-  };
-  const newObj = pipe(
-    evolve({
-      a: (v: number) => v + 1,
-    }),
-    set(['b', 'c'], 'def'),
-  )(obj);
+  // const obj = {
+  //   a: 1,
+  //   b: {
+  //     c: 'abc',
+  //   },
+  // };
+  // const newObj = pipe(
+  //   evolve({
+  //     a: (v: number) => v + 1,
+  //   }),
+  //   set(['b', 'c'], 'def'),
+  // )(obj);
 
-  console.log('newObj', newObj);
+  // console.log('newObj', newObj);
   return <h2>ramda</h2>;
 }

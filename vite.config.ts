@@ -9,12 +9,18 @@ import { presetAttributify, presetIcons, presetUno } from 'unocss';
 // import styleImport, { AntdResolve } from "vite-plugin-style-import"
 import Unocss from 'unocss/vite';
 import { defineConfig } from 'vite';
+import checker from 'vite-plugin-checker';
 
 export default defineConfig({
   plugins: [
     // commonjs(),
     // commonjsExternals({ externals }),
     // nodePolyfills({ include: null }),
+    checker({
+      // e.g. use TypeScript check
+      typescript: true,
+      root: './src',
+    }),
     react(),
     Unocss({
       presets: [presetUno(), presetAttributify(), presetIcons()],

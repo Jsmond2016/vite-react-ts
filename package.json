@@ -2,10 +2,15 @@
   "name": "react18-demo",
   "private": true,
   "version": "1.0.0",
+  "engines": {
+    "pnpm": ">=9.0.0",
+    "npm": ">= 8.0.0"
+  },
   "scripts": {
     "dev": "vite --host --port 3005",
     "build": "tsc && vite build",
     "genCodes": "ts-node --project tsconfig.node.json ./src/tools/genCode.ts",
+    "preinstall": "node -e \"if (!process.env.npm_config_user_agent.includes('pnpm')) { console.error('请使用 pnpm 安装依赖'); process.exit(1); }\"",
     "preview": "vite preview",
     "prepare": "husky install",
     "pretest": "npm run lint",
@@ -83,6 +88,7 @@
     "typescript": "^5.2.2",
     "unocss": "^0.57.5",
     "vite": "^5.0.0",
+    "vite-plugin-checker": "^0.8.0",
     "vite-plugin-style-import": "^2.0.0"
   },
   "msw": {
