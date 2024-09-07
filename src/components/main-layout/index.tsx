@@ -18,33 +18,19 @@ const breadCrumbItems = [
 const MainLayout: React.FC = () => {
   const [collapsed, setCollapsed] = useState(false);
   return (
-    <Layout style={{ minHeight: '100vh' }}>
+    <Layout>
       <Sider collapsible collapsed={collapsed} onCollapse={(value) => setCollapsed(value)}>
         <div className="home-logo" />
         <MainMenu />
       </Sider>
-      <Layout className="site-layout" style={{ height: '100vh' }}>
-        <Header className="site-layout-background" style={{ padding: '0 16px' }}>
-          <Breadcrumb items={breadCrumbItems} style={{ lineHeight: '64px' }} />
+      <Layout className="h-screen">
+        <Header className="flex items-center justify-start bg-white">
+          <Breadcrumb items={breadCrumbItems} className="leading-normal" />
         </Header>
-        <Content
-          style={{
-            margin: '10px 10px 0 10px',
-            padding: '10px',
-            background: '#FFFFFF',
-            overflow: 'auto',
-          }}
-        >
+        <Content className="p-10 pb-0  overflow-auto ">
           <Outlet />
         </Content>
-        <Footer
-          style={{
-            textAlign: 'center',
-            padding: '0',
-            lineHeight: '48px',
-            height: '48px',
-          }}
-        >
+        <Footer className="h-[48px] flex justify-center items-center border-t-neutral border-t-solid border-t-2">
           Ant Design ©2022 Created by Ant UED
         </Footer>
       </Layout>
