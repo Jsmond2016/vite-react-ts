@@ -2,7 +2,7 @@ import { Breadcrumb, Layout, Typography } from 'antd';
 import React, { useState } from 'react';
 import { Outlet } from 'react-router-dom';
 
-import MainMenu from '@/components/main-menu';
+import MainMenu from '@/components/MainMenu';
 
 const { Header, Content, Footer, Sider } = Layout;
 
@@ -20,7 +20,6 @@ const MainLayout: React.FC = () => {
   return (
     <Layout>
       <Sider collapsible collapsed={collapsed} onCollapse={(value) => setCollapsed(value)}>
-        <div className="home-logo" />
         <MainMenu />
       </Sider>
       <Layout className="h-screen">
