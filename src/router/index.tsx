@@ -54,7 +54,7 @@ const EditTablePage = lazy(() => import('@/views/ListSamples/EditTableList'));
 const NormalListPage = lazy(() => import('@/views/ListSamples/TableList'));
 
 // ====
-const StaticPage = lazy(() => import('@/views/Statistic'));
+const DataBigScreenPage = lazy(() => import('@/views/DataBigScreen'));
 const PermissionPage = lazy(() => import('@/views/PermissionManagement/PagePermission'));
 const ButtonPermissionPage = lazy(() => import('@/views/PermissionManagement/ButtonPermission'));
 
@@ -110,7 +110,7 @@ const routes = [
         title: '数据大屏',
         path: '/static',
         menuIcon: <PieChartOutlined />,
-        element: widthLoading(<StaticPage />),
+        element: widthLoading(<DataBigScreenPage />),
       },
       {
         title: '权限管理',
