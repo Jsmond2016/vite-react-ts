@@ -1,10 +1,15 @@
-参考：https://pro.spicyboy.cn/#/auth/page
+参考：
+
+- [github/Hooks-Admin](https://github.com/HalseySpicy/Hooks-Admin) 
+- [预览-Hooks-Admin](https://pro.spicyboy.cn/#/auth/page)
+- [官网-naiveadmin](https://www.naiveadmin.com/)
+- [预览-naiveadmin](https://plus.naiveadmin.com/)
 
 todo:
 
 ## 系统默认模块
 
-- [ ] 登录 | 注册
+- [ ] 登录 | 注册: 可以参考这个实现：https://plus.naiveadmin.com/login-v4
 - [x] 首页
 - [ ] 数据大屏
 - [ ] 权限管理
@@ -27,7 +32,7 @@ todo:
   - [ ] 用户管理
   - [ ] 角色管理
   - [ ] 菜单和权限管理；
-- [ ] 关于项目
+- [ ] 关于项目: 参考这里实现：https://plus.naiveadmin.com/about/index
 - [ ] 其他
   - [ ] 个人学习测试 demo；
 
@@ -38,7 +43,7 @@ todo:
   - [ ] useEditorModel
   - [ ] useStatusModel
   - [ ] useCustomModel
-- [ ] 基础组件 (表单创建和修改，表格和详情数据渲染)
+- [ ] 基础组件 (表单创建和修改，表格和详情数据渲染)，更多内容可以参考这里 https://www.naiveadmin.com/comp/index
   - [ ] RenderFormItem
   - [ ] FilterForm
   - [ ] EditableTable
