@@ -33,7 +33,38 @@ type Obj = {
 };
 
 // 测试
-type Test = GetMultipleNameByPath<Obj>; // expect: 'a' | ['b', 'c'] | ['b', 'd', 'e']
+type Test = GetMultipleNameByPath<Obj>; // expect: 'list' | 'a' |  ['b', 'c'] | ['b', 'd', 'e']
+
+type GetNameValueByPathList<T extends object, F extends string[]> = F extends []
+  ? T
+  : F extends [infer First, ...infer Rest]
+    ? First extends keyof T
+      ? GetNameValueByPathList<T[First], Rest>
+      : never
+    : never;
+// 测试
+type Test1 = GetNameValueByPathList<Obj, ['a']>; // string
+type Test2 = GetNameValueByPathList<Obj, ['b']>; // { c: string; d: { e: number; }; }
+type Test3 = GetNameValueByPathList<Obj, ['b', 'd']>; // { e: number; }
+type Test4 = GetNameValueByPathList<Obj, ['list']>; // Array<{ id: string }>
+
+// 排除中间的对象 key; 确保 path 准确；
+type ExcludeObjectKey<T extends object, F extends string | string[]> = F extends string
+  ? F
+  : IsObject<GetNameValueByPathList<T, F>> extends true
+    ? never
+    : F;
+
+// 测试
+type Test11 = ExcludeObjectKey<Obj, ['a']>; // string
+type Test22 = ExcludeObjectKey<Obj, ['b']>; // { c: string; d: { e: number; }; }
+type Test33 = ExcludeObjectKey<Obj, ['b', 'd']>; // { e: number; }
+type Test44 = ExcludeObjectKey<Obj, ['list']>; // Array<{ id: string }>
+
+type Test55 = ExcludeObjectKey<Obj, GetMultipleNameByPath<Obj>>; // expect: 'list' | 'a' |  ['b', 'c'] | ['b', 'd', 'e']
+
+export type GetFieldName<T> = ExcludeObjectKey<T, GetMultipleNameByPath<T>>;
+type Test56 = ExcludeObjectKey<Obj, GetMultipleNameByPath<Obj>>; // expect: 'list' | 'a' |  ['b', 'c'] | ['b', 'd', 'e']
 
 // ===========================================================================================
 // export type GetNameByPath<T> = T extends object

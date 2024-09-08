@@ -47,6 +47,10 @@ const Search: React.FC<IProps> = () => {
     config: {
       title: string;
       count: number;
+      moreConfig: {
+        name: string;
+        value: number;
+      };
       list: Array<{
         id: number;
         amount: number;
@@ -55,6 +59,11 @@ const Search: React.FC<IProps> = () => {
     };
   };
   const formFields: FormItemFields<Album>[] = [
+    {
+      title: 'test-config-moreConfig',
+      key: ['config', 'moreConfig', 'name'],
+      type: 'date',
+    },
     {
       title: 'test-radio',
       key: 'radio',

@@ -17,7 +17,7 @@ import {
 import { TextAreaProps } from 'antd/es/input';
 import React from 'react';
 
-import { GetMultipleNameByPath } from '@/types/util';
+import { GetFieldName } from '@/types/util';
 
 type FormFieldType = 'input' | 'textarea' | 'inputNumber' | 'select' | 'radio' | 'date';
 
@@ -42,7 +42,7 @@ type GetTypeWithProps<F extends FormFieldType = FormFieldType> = F extends FormF
 
 export type FormItemFields<T = any, F extends FormFieldType = FormFieldType> = {
   title: string;
-  key: GetMultipleNameByPath<T>;
+  key: GetFieldName<T>;
   formItemProps?: any;
   updater?: any;
 } & GetTypeWithProps<F>;
