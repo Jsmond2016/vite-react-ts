@@ -1,8 +1,10 @@
-import { Breadcrumb, Layout, Typography } from 'antd';
-import React, { useState } from 'react';
+import { Breadcrumb, Layout, Row, Space, Typography } from 'antd';
+import React from 'react';
 import { Outlet } from 'react-router-dom';
 
+import Logo from '@/assets/antd-logo.svg';
 import MainMenu from '@/components/MainMenu';
+import { useMenuStore } from '@/store/global';
 
 const { Header, Content, Footer, Sider } = Layout;
 
@@ -16,10 +18,18 @@ const breadCrumbItems = [
 ];
 
 const MainLayout: React.FC = () => {
-  const [collapsed, setCollapsed] = useState(false);
+  const { isMenuClosed, toggleMenuOpenStatus } = useMenuStore();
+  console.log('isMenuClosed: ', isMenuClosed);
+
   return (
     <Layout>
-      <Sider collapsible collapsed={collapsed} onCollapse={(value) => setCollapsed(value)}>
+      <Sider collapsible collapsed={isMenuClosed} onCollapse={() => toggleMenuOpenStatus()}>
+        <Row justify="center" align="middle" className="h-[56px]">
+          <Space size="small">
+            <img src={Logo} alt="antd-logo" width={32} />
+            {!isMenuClosed && <h1 className="text-white text-size-lg">Vite-AntD-Admin</h1>}
+          </Space>
+        </Row>
         <MainMenu />
       </Sider>
       <Layout className="h-screen">

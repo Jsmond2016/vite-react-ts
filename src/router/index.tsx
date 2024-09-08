@@ -1,5 +1,21 @@
-import { HomeOutlined, UserOutlined } from '@ant-design/icons';
-import React, { lazy } from 'react';
+import {
+  CustomerServiceOutlined,
+  DotChartOutlined,
+  ExclamationCircleOutlined,
+  FormatPainterOutlined,
+  FormOutlined,
+  HomeOutlined,
+  LineChartOutlined,
+  LockOutlined,
+  PieChartOutlined,
+  ProductOutlined,
+  ProfileOutlined,
+  TableOutlined,
+  UnorderedListOutlined,
+  UserOutlined,
+} from '@ant-design/icons';
+import { lazy } from 'react';
+import React from 'react';
 import { Navigate } from 'react-router-dom';
 
 import MainLayout from '@/components/MainLayout';
@@ -22,16 +38,59 @@ const Demo5 = lazy(() => import('@/views/demos/demo-5/index'));
 const Demo6 = lazy(() => import('@/views/demos/demo-6/index'));
 const Demo7 = lazy(() => import('@/views/demos/demo-7/index'));
 
-const UserIndex = lazy(() => import('@/views/product/index'));
-const UserList = lazy(() => import('@/views/product/list/index'));
+const ProductIndex = lazy(() => import('@/views/product/index'));
+const ProductList = lazy(() => import('@/views/product/list/index'));
 const UserDetail = lazy(() => import('@/views/product/detail/index'));
 
 const MusicList = lazy(() => import('@/views/music/music-list/index'));
 const MusicDetail = lazy(() => import('@/views/music/music-detail/index'));
 
+const NormalEchartsPage = lazy(() => import('@/views/NormalComponentsSamples/ECharts'));
+const NormalStaticsPage = lazy(() => import('@/views/NormalComponentsSamples/Statics'));
+
+// ===
+const BasicTablePage = lazy(() => import('@/views/ListSamples/TableList'));
+const EditTablePage = lazy(() => import('@/views/ListSamples/EditTableList'));
+const NormalListPage = lazy(() => import('@/views/ListSamples/TableList'));
+
+// ====
+const StaticPage = lazy(() => import('@/views/Statistic'));
+const PermissionPage = lazy(() => import('@/views/PermissionManagement/PagePermission'));
+const ButtonPermissionPage = lazy(() => import('@/views/PermissionManagement/ButtonPermission'));
+
+// ===
+const BasicFormPage = lazy(() => import('@/views/FormSamples/FormPage'));
+const StepFormPage = lazy(() => import('@/views/FormSamples/StepFormPage'));
+const AdvanceFormPage = lazy(() => import('@/views/FormSamples/AdvanceFormPage'));
+
+// ===
+const BasicDetailPage = lazy(() => import('@/views/DetailSamples/NormalDetail'));
+
+// ===
+
+const AboutPage = lazy(() => import('@/views/About'));
+
 const widthLoading = (comp: JSX.Element) => (
   <React.Suspense fallback={<div>Loading</div>}>{comp}</React.Suspense>
 );
+
+/**
+ * 参考：https://pro.spicyboy.cn/#/auth/page
+ *
+ * todo:
+ * - [x] 首页
+ * - [ ] 数据大屏
+ * - [ ] 权限管理
+ *   - [ ] 页面权限
+ *   - [ ] 按钮权限
+ * - [ ] 常用组件
+ *   - [ ] 页面权限
+ *   - [ ] 按钮权限
+ *   - [ ] Echarts 图表页
+ *   - [ ] 统计数值
+ * - [ ] 关于项目
+ */
+
 const routes = [
   {
     path: '/',
@@ -46,6 +105,158 @@ const routes = [
         path: '/index',
         menuIcon: <HomeOutlined />,
         element: widthLoading(<Index />),
+      },
+      {
+        title: '数据大屏',
+        path: '/static',
+        menuIcon: <PieChartOutlined />,
+        element: widthLoading(<StaticPage />),
+      },
+      {
+        title: '权限管理',
+        path: '/permission-management',
+        menuIcon: <LockOutlined />,
+        children: [
+          {
+            title: '页面权限',
+            path: '/permission-management/page-permission',
+            menuIcon: <LockOutlined />,
+            element: widthLoading(<PermissionPage />),
+          },
+          {
+            title: '按钮级权限',
+            path: '/permission-management/button-permission',
+            menuIcon: <LockOutlined />,
+            element: widthLoading(<ButtonPermissionPage />),
+          },
+        ],
+      },
+      {
+        title: '常用组件',
+        path: '/normal-components',
+        menuIcon: <HomeOutlined />,
+        children: [
+          {
+            title: 'E-Charts 图表页',
+            path: '/normal-components/e-charts',
+            menuIcon: <DotChartOutlined />,
+            element: widthLoading(<NormalEchartsPage />),
+          },
+          {
+            title: '统计数值',
+            path: '/normal-components/statics',
+            menuIcon: <LineChartOutlined />,
+            element: widthLoading(<NormalStaticsPage />),
+          },
+        ],
+      },
+      {
+        title: '列表页',
+        path: '/list-page',
+        menuIcon: <TableOutlined />,
+        children: [
+          {
+            title: '正常Table',
+            path: '/list-page/table',
+            menuIcon: <TableOutlined />,
+            element: widthLoading(<BasicTablePage />),
+          },
+          {
+            title: 'EditTable',
+            path: '/list-page/edit-table',
+            menuIcon: <TableOutlined />,
+            element: widthLoading(<EditTablePage />),
+          },
+          {
+            title: 'List列表',
+            path: '/list-page/list',
+            menuIcon: <UnorderedListOutlined />,
+            element: widthLoading(<NormalListPage />),
+          },
+        ],
+      },
+      {
+        title: '表单页',
+        path: '/form-samples',
+        menuIcon: <FormOutlined />,
+        children: [
+          {
+            title: '基础表单',
+            path: '/form-samples/basic-form',
+            menuIcon: <FormOutlined />,
+            element: widthLoading(<BasicFormPage />),
+          },
+          {
+            title: '分步表单',
+            path: '/form-samples/step-form',
+            menuIcon: <FormatPainterOutlined />,
+            element: widthLoading(<StepFormPage />),
+          },
+          {
+            title: '高级表单',
+            path: '/form-samples/advance-form',
+            menuIcon: <ProfileOutlined />,
+            element: widthLoading(<AdvanceFormPage />),
+          },
+        ],
+      },
+      {
+        title: '详情页示例',
+        path: '/detail-samples',
+        menuIcon: <ProfileOutlined />,
+        children: [
+          {
+            title: '基础详情页',
+            path: '/detail-samples/basic-detail',
+            menuIcon: <ProfileOutlined />,
+            element: widthLoading(<BasicDetailPage />),
+          },
+        ],
+      },
+
+      {
+        title: '商品管理',
+        path: '/product/',
+        menuIcon: <ProductOutlined />,
+        element: widthLoading(<ProductIndex />),
+        children: [
+          {
+            title: '商品列表',
+            path: '/product/list',
+            menuIcon: <ProductOutlined />,
+            element: widthLoading(<ProductList />),
+          },
+          {
+            title: '商品详情',
+            path: '/product/detail/:id',
+            menuIcon: <ProductOutlined />,
+            element: widthLoading(<UserDetail />),
+          },
+          // {
+          //   path: '/user/create',
+          //   element: widthLoading(<UserCreate />),
+          // },
+        ],
+      },
+      {
+        title: '音乐中心',
+        path: '/music/',
+        menuIcon: <CustomerServiceOutlined />,
+        // element: widthLoading(<ProductIndex />),
+        children: [
+          {
+            title: '音乐列表',
+            path: '/music/list',
+            menuIcon: <CustomerServiceOutlined />,
+            element: widthLoading(<MusicList />),
+          },
+          {
+            title: '音乐详情',
+            path: '/music/detail',
+            menuIcon: <CustomerServiceOutlined />,
+            element: widthLoading(<MusicDetail />),
+          },
+        ],
       },
       {
         path: '/demos',
@@ -85,45 +296,10 @@ const routes = [
         ],
       },
       {
-        title: '商品管理',
-        path: '/product/',
-        menuIcon: <UserOutlined />,
-        element: widthLoading(<UserIndex />),
-        children: [
-          {
-            title: '商品列表',
-            path: '/product/list',
-            element: widthLoading(<UserList />),
-          },
-          {
-            title: '商品详情',
-            path: '/product/detail/:id',
-            element: widthLoading(<UserDetail />),
-          },
-          // {
-          //   path: '/user/create',
-          //   element: widthLoading(<UserCreate />),
-          // },
-        ],
-      },
-      {
-        title: '音乐中心',
-        path: '/music/',
-        menuIcon: <UserOutlined />,
-        element: widthLoading(<UserIndex />),
-        // element: UserIndex,
-        children: [
-          {
-            title: '音乐列表',
-            path: '/music/list',
-            element: widthLoading(<MusicList />),
-          },
-          {
-            title: '音乐详情',
-            path: '/music/detail',
-            element: widthLoading(<MusicDetail />),
-          },
-        ],
+        title: '关于项目',
+        path: '/about/',
+        menuIcon: <ExclamationCircleOutlined />,
+        element: widthLoading(<AboutPage />),
       },
     ],
   },
