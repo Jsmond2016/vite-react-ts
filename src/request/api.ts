@@ -1,4 +1,6 @@
 'use strict';
+import { CaptchaApiRes } from '@/types/api';
+
 import request from './index';
 
 export const loginApi = () => {
