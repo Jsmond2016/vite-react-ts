@@ -6,6 +6,8 @@ import Logo from '@/assets/antd-logo.svg';
 import MainMenu from '@/components/MainMenu';
 import { useMenuStore } from '@/store/global';
 
+import ToolBar from '../ToolBar';
+
 const { Header, Content, Footer, Sider } = Layout;
 
 const breadCrumbItems = [
@@ -33,8 +35,9 @@ const MainLayout: React.FC = () => {
         <MainMenu />
       </Sider>
       <Layout className="h-screen">
-        <Header className="flex items-center justify-start bg-white">
+        <Header className="flex items-center justify-between h-[56px] p-8 bg-white">
           <Breadcrumb items={breadCrumbItems} className="leading-normal" />
+          <ToolBar />
         </Header>
         <Content className="p-10 pb-0  overflow-auto ">
           <Outlet />
