@@ -1,4 +1,4 @@
-import { Breadcrumb, Layout, Row, Space, Typography } from 'antd';
+import { Breadcrumb, Layout, Row, Space } from 'antd';
 import React from 'react';
 import { Outlet } from 'react-router-dom';
 
@@ -10,18 +10,21 @@ import ToolBar from '../ToolBar';
 
 const { Header, Content, Footer, Sider } = Layout;
 
-const breadCrumbItems = [
-  {
-    title: 'User',
-  },
-  {
-    title: <Typography.Link href="">Bill</Typography.Link>,
-  },
-];
-
 const MainLayout: React.FC = () => {
   const { isMenuClosed, toggleMenuOpenStatus } = useMenuStore();
-  console.log('isMenuClosed: ', isMenuClosed);
+
+  const { curOpenedMenuItems } = useMenuStore();
+  console.log('curOpenedMenuItems: ', curOpenedMenuItems);
+
+  const breadItems = curOpenedMenuItems.map((menu) => ({
+    href: menu.isAccessed ? menu.key : undefined,
+    title: (
+      <Space size="small">
+        {menu.icon}
+        {menu.label}
+      </Space>
+    ),
+  }));
 
   return (
     <Layout>
@@ -36,7 +39,7 @@ const MainLayout: React.FC = () => {
       </Sider>
       <Layout className="h-screen">
         <Header className="flex items-center justify-between h-[56px] p-8 bg-white">
-          <Breadcrumb items={breadCrumbItems} className="leading-normal" />
+          <Breadcrumb items={breadItems} className="leading-normal" />
           <ToolBar />
         </Header>
         <Content className="p-10 pb-0  overflow-auto ">

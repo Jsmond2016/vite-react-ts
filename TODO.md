@@ -1,6 +1,6 @@
 参考：
 
-- [github/Hooks-Admin](https://github.com/HalseySpicy/Hooks-Admin) 
+- [github/Hooks-Admin](https://github.com/HalseySpicy/Hooks-Admin)
 - [预览-Hooks-Admin](https://pro.spicyboy.cn/#/auth/page)
 - [官网-naiveadmin](https://www.naiveadmin.com/)
 - [预览-naiveadmin](https://plus.naiveadmin.com/)

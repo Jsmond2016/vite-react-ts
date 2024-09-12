@@ -8,7 +8,7 @@ import {
   TranslationOutlined,
 } from '@ant-design/icons';
 import { useBoolean } from 'ahooks';
-import { Badge, Space } from 'antd';
+import { Badge, Divider, Space } from 'antd';
 import React from 'react';
 
 import avatar from '@/assets/vue-color-avatar.png';
@@ -18,24 +18,25 @@ const ToolBar = () => {
 
   return (
     <Space size="middle">
-      <PicRightOutlined className="text-size-[24px] cursor-pointer" />
-      <TranslationOutlined className="text-size-[24px] cursor-pointer" />
-      <SearchOutlined className="text-size-[24px] cursor-pointer" />
-      <SkinOutlined className="text-size-[24px] cursor-pointer" />
+      <PicRightOutlined className="text-size-[22px] cursor-pointer" />
+      <TranslationOutlined className="text-size-[22px] cursor-pointer" />
+      <SearchOutlined className="text-size-[22px] cursor-pointer" />
+      <SkinOutlined className="text-size-[22px] cursor-pointer" />
       <Badge count={5}>
-        <BellOutlined className="text-size-[24px] cursor-pointer" />
+        <BellOutlined className="text-size-[22px] cursor-pointer" />
       </Badge>
       {isBigScreen ? (
         <FullscreenExitOutlined
           onClick={bigScreenOperate.toggle}
-          className="text-size-[24px] cursor-pointer"
+          className="text-size-[22px] cursor-pointer"
         />
       ) : (
         <FullscreenOutlined
           onClick={bigScreenOperate.toggle}
-          className="text-size-[24px] cursor-pointer"
+          className="text-size-[22px] cursor-pointer"
         />
       )}
+      <Divider type="vertical" />
       <Space size="middle" align="center" justify-center>
         <span className="font-bold">Admin</span>
         <img src={avatar} alt="avatar" className="flex w-[38px] rounded-full cursor-pointer" />

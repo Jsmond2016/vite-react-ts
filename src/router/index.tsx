@@ -74,35 +74,20 @@ const widthLoading = (comp: JSX.Element) => (
   <React.Suspense fallback={<div>Loading</div>}>{comp}</React.Suspense>
 );
 
-/**
- * 参考：https://pro.spicyboy.cn/#/auth/page
- *
- * todo:
- * - [x] 首页
- * - [ ] 数据大屏
- * - [ ] 权限管理
- *   - [ ] 页面权限
- *   - [ ] 按钮权限
- * - [ ] 常用组件
- *   - [ ] 页面权限
- *   - [ ] 按钮权限
- *   - [ ] Echarts 图表页
- *   - [ ] 统计数值
- * - [ ] 关于项目
- */
-
 const routes = [
   {
     path: '/',
-    element: <Navigate to="/index" />,
+    element: <Navigate to="/home" />,
   },
   {
     path: '/',
+    title: '首页',
+    isAccessed: true,
     element: <MainLayout />,
     children: [
       {
-        title: '首页',
-        path: '/index',
+        path: '/home',
+        title: 'Home',
         menuIcon: <HomeOutlined />,
         element: widthLoading(<Index />),
       },
