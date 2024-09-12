@@ -26,7 +26,6 @@ const renderSubRouterToMenu = (routerList: any[], parentPaths: string[] = []) =>
     };
     menuKeyMap.set(r.path, subMenu);
     subMenuItem.push(subMenu);
-    pathToPathListMap.set(r.path, [...parentPaths, r.path].filter(Boolean));
   });
   return subMenuItem;
 };
@@ -46,11 +45,8 @@ const renderMenuFromRouter = (router: any[], parentPaths: string[] = []) => {
   };
   menuKeyMap.set(homeRoute.path, menuItem);
   menuItems.push(menuItem);
-  pathToPathListMap.set(homeRoute.path, [...parentPaths, homeRoute.path]);
   return menuItems[0]?.children as MenuItem[];
 };
-
-const pathToPathListMap = new Map<string, string[]>();
 
 const MainMenu: React.FC = () => {
   // 组件加载完成
@@ -70,29 +66,27 @@ const MainMenu: React.FC = () => {
 
   useEffect(() => {
     const menuItems = renderMenuFromRouter(router);
-    console.log('menuItems: ', menuItems);
     setMenuList(menuItems);
   }, [router]);
 
+  const { setCurOpenedMenuItems } = useMenuStore();
+
   useEffect(() => {
     // 菜单展开项的初始值
-    const defaultOpenKeys = pathToPathListMap.get(currentRoute.pathname) as string[];
-    setOpenedMenuKeys(defaultOpenKeys);
-    const curMenuItem = defaultOpenKeys.map((key) => menuKeyMap.get(key));
-    setCurOpenedMenuItems(curMenuItem);
+    const curMenuItem = menuKeyMap.get(currentRoute.pathname);
+    setOpenedMenuKeys(curMenuItem.parentPathList);
+    setCurOpenedMenuItems([curMenuItem]);
   }, [currentRoute]);
 
   const onOpenChange: MenuProps['onOpenChange'] = (keys) => {
     setOpenedMenuKeys([...keys]);
   };
 
-  const { setCurOpenedMenuItems } = useMenuStore();
   const handleSelect = (ev) => {
     const { keyPath } = ev;
     const openKeys = [...keyPath].slice(1);
     const curMenuItem = openKeys.map((key) => menuKeyMap.get(key));
     setCurOpenedMenuItems(curMenuItem);
-    setOpenedMenuKeys(openKeys);
     navigateTo(ev.key);
   };
 
@@ -103,8 +97,8 @@ const MainMenu: React.FC = () => {
       mode="inline"
       items={menuList}
       openKeys={openedMenuKeys}
-      onOpenChange={onOpenChange}
       onSelect={handleSelect}
+      onOpenChange={onOpenChange}
     />
   );
 };

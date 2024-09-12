@@ -22,5 +22,5 @@ export const useMenuStore = create<IActions & typeof initState>((set) => ({
     set(() => {
       return { openedMenuKeys: _openedMenuKeys };
     }),
-  setCurOpenedMenuItems: (curMenuItem) => set(() => ({ curOpenedMenuItems: curMenuItem })),
+  setCurOpenedMenuItems: (curMenuItems) => set(() => ({ curOpenedMenuItems: curMenuItems })),
 }));
