@@ -1,4 +1,4 @@
-import { Breadcrumb, Layout, Row, Space } from 'antd';
+import { Breadcrumb, Layout, Row, Space, Tabs } from 'antd';
 import React from 'react';
 import { Outlet } from 'react-router-dom';
 
@@ -11,10 +11,9 @@ import ToolBar from '../ToolBar';
 const { Header, Content, Footer, Sider } = Layout;
 
 const MainLayout: React.FC = () => {
-  const { isMenuClosed, toggleMenuOpenStatus } = useMenuStore();
+  const { isMenuClosed, toggleMenuOpenStatus, setCurTabKey } = useMenuStore();
 
-  const { curOpenedMenuItems } = useMenuStore();
-  console.log('curOpenedMenuItems: ', curOpenedMenuItems);
+  const { curOpenedMenuItems, openedPageTabs, curTabKey } = useMenuStore();
 
   const breadItems = curOpenedMenuItems.map((menu) => ({
     href: menu.isAccessed ? menu.key : undefined,
@@ -24,6 +23,16 @@ const MainLayout: React.FC = () => {
         {menu.label}
       </Space>
     ),
+  }));
+
+  const tabItems = openedPageTabs.map((menu) => ({
+    label: (
+      <Space size="small">
+        {menu.icon}
+        {menu.label}
+      </Space>
+    ),
+    key: menu.key,
   }));
 
   return (
@@ -42,6 +51,7 @@ const MainLayout: React.FC = () => {
           <Breadcrumb items={breadItems} className="leading-normal" />
           <ToolBar />
         </Header>
+        <Tabs items={tabItems} type="editable-card" activeKey={curTabKey} onChange={setCurTabKey} />
         <Content className="p-10 pb-0  overflow-auto ">
           <Outlet />
         </Content>

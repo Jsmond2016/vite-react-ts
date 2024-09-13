@@ -1,3 +1,4 @@
+import { last, prop } from 'ramda';
 import { create } from 'zustand';
 
 type IActions = {
@@ -5,6 +6,8 @@ type IActions = {
   setMenuList: (_menuList: any[]) => void;
   setOpenedMenuKeys: (_openedMenuKeys: string[]) => void;
   setCurOpenedMenuItems: (_openedMenu: any) => void;
+  setOpenedPageTabs: (pageTabs: any) => void;
+  setCurTabKey: (key: string) => void;
 };
 
 const initState = {
@@ -12,6 +15,8 @@ const initState = {
   menuList: [],
   openedMenuKeys: [],
   curOpenedMenuItems: [],
+  openedPageTabs: [],
+  curTabKey: '',
 };
 
 export const useMenuStore = create<IActions & typeof initState>((set) => ({
@@ -22,5 +27,26 @@ export const useMenuStore = create<IActions & typeof initState>((set) => ({
     set(() => {
       return { openedMenuKeys: _openedMenuKeys };
     }),
-  setCurOpenedMenuItems: (curMenuItems) => set(() => ({ curOpenedMenuItems: curMenuItems })),
+  setCurOpenedMenuItems: (curMenuItems) =>
+    set((state) => {
+      const { openedPageTabs } = state;
+      let menuItemsState: any = { curOpenedMenuItems: curMenuItems };
+      const openedTabKeys = openedPageTabs.map(prop('key'));
+      const lastMenuItem: any = last(curMenuItems);
+      if (lastMenuItem) {
+        menuItemsState = {
+          ...menuItemsState,
+          curTabKey: lastMenuItem?.key,
+        };
+        if (!openedTabKeys.includes(lastMenuItem?.key)) {
+          menuItemsState = {
+            ...menuItemsState,
+            openedPageTabs: [...openedPageTabs, lastMenuItem].filter((v) => v.isAccessed),
+          };
+        }
+      }
+      return menuItemsState;
+    }),
+  setOpenedPageTabs: (_menuList: any[]) => set(() => ({ menuList: _menuList })),
+  setCurTabKey: (tabKey: string) => set(() => ({ curTabKey: tabKey })),
 }));

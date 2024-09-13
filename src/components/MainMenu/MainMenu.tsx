@@ -74,8 +74,10 @@ const MainMenu: React.FC = () => {
   useEffect(() => {
     // 菜单展开项的初始值
     const curMenuItem = menuKeyMap.get(currentRoute.pathname);
-    setOpenedMenuKeys(curMenuItem.parentPathList);
-    setCurOpenedMenuItems([curMenuItem]);
+    const openedKeys = curMenuItem.parentPathList;
+    setOpenedMenuKeys(openedKeys);
+    const curOpenedMenuItems = openedKeys.map((v) => menuKeyMap.get(v));
+    setCurOpenedMenuItems(curOpenedMenuItems);
   }, [currentRoute]);
 
   const onOpenChange: MenuProps['onOpenChange'] = (keys) => {
