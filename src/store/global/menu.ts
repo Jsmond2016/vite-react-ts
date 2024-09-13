@@ -47,6 +47,10 @@ export const useMenuStore = create<IActions & typeof initState>((set) => ({
       }
       return menuItemsState;
     }),
-  setOpenedPageTabs: (_menuList: any[]) => set(() => ({ menuList: _menuList })),
+  setOpenedPageTabs: (newWorkTabs: any[]) =>
+    set(() => {
+      const tabKey = last(newWorkTabs).key;
+      return { openedPageTabs: newWorkTabs, curTabKey: tabKey };
+    }),
   setCurTabKey: (tabKey: string) => set(() => ({ curTabKey: tabKey })),
 }));

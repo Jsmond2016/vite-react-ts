@@ -95,10 +95,11 @@ const MainMenu: React.FC = () => {
   return (
     <Menu
       theme="dark"
-      defaultSelectedKeys={[currentRoute.pathname]}
       mode="inline"
       items={menuList}
+      defaultSelectedKeys={[currentRoute.pathname]}
       openKeys={openedMenuKeys}
+      selectedKeys={openedMenuKeys}
       onSelect={handleSelect}
       onOpenChange={onOpenChange}
     />

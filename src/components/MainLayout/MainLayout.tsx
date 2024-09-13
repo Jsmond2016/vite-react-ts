@@ -1,6 +1,7 @@
-import { Breadcrumb, Layout, Row, Space, Tabs } from 'antd';
+import { Breadcrumb, Layout, message, Row, Space, Tabs } from 'antd';
+import { last } from 'ramda';
 import React from 'react';
-import { Outlet } from 'react-router-dom';
+import { Outlet, useNavigate } from 'react-router-dom';
 
 import Logo from '@/assets/antd-logo.svg';
 import MainMenu from '@/components/MainMenu';
@@ -11,7 +12,7 @@ import ToolBar from '../ToolBar';
 const { Header, Content, Footer, Sider } = Layout;
 
 const MainLayout: React.FC = () => {
-  const { isMenuClosed, toggleMenuOpenStatus, setCurTabKey } = useMenuStore();
+  const { isMenuClosed, toggleMenuOpenStatus, setCurTabKey, setOpenedPageTabs } = useMenuStore();
 
   const { curOpenedMenuItems, openedPageTabs, curTabKey } = useMenuStore();
 
@@ -27,13 +28,28 @@ const MainLayout: React.FC = () => {
 
   const tabItems = openedPageTabs.map((menu) => ({
     label: (
-      <Space size="small">
+      <Space size="small" onClick={() => navigateTo(menu.key)}>
         {menu.icon}
         {menu.label}
       </Space>
     ),
     key: menu.key,
   }));
+
+  const navigateTo = useNavigate();
+
+  const handleEditTab = (key: string, action: 'add' | 'remove') => {
+    if (action === 'remove') {
+      if (['/', '/home'].includes(key)) {
+        message.warning('首页不允许删除');
+        return;
+      }
+      const newWorkTabs = openedPageTabs.filter((tab) => tab.key !== key);
+      const tabKey = last(newWorkTabs).key;
+      navigateTo(tabKey);
+      setOpenedPageTabs(newWorkTabs);
+    }
+  };
 
   return (
     <Layout>
@@ -51,7 +67,15 @@ const MainLayout: React.FC = () => {
           <Breadcrumb items={breadItems} className="leading-normal" />
           <ToolBar />
         </Header>
-        <Tabs items={tabItems} type="editable-card" activeKey={curTabKey} onChange={setCurTabKey} />
+        <Tabs
+          className="bg-white border-t-solid border-t-coolgray border-t-1"
+          items={tabItems}
+          type="editable-card"
+          activeKey={curTabKey}
+          onChange={setCurTabKey}
+          onEdit={handleEditTab}
+          hideAdd
+        />
         <Content className="p-10 pb-0  overflow-auto ">
           <Outlet />
         </Content>
