@@ -1,20 +1,20 @@
-import { Breadcrumb, Layout, message, Row, Space, Tabs } from 'antd';
-import { last } from 'ramda';
+import { Breadcrumb, Layout, Row, Space } from 'antd';
 import React from 'react';
-import { Outlet, useNavigate } from 'react-router-dom';
+import { Outlet } from 'react-router-dom';
 
 import Logo from '@/assets/antd-logo.svg';
 import MainMenu from '@/components/MainMenu';
 import { useMenuStore } from '@/store/global';
 
 import ToolBar from '../ToolBar';
+import WorkTab from '../WorkTab';
 
 const { Header, Content, Footer, Sider } = Layout;
 
 const MainLayout: React.FC = () => {
-  const { isMenuClosed, toggleMenuOpenStatus, setCurTabKey, setOpenedPageTabs } = useMenuStore();
+  const { isMenuClosed, toggleMenuOpenStatus } = useMenuStore();
 
-  const { curOpenedMenuItems, openedPageTabs, curTabKey } = useMenuStore();
+  const { curOpenedMenuItems } = useMenuStore();
 
   const breadItems = curOpenedMenuItems.map((menu) => ({
     href: menu.isAccessed ? menu.key : undefined,
@@ -25,31 +25,6 @@ const MainLayout: React.FC = () => {
       </Space>
     ),
   }));
-
-  const tabItems = openedPageTabs.map((menu) => ({
-    label: (
-      <Space size="small" onClick={() => navigateTo(menu.key)}>
-        {menu.icon}
-        {menu.label}
-      </Space>
-    ),
-    key: menu.key,
-  }));
-
-  const navigateTo = useNavigate();
-
-  const handleEditTab = (key: string, action: 'add' | 'remove') => {
-    if (action === 'remove') {
-      if (['/', '/home'].includes(key)) {
-        message.warning('首页不允许删除');
-        return;
-      }
-      const newWorkTabs = openedPageTabs.filter((tab) => tab.key !== key);
-      const tabKey = last(newWorkTabs).key;
-      navigateTo(tabKey);
-      setOpenedPageTabs(newWorkTabs);
-    }
-  };
 
   return (
     <Layout>
@@ -67,15 +42,7 @@ const MainLayout: React.FC = () => {
           <Breadcrumb items={breadItems} className="leading-normal" />
           <ToolBar />
         </Header>
-        <Tabs
-          className="bg-white border-t-solid border-t-coolgray border-t-1"
-          items={tabItems}
-          type="editable-card"
-          activeKey={curTabKey}
-          onChange={setCurTabKey}
-          onEdit={handleEditTab}
-          hideAdd
-        />
+        <WorkTab />
         <Content className="p-10 pb-0  overflow-auto ">
           <Outlet />
         </Content>
