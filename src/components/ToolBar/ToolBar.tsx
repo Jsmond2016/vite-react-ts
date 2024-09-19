@@ -7,14 +7,13 @@ import {
   SkinOutlined,
   TranslationOutlined,
 } from '@ant-design/icons';
-import { useBoolean } from 'ahooks';
 import { Badge, Divider, Space } from 'antd';
-import React from 'react';
 
 import avatar from '@/assets/vue-color-avatar.png';
+import { useMenuStore } from '@/store/global';
 
 const ToolBar = () => {
-  const [isBigScreen, bigScreenOperate] = useBoolean();
+  const { isFullScreen, setFullScreen } = useMenuStore();
 
   return (
     <Space size="middle">
@@ -25,14 +24,14 @@ const ToolBar = () => {
       <Badge count={5}>
         <BellOutlined className="text-size-[22px] cursor-pointer" />
       </Badge>
-      {isBigScreen ? (
+      {isFullScreen ? (
         <FullscreenExitOutlined
-          onClick={bigScreenOperate.toggle}
+          onClick={() => setFullScreen(!isFullScreen)}
           className="text-size-[22px] cursor-pointer"
         />
       ) : (
         <FullscreenOutlined
-          onClick={bigScreenOperate.toggle}
+          onClick={() => setFullScreen(!isFullScreen)}
           className="text-size-[22px] cursor-pointer"
         />
       )}

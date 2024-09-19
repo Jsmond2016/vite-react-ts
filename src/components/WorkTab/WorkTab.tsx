@@ -34,16 +34,17 @@ const WorkTab = () => {
     }
   };
   return (
-    <Row justify-between className="w-full border-t-solid border-t-coolgray border-t-1">
+    <Row justify-between className="border-t-solid border-t-coolgray border-t-1">
       <Tabs
-        className="bg-white  flex-grow-1"
+        tabBarStyle={{ marginBottom: 0 }}
+        className="bg-white"
+        style={{ width: 'calc(100% - 34px)' }}
         items={tabItems}
         type="editable-card"
         activeKey={curTabKey}
         onChange={setCurTabKey}
         onEdit={handleEditTab}
         hideAdd
-        more={{ icon: <MoreTab />, arrow: true }}
       />
       <MoreTab />
     </Row>

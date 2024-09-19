@@ -8,6 +8,7 @@ type IActions = {
   setCurOpenedMenuItems: (_openedMenu: any) => void;
   setOpenedPageTabs: (pageTabs: any) => void;
   setCurTabKey: (key: string) => void;
+  setFullScreen: (mode: boolean) => void;
 };
 
 const initState = {
@@ -17,6 +18,7 @@ const initState = {
   curOpenedMenuItems: [],
   openedPageTabs: [],
   curTabKey: '',
+  isFullScreen: false,
 };
 
 export const useMenuStore = create<IActions & typeof initState>((set) => ({
@@ -53,4 +55,5 @@ export const useMenuStore = create<IActions & typeof initState>((set) => ({
       return { openedPageTabs: newWorkTabs, curTabKey: tabKey };
     }),
   setCurTabKey: (tabKey: string) => set(() => ({ curTabKey: tabKey })),
+  setFullScreen: (mode: boolean) => set(() => ({ isFullScreen: mode })),
 }));
