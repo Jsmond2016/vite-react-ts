@@ -2,24 +2,25 @@ import {
   BellOutlined,
   FullscreenExitOutlined,
   FullscreenOutlined,
-  PicRightOutlined,
-  SearchOutlined,
   SkinOutlined,
-  TranslationOutlined,
 } from '@ant-design/icons';
 import { Badge, Divider, Space } from 'antd';
 
 import avatar from '@/assets/vue-color-avatar.png';
 import { useMenuStore } from '@/store/global';
 
+import SearchMenuIcon from './components/SearchMenuIcon';
+import ToggleLanguageIcon from './components/ToggleLanguageIcon';
+import ToggleSpaceIcon from './components/ToggleSpaceIcon';
+
 const ToolBar = () => {
   const { isFullScreen, setFullScreen } = useMenuStore();
 
   return (
     <Space size="middle">
-      <PicRightOutlined className="text-size-[22px] cursor-pointer" />
-      <TranslationOutlined className="text-size-[22px] cursor-pointer" />
-      <SearchOutlined className="text-size-[22px] cursor-pointer" />
+      <ToggleSpaceIcon />
+      <ToggleLanguageIcon />
+      <SearchMenuIcon />
       <SkinOutlined className="text-size-[22px] cursor-pointer" />
       <Badge count={5}>
         <BellOutlined className="text-size-[22px] cursor-pointer" />

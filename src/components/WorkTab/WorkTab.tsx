@@ -45,6 +45,7 @@ const WorkTab = () => {
         onChange={setCurTabKey}
         onEdit={handleEditTab}
         hideAdd
+        // indicator={{ align: 'center' }}
       />
       <MoreTab />
     </Row>

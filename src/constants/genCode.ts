@@ -175,3 +175,55 @@ export const ProductTrendStatusOptions = {
   [ProductTrendStatus.Flat]: '持平',
   [ProductTrendStatus.Up]: '上升',
 };
+
+/**
+ * 系统间距大小
+ */
+export enum GlobalSpaceEnum {
+  /**
+   * 默认
+   */
+  Default = 0,
+
+  /**
+   * 大型
+   */
+  Big = 1,
+
+  /**
+   * 小型
+   */
+  Small = 2,
+}
+
+/**
+ * 系统间距大小Options
+ */
+export const GlobalSpaceEnumOptions = {
+  [GlobalSpaceEnum.Default]: '默认',
+  [GlobalSpaceEnum.Big]: '大型',
+  [GlobalSpaceEnum.Small]: '小型',
+};
+
+/**
+ * 系统语言
+ */
+export enum GlobalLanguage {
+  /**
+   * English
+   */
+  Eng = 0,
+
+  /**
+   * 中文
+   */
+  CN = 1,
+}
+
+/**
+ * 系统语言Options
+ */
+export const GlobalLanguageOptions = {
+  [GlobalLanguage.Eng]: 'English',
+  [GlobalLanguage.CN]: '中文',
+};
