@@ -10,6 +10,7 @@ type IActions = {
   setCurOpenedMenuItems: (_openedMenu: any) => void;
   setOpenedPageTabs: (pageTabs: any) => void;
   setCurTabKey: (key: string) => void;
+  // 以下内容属于 topToolBar 相关
   setFullScreen: (mode: boolean) => void;
   setGlobalSpace: (space: GlobalSpaceEnum) => void;
   setGlobalLanguage: (lang: GlobalLanguage) => void;

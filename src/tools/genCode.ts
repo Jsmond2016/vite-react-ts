@@ -38,7 +38,7 @@ const createOptions = (item: EnumItem[][]) => {
    */
   export const ${enumName}Options = {
     ${restItem.map((item) => `[${enumName}.${item[0]}]: "${item[2]}" `).join(',\n  ')}
-  }
+  } as const
   `;
 };
 

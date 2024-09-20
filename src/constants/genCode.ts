@@ -29,7 +29,7 @@ export enum DemoStatus {
 export const DemoStatusOptions = {
   [DemoStatus.OFF_SHORE]: '下架',
   [DemoStatus.ON_SHORE]: '在售',
-};
+} as const;
 
 /**
  * 商品颜色
@@ -52,7 +52,7 @@ export enum DemoColor {
 export const DemoColorOptions = {
   [DemoColor.black]: '黑色',
   [DemoColor.green]: '绿色',
-};
+} as const;
 
 /**
  * 商品颜色
@@ -75,7 +75,7 @@ export enum ProductColor {
 export const ProductColorOptions = {
   [ProductColor.Blue]: '海军蓝',
   [ProductColor.Black]: '星空黑',
-};
+} as const;
 
 /**
  * 网络类型
@@ -110,7 +110,7 @@ export const NetTypeOptions = {
   [NetType._4G_Global]: '4G全网通',
   [NetType._5G]: '5G',
   [NetType._5G_Global]: '4G全网通',
-};
+} as const;
 
 /**
  * 商品状态
@@ -145,7 +145,7 @@ export const ProductStatusOptions = {
   [ProductStatus.To_Be_Sale]: '待售',
   [ProductStatus.On_Sale]: '在售',
   [ProductStatus.Sold_Out]: '售罄',
-};
+} as const;
 
 /**
  * 商品销量趋势
@@ -174,7 +174,7 @@ export const ProductTrendStatusOptions = {
   [ProductTrendStatus.Down]: '下降',
   [ProductTrendStatus.Flat]: '持平',
   [ProductTrendStatus.Up]: '上升',
-};
+} as const;
 
 /**
  * 系统间距大小
@@ -203,7 +203,7 @@ export const GlobalSpaceEnumOptions = {
   [GlobalSpaceEnum.Default]: '默认',
   [GlobalSpaceEnum.Big]: '大型',
   [GlobalSpaceEnum.Small]: '小型',
-};
+} as const;
 
 /**
  * 系统语言
@@ -226,4 +226,4 @@ export enum GlobalLanguage {
 export const GlobalLanguageOptions = {
   [GlobalLanguage.Eng]: 'English',
   [GlobalLanguage.CN]: '中文',
-};
+} as const;
