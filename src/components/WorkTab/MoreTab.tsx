@@ -37,7 +37,7 @@ const MoreTab = () => {
     CloseOthers,
     CloseAll,
   }
-  const [isFullscreen, { toggleFullscreen }] = useFullscreen(() => document.getElementById('root'));
+  const [isFullscreen, { toggleFullscreen }] = useFullscreen(() => document.documentElement);
 
   const items: MenuProps['items'] = (
     [
