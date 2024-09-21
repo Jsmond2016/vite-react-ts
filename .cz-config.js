@@ -1,4 +1,5 @@
 'use strict';
+// 参考配置方式：https://github.com/leoforfree/cz-customizable
 module.exports = {
   types: [
     { value: '✨feat', name: '新增:    新的内容' },
@@ -13,7 +14,7 @@ module.exports = {
     { value: '⏪chore', name: '其他:    如发版等' },
     { value: '⏪pkg', name: '依赖变化:    如何依赖变更、升级等' },
   ],
-  scopes: [],
+  scopes: [{ name: '菜单模块' }, { name: '顶部工具栏模块' }, { name: '系统内容模块' }],
   // it needs to match the value for field type. Eg.: 'fix'
   /*  scopeOverrides: {
     fix: [
@@ -26,7 +27,7 @@ module.exports = {
   // override the messages, defaults are as follows
   messages: {
     type: '选择一种你的提交类型:',
-    scope: '选择一个影响范围 (可选):',
+    scope: '选择一个影响范围:',
     // used if allowCustomScopes is true
     customScope: '自定义修改模块名:',
     subject: '短说明:\n',
@@ -37,10 +38,11 @@ module.exports = {
   },
   allowCustomScopes: true,
   allowBreakingChanges: ['特性', '修复'],
-  allowEmptyScopes: true,
+  skipEmptyScopes: false,
+  // allowEmptyScopes: false,
   customScopesAlign: 'bottom',
-  customScopesAlias: 'custom',
-  emptyScopesAlias: 'empty',
+  // customScopesAlias: 'custom',
+  // emptyScopesAlias: 'empty',
   // limit subject length
   subjectLimit: 100,
 };

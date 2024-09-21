@@ -73,7 +73,7 @@ todo:
   - [ ] urlUtil 处理 url 参数和跳转相关；
 - [ ] tools
   - [ ] genConstants
-  - [ ] genService
+  - [ ] genService & genTsTypes;
   - [ ] genPage
 
 ## 其他
