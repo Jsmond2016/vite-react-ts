@@ -6,8 +6,14 @@ import { useState } from 'react';
 import { GlobalNotificationTab, GlobalNotificationTabOptions } from '@/constants';
 
 const NotificationIcon = () => {
+  const [open, openOperate] = useBoolean();
   return (
-    <Popover trigger={['click']} content={<NotificationTabs />}>
+    <Popover
+      open={open}
+      onOpenChange={openOperate.toggle}
+      trigger={['click']}
+      content={<NotificationTabs />}
+    >
       <Badge count={5}>
         <BellOutlined className="text-size-[22px] cursor-pointer" />
       </Badge>

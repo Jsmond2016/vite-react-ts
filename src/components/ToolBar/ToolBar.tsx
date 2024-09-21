@@ -1,18 +1,15 @@
-import { FullscreenExitOutlined, FullscreenOutlined } from '@ant-design/icons';
 import { Divider, Space } from 'antd';
 
 import avatar from '@/assets/vue-color-avatar.png';
-import { useTopToolBarStore } from '@/store/global';
 
 import NotificationIcon from './components/NotificationIcon';
 import SearchMenuIcon from './components/SearchMenuIcon';
 import SwitchSkinIcon from './components/SwitchSkinIcon';
+import ToggleFullScreen from './components/ToggleFullScreen';
 import ToggleLanguageIcon from './components/ToggleLanguageIcon';
 import ToggleSpaceIcon from './components/ToggleSpaceIcon';
 
 const ToolBar = () => {
-  const { isFullScreen, setFullScreen } = useTopToolBarStore();
-
   return (
     <Space size="middle">
       <ToggleSpaceIcon />
@@ -20,17 +17,7 @@ const ToolBar = () => {
       <SearchMenuIcon />
       <SwitchSkinIcon />
       <NotificationIcon />
-      {isFullScreen ? (
-        <FullscreenExitOutlined
-          onClick={() => setFullScreen(!isFullScreen)}
-          className="text-size-[22px] cursor-pointer"
-        />
-      ) : (
-        <FullscreenOutlined
-          onClick={() => setFullScreen(!isFullScreen)}
-          className="text-size-[22px] cursor-pointer"
-        />
-      )}
+      <ToggleFullScreen />
       <Divider type="vertical" />
       <Space size="middle" align="center" justify-center>
         <span className="font-bold">Admin</span>

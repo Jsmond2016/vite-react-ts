@@ -9,15 +9,12 @@ import {
   VerticalLeftOutlined,
   VerticalRightOutlined,
 } from '@ant-design/icons';
-import { useBoolean } from 'ahooks';
+import { useBoolean, useFullscreen } from 'ahooks';
 import { Dropdown, DropdownProps, MenuProps, Space } from 'antd';
 import React from 'react';
 
-import { useTopToolBarStore } from '@/store/global';
-
 const MoreTab = () => {
   const [open, openOperate] = useBoolean(false);
-  const { isFullScreen, setFullScreen } = useTopToolBarStore();
   const handleMenuClick: MenuProps['onClick'] = (e) => {
     if (e.key === '3') {
       openOperate.setFalse();
@@ -40,6 +37,7 @@ const MoreTab = () => {
     CloseOthers,
     CloseAll,
   }
+  const [isFullscreen, { toggleFullscreen }] = useFullscreen(() => document.getElementById('root'));
 
   const items: MenuProps['items'] = (
     [
@@ -52,7 +50,7 @@ const MoreTab = () => {
         ),
         key: MoreTabEnum.Refresh,
       },
-      !isFullScreen
+      !isFullscreen
         ? {
             label: (
               <Space size="small">
@@ -60,10 +58,10 @@ const MoreTab = () => {
               </Space>
             ),
             key: MoreTabEnum.FullScreen,
-            onClick: () => setFullScreen(!isFullScreen),
+            onClick: toggleFullscreen,
           }
         : null,
-      isFullScreen
+      isFullscreen
         ? {
             label: (
               <Space size="small">
@@ -72,7 +70,7 @@ const MoreTab = () => {
               </Space>
             ),
             key: MoreTabEnum.ExitFullScreen,
-            onClick: () => setFullScreen(!isFullScreen),
+            onClick: toggleFullscreen,
           }
         : null,
 
