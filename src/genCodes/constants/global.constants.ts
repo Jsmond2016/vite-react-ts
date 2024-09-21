@@ -10,6 +10,12 @@ const enums = [
     ['Eng', 0, 'English'],
     ['CN', 1, '中文'],
   ],
+  [
+    ['GlobalNotificationTab', '消息通知栏'],
+    ['Notification', 'Notification', '通知'],
+    ['Message', 'Message', '消息'],
+    ['Todo', 'Todo', '待办'],
+  ],
 ];
 
 export default enums;

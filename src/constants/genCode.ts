@@ -227,3 +227,32 @@ export const GlobalLanguageOptions = {
   [GlobalLanguage.Eng]: 'English',
   [GlobalLanguage.CN]: '中文',
 } as const;
+
+/**
+ * 消息通知栏
+ */
+export enum GlobalNotificationTab {
+  /**
+   * 通知
+   */
+  Notification = 'Notification',
+
+  /**
+   * 消息
+   */
+  Message = 'Message',
+
+  /**
+   * 待办
+   */
+  Todo = 'Todo',
+}
+
+/**
+ * 消息通知栏Options
+ */
+export const GlobalNotificationTabOptions = {
+  [GlobalNotificationTab.Notification]: '通知',
+  [GlobalNotificationTab.Message]: '消息',
+  [GlobalNotificationTab.Todo]: '待办',
+} as const;

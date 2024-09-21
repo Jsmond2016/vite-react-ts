@@ -1,9 +1,10 @@
-import { BellOutlined, FullscreenExitOutlined, FullscreenOutlined } from '@ant-design/icons';
-import { Badge, Divider, Space } from 'antd';
+import { FullscreenExitOutlined, FullscreenOutlined } from '@ant-design/icons';
+import { Divider, Space } from 'antd';
 
 import avatar from '@/assets/vue-color-avatar.png';
 import { useTopToolBarStore } from '@/store/global';
 
+import NotificationIcon from './components/NotificationIcon';
 import SearchMenuIcon from './components/SearchMenuIcon';
 import SwitchSkinIcon from './components/SwitchSkinIcon';
 import ToggleLanguageIcon from './components/ToggleLanguageIcon';
@@ -18,9 +19,7 @@ const ToolBar = () => {
       <ToggleLanguageIcon />
       <SearchMenuIcon />
       <SwitchSkinIcon />
-      <Badge count={5}>
-        <BellOutlined className="text-size-[22px] cursor-pointer" />
-      </Badge>
+      <NotificationIcon />
       {isFullScreen ? (
         <FullscreenExitOutlined
           onClick={() => setFullScreen(!isFullScreen)}
