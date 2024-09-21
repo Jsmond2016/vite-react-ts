@@ -1,8 +1,6 @@
 import { last, prop } from 'ramda';
 import { create } from 'zustand';
 
-import { GlobalLanguage, GlobalSpaceEnum } from '@/constants';
-
 type IActions = {
   toggleMenuOpenStatus: () => void;
   setMenuList: (_menuList: any[]) => void;
@@ -10,10 +8,6 @@ type IActions = {
   setCurOpenedMenuItems: (_openedMenu: any) => void;
   setOpenedPageTabs: (pageTabs: any) => void;
   setCurTabKey: (key: string) => void;
-  // 以下内容属于 topToolBar 相关
-  setFullScreen: (mode: boolean) => void;
-  setGlobalSpace: (space: GlobalSpaceEnum) => void;
-  setGlobalLanguage: (lang: GlobalLanguage) => void;
 };
 
 const initState = {
@@ -23,9 +17,6 @@ const initState = {
   curOpenedMenuItems: [],
   openedPageTabs: [],
   curTabKey: '',
-  isFullScreen: false,
-  curSpace: GlobalSpaceEnum.Default,
-  curLanguage: GlobalLanguage.CN,
 };
 
 export const useMenuStore = create<IActions & typeof initState>((set) => ({
@@ -62,7 +53,4 @@ export const useMenuStore = create<IActions & typeof initState>((set) => ({
       return { openedPageTabs: newWorkTabs, curTabKey: tabKey };
     }),
   setCurTabKey: (tabKey: string) => set(() => ({ curTabKey: tabKey })),
-  setFullScreen: (mode: boolean) => set(() => ({ isFullScreen: mode })),
-  setGlobalSpace: (space: GlobalSpaceEnum) => set(() => ({ curSpace: space })),
-  setGlobalLanguage: (newLanguage) => set(() => ({ curLanguage: newLanguage })),
 }));

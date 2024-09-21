@@ -3,10 +3,10 @@ import type { MenuProps } from 'antd';
 import { Dropdown } from 'antd';
 
 import { GlobalSpaceEnum, GlobalSpaceEnumOptions } from '@/constants';
-import { useMenuStore } from '@/store/global';
+import { useTopToolBarStore } from '@/store/global';
 
 const ToggleSpaceIcon = () => {
-  const { curSpace, setGlobalSpace } = useMenuStore();
+  const { curSpace, setGlobalSpace } = useTopToolBarStore();
 
   const items: MenuProps['items'] = [
     {

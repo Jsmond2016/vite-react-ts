@@ -3,10 +3,10 @@ import { Dropdown, MenuProps } from 'antd';
 import React from 'react';
 
 import { GlobalLanguage, GlobalLanguageOptions } from '@/constants';
-import { useMenuStore } from '@/store/global';
+import { useTopToolBarStore } from '@/store/global';
 
 const ToggleLanguageIcon = () => {
-  const { curLanguage, setGlobalLanguage } = useMenuStore();
+  const { curLanguage, setGlobalLanguage } = useTopToolBarStore();
 
   const items: MenuProps['items'] = [
     {

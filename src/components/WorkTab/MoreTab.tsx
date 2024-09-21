@@ -13,11 +13,11 @@ import { useBoolean } from 'ahooks';
 import { Dropdown, DropdownProps, MenuProps, Space } from 'antd';
 import React from 'react';
 
-import { useMenuStore } from '@/store/global';
+import { useTopToolBarStore } from '@/store/global';
 
 const MoreTab = () => {
   const [open, openOperate] = useBoolean(false);
-  const { isFullScreen, setFullScreen } = useMenuStore();
+  const { isFullScreen, setFullScreen } = useTopToolBarStore();
   const handleMenuClick: MenuProps['onClick'] = (e) => {
     if (e.key === '3') {
       openOperate.setFalse();

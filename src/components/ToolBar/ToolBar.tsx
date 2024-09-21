@@ -7,14 +7,14 @@ import {
 import { Badge, Divider, Space } from 'antd';
 
 import avatar from '@/assets/vue-color-avatar.png';
-import { useMenuStore } from '@/store/global';
+import { useTopToolBarStore } from '@/store/global';
 
 import SearchMenuIcon from './components/SearchMenuIcon';
 import ToggleLanguageIcon from './components/ToggleLanguageIcon';
 import ToggleSpaceIcon from './components/ToggleSpaceIcon';
 
 const ToolBar = () => {
-  const { isFullScreen, setFullScreen } = useMenuStore();
+  const { isFullScreen, setFullScreen } = useTopToolBarStore();
 
   return (
     <Space size="middle">

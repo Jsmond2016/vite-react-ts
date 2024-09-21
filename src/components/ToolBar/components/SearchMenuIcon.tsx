@@ -99,7 +99,6 @@ const SearchModal = forwardRef<SearchRefProps, SearchModalProps>(
             bordered
             dataSource={data}
             renderItem={(item) => {
-              console.log('item', item);
               return (
                 <List.Item className="cursor-pointer" onClick={() => clickJumpToMenuItem(item.key)}>
                   <Typography.Link>{item.label}</Typography.Link>

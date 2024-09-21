@@ -16,8 +16,9 @@ const MainLayout: React.FC = () => {
 
   const { curOpenedMenuItems } = useMenuStore();
 
-  const breadItems = curOpenedMenuItems.map((menu) => ({
-    href: menu.isAccessed ? menu.key : undefined,
+  const breadItems = curOpenedMenuItems.map((menu, idx, list) => ({
+    // 最后一个 item 是自己，不允许点击
+    href: menu.isAccessed && idx !== list.length - 1 ? menu.key : undefined,
     title: (
       <Space size="small">
         {menu.icon}
