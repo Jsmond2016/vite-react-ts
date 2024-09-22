@@ -89,6 +89,13 @@
   - [ ] RenderFormItem
   - [ ] FilterForm
   - [ ] EditableTable
+  - [ ] EditModalForm
+    - 参考这里的思路实现：[Modal管理-看这篇文章就够了 (实践篇)- 掘金](https://juejin.cn/post/7315231440777707558)
+    - 结合这里：https://github.com/eBay/nice-modal-react
+    - demo: 文档：https://opensource.ebay.com/nice-modal-react/#antd
+    - [React弹窗使用最佳实践 - @ebay/nice-modal-reactReact弹窗使用最佳实践 - @ebay - 掘金](https://juejin.cn/post/7367163252936507455)
+    - chatgpt 推荐的：[mpontus/react-modal-hook: Syntactic sugar for handling modals using React Hooks](https://github.com/mpontus/react-modal-hook)
+    - 其他：https://github.com/search?q=react-modal-hook&type=repositories&s=stars&o=desc
   - [ ] --- 分界线 -----
   - [ ] DescriptionRender
   - [ ] CommonModal
@@ -121,6 +128,7 @@
 
 ## 规范化
 
+- [ ] 项目名字，暂定 amazing-admin
 - [ ] 单元测试，自定义组件都要加上单元测试；
 - [ ] ts，所有类型排除 any；绝对的 ts 规范；
 - [ ] git 提交格式化
@@ -128,6 +136,7 @@
 - [ ] 代码风格 prettier
 - [ ] 目录结构规范化，命名等
 - [ ] 特定业务场景技术设计合理
+- [ ] 项目说明文档，参考：https://github.jzfai.top/vue3-admin-cn-doc/guide/
 
 ## 性能优化
 
