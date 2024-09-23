@@ -11,13 +11,87 @@ import {
 } from '@ant-design/icons';
 import { useBoolean, useFullscreen } from 'ahooks';
 import { Dropdown, DropdownProps, MenuProps, Space } from 'antd';
-import React from 'react';
+import { head, last } from 'ramda';
+import { useNavigate } from 'react-router-dom';
 
+import { useMenuStore } from '@/store/global';
+
+enum MoreTabEnum {
+  Refresh,
+  FullScreen,
+  ExitFullScreen,
+  CloseCurrent,
+  CloseLeft,
+  CloseRight,
+  CloseOthers,
+  CloseAll,
+}
 const MoreTab = () => {
   const [open, openOperate] = useBoolean(false);
+  const { setOpenedPageTabs, openedPageTabs } = useMenuStore();
+
+  const navigate = useNavigate();
+
   const handleMenuClick: MenuProps['onClick'] = (e) => {
-    if (e.key === '3') {
-      openOperate.setFalse();
+    console.log('e', e);
+
+    if (+e.key === MoreTabEnum.Refresh) {
+      location.reload();
+      return;
+    }
+    const curPath = location.pathname;
+    if (+e.key === MoreTabEnum.CloseCurrent) {
+      const newPageTabs = openedPageTabs.filter((v) => v.key !== curPath);
+      if (newPageTabs.length === 0) {
+        setOpenedPageTabs([]);
+        navigate('/');
+        return;
+      }
+      setOpenedPageTabs(newPageTabs);
+      const newTabKey = last(newPageTabs).key;
+      navigate(newTabKey);
+    }
+
+    console.log('openedPageTabs: ', openedPageTabs);
+    if (+e.key === MoreTabEnum.CloseLeft) {
+      const idx = openedPageTabs.findIndex((v) => v.key === curPath);
+      console.log('idx-left: ', idx);
+      const newPageTabs = openedPageTabs.filter((_, index) => index >= idx);
+      if (idx < 0 || newPageTabs.length === 0) {
+        setOpenedPageTabs([]);
+        navigate('/');
+        return;
+      }
+      setOpenedPageTabs(newPageTabs);
+      const newTabKey = head(newPageTabs).key;
+      navigate(newTabKey);
+    }
+
+    if (+e.key === MoreTabEnum.CloseRight) {
+      const idx = openedPageTabs.findIndex((v) => v.key === curPath);
+      const newPageTabs = openedPageTabs.filter((_, index) => index <= idx);
+      console.log('idx-right: ', idx);
+      if (idx < 0 || newPageTabs.length === 0) {
+        setOpenedPageTabs([]);
+        navigate('/');
+        return;
+      }
+      setOpenedPageTabs(newPageTabs);
+      const newTabKey = last(newPageTabs).key;
+      navigate(newTabKey);
+    }
+
+    if (+e.key === MoreTabEnum.CloseOthers) {
+      const newPageTabs = openedPageTabs.filter((v) => v.key === curPath);
+      setOpenedPageTabs(newPageTabs);
+      return;
+    }
+
+    if (+e.key === MoreTabEnum.CloseAll) {
+      setOpenedPageTabs([]);
+      setOpenedPageTabs([]);
+      navigate('/');
+      return;
     }
   };
 
@@ -27,16 +101,6 @@ const MoreTab = () => {
     }
   };
 
-  enum MoreTabEnum {
-    Refresh,
-    FullScreen,
-    ExitFullScreen,
-    CloseCurrent,
-    CloseLeft,
-    CloseRight,
-    CloseOthers,
-    CloseAll,
-  }
   const [isFullscreen, { toggleFullscreen }] = useFullscreen(() => document.documentElement);
 
   const items: MenuProps['items'] = (

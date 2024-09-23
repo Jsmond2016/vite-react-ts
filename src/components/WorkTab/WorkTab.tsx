@@ -28,6 +28,11 @@ const WorkTab = () => {
         return;
       }
       const newWorkTabs = openedPageTabs.filter((tab) => tab.key !== key);
+      if (newWorkTabs.length === 0) {
+        navigateTo('/');
+        setOpenedPageTabs([]);
+        return;
+      }
       const newTabKey = last(newWorkTabs).key;
       navigateTo(newTabKey);
       setOpenedPageTabs(newWorkTabs);
