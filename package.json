@@ -10,7 +10,7 @@
     "dev": "vite --host --port 3005",
     "build": "tsc && vite build",
     "genCodes": "ts-node --project tsconfig.node.json ./src/tools/genCode.ts",
-    "preinstall": "node -e \"if (!process.env.npm_config_user_agent.includes('pnpm')) { console.error('请使用 pnpm 安装依赖'); process.exit(1); }\"",
+    "preinstall": "npx -y only-allow pnpm",
     "preview": "vite preview",
     "prepare": "husky install",
     "pretest": "npm run lint",

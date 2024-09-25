@@ -14,9 +14,10 @@ import {
   Typography,
   TypographyProps,
 } from 'antd';
+import { append, cond, equals, filter, pipe, uniq } from 'ramda';
 import React, { forwardRef, useImperativeHandle, useRef } from 'react';
 
-import { useThemeConfigStore } from '@/store/global';
+import { ThemeMode, useThemeConfigStore } from '@/store/global';
 
 const SwitchSkinIcon = () => {
   const skinDrawerRef = useRef<SkinDrawerRefProps>(null);
@@ -63,6 +64,8 @@ const SkinDrawer = forwardRef<SkinDrawerRefProps, SkinDrawerProps>(
   function SkinDrawerContent(props, ref) {
     const [open, openOperate] = useBoolean();
 
+    const { colorPrimary, setThemeMode, themeAlgoMode } = useThemeConfigStore();
+
     useImperativeHandle(ref, () => ({
       openModal: openOperate.setTrue,
     }));
@@ -89,12 +92,17 @@ const SkinDrawer = forwardRef<SkinDrawerRefProps, SkinDrawerProps>(
         key: SkinConfigEnum.ThemeColor,
         label: '主题颜色',
         customContent: (
-          <ColorPicker onChange={(c) => setColorPrimary(c.toHexString())} defaultValue="#1677ff" />
+          <ColorPicker
+            value={colorPrimary}
+            onChange={(c) => setColorPrimary(c.toHexString())}
+            defaultValue="#1677ff"
+          />
         ),
       },
       {
         key: SkinConfigEnum.DarkMode,
         label: '暗黑模式',
+        value: themeAlgoMode.includes('dark'),
       },
       {
         key: SkinConfigEnum.GrayMode,
@@ -107,6 +115,7 @@ const SkinDrawer = forwardRef<SkinDrawerRefProps, SkinDrawerProps>(
       {
         key: SkinConfigEnum.CompactThemeMode,
         label: '紧凑主题',
+        value: themeAlgoMode.includes('compact'),
       },
       {
         key: SkinConfigEnum.RadiusSizeSetting,
@@ -157,16 +166,46 @@ const SkinDrawer = forwardRef<SkinDrawerRefProps, SkinDrawerProps>(
       },
     ];
 
-    const { setThemeMode } = useThemeConfigStore();
     const handleSwitchChange = (key: SkinConfigEnum, checked: boolean) => {
-      console.log('key', key, 'checked', checked);
-
       if (key === SkinConfigEnum.DarkMode) {
-        setThemeMode(checked ? 'dark' : 'default');
+        const algorithm = cond([
+          [
+            equals(true),
+            () =>
+              pipe(
+                filter((v) => v !== 'default'),
+                append('dark'),
+                uniq,
+              )(themeAlgoMode),
+          ],
+          [
+            equals(false),
+            () =>
+              pipe(
+                filter((v) => v !== 'dark'),
+                append('default'),
+                uniq,
+              )(themeAlgoMode),
+          ],
+        ])(checked);
+
+        setThemeMode(algorithm as ThemeMode[]);
       }
 
       if (key === SkinConfigEnum.CompactThemeMode) {
-        setThemeMode(checked ? 'compact' : 'default');
+        const algorithm = cond([
+          [equals(true), () => pipe(append('compact'), uniq)(themeAlgoMode)],
+          [
+            equals(false),
+            () =>
+              pipe(
+                filter((v) => v !== 'compact'),
+                // uniq,
+              )(themeAlgoMode),
+          ],
+        ])(checked);
+
+        setThemeMode(algorithm as ThemeMode[]);
       }
     };
 
@@ -207,6 +246,7 @@ function TextTip({
 }
 
 type SettingItem = {
+  value?: boolean;
   key: SkinConfigEnum;
   label: React.ReactNode;
   tipText?: string;
@@ -235,12 +275,14 @@ function SettingSection(props: SettingSectionProps) {
             customContent,
             checkedChildren = '开启',
             uncheckedChildren = '关闭',
+            value,
           } = setting;
           return (
             <Row key={key} justify-between>
               <TextTip tipText={tipText ?? label}>{label}</TextTip>
               {customContent ?? (
                 <Switch
+                  value={value}
                   onChange={(checked) => onChange(key, checked)}
                   checkedChildren={checkedChildren}
                   unCheckedChildren={uncheckedChildren}

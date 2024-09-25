@@ -1,29 +1,33 @@
-import { theme } from 'antd';
 import { create } from 'zustand';
+import { devtools, persist } from 'zustand/middleware';
 
-type ThemeMode = 'default' | 'dark' | 'compact';
+export type ThemeMode = 'default' | 'dark' | 'compact';
 
 type IActions = {
-  // setGlobalSpace: (space: GlobalSpaceEnum) => void;
-  setThemeMode: (mode: ThemeMode) => void;
+  setThemeMode: (mode: ThemeMode[]) => void;
   setColorPrimary: (color: string) => void;
   setBorderRadius: (size: number) => void;
 };
-const themeTokenMap = {
-  default: theme.defaultAlgorithm,
-  dark: theme.darkAlgorithm,
-  compact: theme.compactAlgorithm,
-};
 
 const initState = {
-  themeAlgorithm: themeTokenMap['default'],
+  themeAlgoMode: ['default'],
   colorPrimary: '#1677ff',
   borderRadius: 6,
 };
 
-export const useThemeConfigStore = create<IActions & typeof initState>((set) => ({
-  ...initState,
-  setThemeMode: (mode: ThemeMode) => set(() => ({ themeAlgorithm: themeTokenMap[mode] })),
-  setColorPrimary: (color: string) => set(() => ({ colorPrimary: color })),
-  setBorderRadius: (size: number) => set(() => ({ borderRadius: size })),
-}));
+export const useThemeConfigStore = create<IActions & typeof initState>()(
+  devtools(
+    persist(
+      (set) => ({
+        ...initState,
+        setThemeMode: (newThemeAlgorithm: ThemeMode[]) =>
+          set(() => ({ themeAlgoMode: newThemeAlgorithm })),
+        setColorPrimary: (color: string) => set(() => ({ colorPrimary: color })),
+        setBorderRadius: (size: number) => set(() => ({ borderRadius: size })),
+      }),
+      {
+        name: 'themeConfig',
+      },
+    ),
+  ),
+);
