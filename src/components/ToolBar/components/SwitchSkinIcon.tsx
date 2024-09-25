@@ -16,6 +16,8 @@ import {
 } from 'antd';
 import React, { forwardRef, useImperativeHandle, useRef } from 'react';
 
+import { useThemeConfigStore } from '@/store/global';
+
 const SwitchSkinIcon = () => {
   const skinDrawerRef = useRef<SkinDrawerRefProps>(null);
 
@@ -35,6 +37,28 @@ type SkinDrawerRefProps = {
   openModal: () => void;
 };
 
+enum SkinConfigEnum {
+  MenuSplit,
+  SideBarReverseColor,
+  HeadReverseColor,
+  //
+  ThemeColor,
+  DarkMode,
+  GrayMode,
+  WeakColorMode,
+  CompactThemeMode,
+  RadiusSizeSetting,
+  //
+  MenuFold,
+  MenuAccordion,
+  Watermark,
+  Breadcrumb,
+  BreadcrumbIcon,
+  WorkTab,
+  WorkTabIcon,
+  Footer,
+}
+
 const SkinDrawer = forwardRef<SkinDrawerRefProps, SkinDrawerProps>(
   function SkinDrawerContent(props, ref) {
     const [open, openOperate] = useBoolean();
@@ -45,74 +69,112 @@ const SkinDrawer = forwardRef<SkinDrawerRefProps, SkinDrawerProps>(
 
     const layoutSettingList: SettingItem[] = [
       {
+        key: SkinConfigEnum.MenuSplit,
         label: '菜单分割',
       },
       {
+        key: SkinConfigEnum.SideBarReverseColor,
         label: '侧边栏反转色',
       },
       {
+        key: SkinConfigEnum.HeadReverseColor,
         label: '头部反转色',
-      },
-      {
-        label: '菜单分割',
       },
     ];
 
+    const { setColorPrimary, setBorderRadius } = useThemeConfigStore();
+
     const globalThemeList: SettingItem[] = [
       {
+        key: SkinConfigEnum.ThemeColor,
         label: '主题颜色',
-        customContent: <ColorPicker defaultValue="#1677ff" />,
+        customContent: (
+          <ColorPicker onChange={(c) => setColorPrimary(c.toHexString())} defaultValue="#1677ff" />
+        ),
       },
       {
+        key: SkinConfigEnum.DarkMode,
         label: '暗黑模式',
       },
       {
+        key: SkinConfigEnum.GrayMode,
         label: '灰色模式',
       },
       {
+        key: SkinConfigEnum.WeakColorMode,
         label: '色弱模式',
       },
       {
+        key: SkinConfigEnum.CompactThemeMode,
         label: '紧凑主题',
       },
       {
+        key: SkinConfigEnum.RadiusSizeSetting,
         label: '圆角大小',
-        customContent: <InputNumber min={0} defaultValue={6} suffix="px" />,
+        customContent: (
+          <InputNumber
+            min={0}
+            onChange={(value) => setBorderRadius(value)}
+            defaultValue={6}
+            suffix="px"
+          />
+        ),
       },
     ];
 
     const uiSettingList: SettingItem[] = [
       {
+        key: SkinConfigEnum.MenuFold,
         label: '菜单折叠',
       },
       {
+        key: SkinConfigEnum.MenuAccordion,
         label: '菜单手风琴',
       },
       {
+        key: SkinConfigEnum.Watermark,
         label: '水印',
       },
       {
+        key: SkinConfigEnum.Breadcrumb,
         label: '面包屑',
       },
       {
+        key: SkinConfigEnum.BreadcrumbIcon,
         label: '面包屑图标',
       },
       {
+        key: SkinConfigEnum.WorkTab,
         label: '标签栏',
       },
       {
+        key: SkinConfigEnum.WorkTabIcon,
         label: '标签栏图标',
       },
       {
+        key: SkinConfigEnum.Footer,
         label: '页脚',
       },
     ];
 
+    const { setThemeMode } = useThemeConfigStore();
+    const handleSwitchChange = (key: SkinConfigEnum, checked: boolean) => {
+      console.log('key', key, 'checked', checked);
+
+      if (key === SkinConfigEnum.DarkMode) {
+        setThemeMode(checked ? 'dark' : 'default');
+      }
+
+      if (key === SkinConfigEnum.CompactThemeMode) {
+        setThemeMode(checked ? 'compact' : 'default');
+      }
+    };
+
     return (
       <Drawer open={open} onClose={openOperate.setFalse} title="主题配置">
-        <SettingSection title="布局样式" list={layoutSettingList} />
-        <SettingSection title="全局主题" list={globalThemeList} />
-        <SettingSection title="界面设置" list={uiSettingList} />
+        <SettingSection onChange={handleSwitchChange} title="布局样式" list={layoutSettingList} />
+        <SettingSection onChange={handleSwitchChange} title="全局主题" list={globalThemeList} />
+        <SettingSection onChange={handleSwitchChange} title="界面设置" list={uiSettingList} />
       </Drawer>
     );
   },
@@ -145,6 +207,7 @@ function TextTip({
 }
 
 type SettingItem = {
+  key: SkinConfigEnum;
   label: React.ReactNode;
   tipText?: string;
   checkedChildren?: string;
@@ -155,18 +218,20 @@ type SettingItem = {
 type SettingSectionProps = {
   title: React.ReactNode;
   list: SettingItem[];
+  onChange?: (key: string | number, value: boolean) => void;
 };
 
 function SettingSection(props: SettingSectionProps) {
-  const { title, list } = props;
+  const { title, list, onChange } = props;
   return (
     <>
       <Divider>{title}</Divider>
       <Space direction="vertical" size="middle" className="w-full">
-        {list.map((setting, key) => {
+        {list.map((setting) => {
           const {
             label,
             tipText,
+            key,
             customContent,
             checkedChildren = '开启',
             uncheckedChildren = '关闭',
@@ -175,7 +240,11 @@ function SettingSection(props: SettingSectionProps) {
             <Row key={key} justify-between>
               <TextTip tipText={tipText ?? label}>{label}</TextTip>
               {customContent ?? (
-                <Switch checkedChildren={checkedChildren} unCheckedChildren={uncheckedChildren} />
+                <Switch
+                  onChange={(checked) => onChange(key, checked)}
+                  checkedChildren={checkedChildren}
+                  unCheckedChildren={uncheckedChildren}
+                />
               )}
             </Row>
           );

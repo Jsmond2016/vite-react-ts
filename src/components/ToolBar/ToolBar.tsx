@@ -8,6 +8,7 @@ import SwitchSkinIcon from './components/SwitchSkinIcon';
 import ToggleFullScreen from './components/ToggleFullScreen';
 import ToggleLanguageIcon from './components/ToggleLanguageIcon';
 import ToggleSpaceIcon from './components/ToggleSpaceIcon';
+import ToggleTheme from './components/ToggleTheme';
 
 const ToolBar = () => {
   return (
@@ -16,6 +17,7 @@ const ToolBar = () => {
       <ToggleLanguageIcon />
       <SearchMenuIcon />
       <SwitchSkinIcon />
+      <ToggleTheme />
       <NotificationIcon />
       <ToggleFullScreen />
       <Divider type="vertical" />
