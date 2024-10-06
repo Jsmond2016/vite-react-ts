@@ -1,4 +1,4 @@
-import { Breadcrumb, Layout, Row, Space } from 'antd';
+import { Breadcrumb, Layout, Row, Space, theme } from 'antd';
 import React from 'react';
 import { Outlet } from 'react-router-dom';
 
@@ -10,22 +10,26 @@ import ToolBar from '../ToolBar';
 import WorkTab from '../WorkTab';
 
 const { Header, Content, Footer, Sider } = Layout;
-
+const { useToken } = theme;
 const MainLayout: React.FC = () => {
   const { isMenuClosed, toggleMenuOpenStatus } = useMenuStore();
 
   const { curOpenedMenuItems } = useMenuStore();
+  const { token } = useToken();
 
   const breadItems = curOpenedMenuItems.map((menu, idx, list) => ({
     // 最后一个 item 是自己，不允许点击
     href: menu.isAccessed && idx !== list.length - 1 ? menu.key : undefined,
     title: (
-      <Space size="small">
+      <Space size="small" style={{ color: token.colorWhite }}>
         {menu.icon}
         {menu.label}
       </Space>
     ),
   }));
+
+  // const { themeAlgoMode } = useThemeConfigStore();
+  // const isDarkMode = themeAlgoMode.includes('dark');
 
   return (
     <Layout>
@@ -39,8 +43,15 @@ const MainLayout: React.FC = () => {
         <MainMenu />
       </Sider>
       <Layout className="h-screen">
-        <Header className="flex items-center justify-between h-[56px] p-8 bg-white">
-          <Breadcrumb items={breadItems} className="leading-normal" />
+        <Header
+          style={{ color: token.colorWhite }}
+          className="flex items-center justify-between h-[56px] p-8"
+        >
+          <Breadcrumb
+            style={{ color: token.colorWhite }}
+            items={breadItems}
+            className="leading-normal"
+          />
           <ToolBar />
         </Header>
         <WorkTab />

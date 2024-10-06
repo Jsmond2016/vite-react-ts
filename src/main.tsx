@@ -3,10 +3,12 @@ import '@/assets/style/gloab.scss';
 import 'uno.css';
 
 import { ConfigProvider, theme } from 'antd';
+// import { useState } from 'react';
 import ReactDOM from 'react-dom/client';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 
+// import { darkTheme, lightTheme } from '@/constants/theme';
 import App from './App';
 import store from './store';
 import { useThemeConfigStore } from './store/global';
@@ -35,6 +37,8 @@ const Root = () => {
     .toSorted((a, b) => order.indexOf(a) - order.indexOf(b))
     .map((v) => themeTokenMap[v]);
 
+  // const [theme, setTheme] = useState(lightTheme)
+
   return (
     <Provider store={store}>
       <ConfigProvider
@@ -45,6 +49,7 @@ const Root = () => {
           // algorithm: [theme.darkAlgorithm, theme.compactAlgorithm],
           token: {
             colorPrimary,
+            // ...lightTheme.token,
             borderRadius,
           },
         }}

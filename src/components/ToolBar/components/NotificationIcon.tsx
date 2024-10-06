@@ -1,12 +1,25 @@
 import { BellOutlined, CheckOutlined } from '@ant-design/icons';
 import { useBoolean } from 'ahooks';
-import { Avatar, Badge, Button, List, Popover, Skeleton, Tabs, Tooltip, Typography } from 'antd';
+import {
+  Avatar,
+  Badge,
+  Button,
+  List,
+  Popover,
+  Skeleton,
+  Tabs,
+  theme,
+  Tooltip,
+  Typography,
+} from 'antd';
 import { useState } from 'react';
 
 import { GlobalNotificationTab, GlobalNotificationTabOptions } from '@/constants';
-
+const { useToken } = theme;
 const NotificationIcon = () => {
   const [open, openOperate] = useBoolean();
+
+  const { token } = useToken();
   return (
     <Popover
       open={open}
@@ -15,7 +28,10 @@ const NotificationIcon = () => {
       content={<NotificationTabs />}
     >
       <Badge count={5}>
-        <BellOutlined className="text-size-[22px] cursor-pointer" />
+        <BellOutlined
+          style={{ color: token.colorWhite }}
+          className="text-size-[22px] cursor-pointer"
+        />
       </Badge>
     </Popover>
   );

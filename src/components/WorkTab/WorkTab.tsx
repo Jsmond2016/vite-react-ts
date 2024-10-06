@@ -42,7 +42,6 @@ const WorkTab = () => {
     <Row justify-between className="border-t-solid border-t-coolgray border-t-1">
       <Tabs
         tabBarStyle={{ marginBottom: 0 }}
-        className="bg-white"
         style={{ width: 'calc(100% - 34px)' }}
         items={tabItems}
         type="editable-card"
