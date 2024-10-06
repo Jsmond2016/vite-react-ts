@@ -4,7 +4,7 @@ import { Outlet } from 'react-router-dom';
 
 import Logo from '@/assets/antd-logo.svg';
 import MainMenu from '@/components/MainMenu';
-import { useMenuStore } from '@/store/global';
+import { useMenuStore, useThemeConfigStore } from '@/store/global';
 
 import ToolBar from '../ToolBar';
 import WorkTab from '../WorkTab';
@@ -17,18 +17,20 @@ const MainLayout: React.FC = () => {
   const { curOpenedMenuItems } = useMenuStore();
   const { token } = useToken();
 
+  const { isShowBreadcrumb, isShowBreadcrumbIcon, isShowFooter, isUseWorkTab } =
+    useThemeConfigStore();
+
   const breadItems = curOpenedMenuItems.map((menu, idx, list) => ({
     // 最后一个 item 是自己，不允许点击
     href: menu.isAccessed && idx !== list.length - 1 ? menu.key : undefined,
     title: (
       <Space size="small" style={{ color: token.colorWhite }}>
-        {menu.icon}
+        {isShowBreadcrumbIcon && menu.icon}
         {menu.label}
       </Space>
     ),
   }));
 
-  // const { themeAlgoMode } = useThemeConfigStore();
   // const isDarkMode = themeAlgoMode.includes('dark');
 
   return (
@@ -47,20 +49,26 @@ const MainLayout: React.FC = () => {
           style={{ color: token.colorWhite }}
           className="flex items-center justify-between h-[56px] p-8"
         >
-          <Breadcrumb
-            style={{ color: token.colorWhite }}
-            items={breadItems}
-            className="leading-normal"
-          />
+          {isShowBreadcrumb ? (
+            <Breadcrumb
+              style={{ color: token.colorWhite }}
+              items={breadItems}
+              className="leading-normal"
+            />
+          ) : (
+            <div />
+          )}
           <ToolBar />
         </Header>
-        <WorkTab />
+        {isUseWorkTab && <WorkTab />}
         <Content className="p-10 pb-0  overflow-auto ">
           <Outlet />
         </Content>
-        <Footer className="h-[48px] flex justify-center items-center border-t-neutral border-t-solid border-t-2">
-          Ant Design ©2022 Created by Ant UED
-        </Footer>
+        {isShowFooter && (
+          <Footer className="h-[48px] flex justify-center items-center border-t-neutral border-t-solid border-t-2">
+            Ant Design ©2022 Created by Ant UED
+          </Footer>
+        )}
       </Layout>
     </Layout>
   );

@@ -2,6 +2,7 @@ import { message, Row, Space, Tabs } from 'antd';
 import { last } from 'ramda';
 import { useNavigate } from 'react-router-dom';
 
+import { useThemeConfigStore } from '@/store/global';
 import { useMenuStore } from '@/store/global/menu';
 
 import MoreTab from './MoreTab';
@@ -9,10 +10,12 @@ import MoreTab from './MoreTab';
 const WorkTab = () => {
   const { openedPageTabs, curTabKey, setCurTabKey, setOpenedPageTabs } = useMenuStore();
 
+  const { isUseWorkTabIcon } = useThemeConfigStore();
+
   const tabItems = openedPageTabs.map((menu) => ({
     label: (
       <Space size="small" onClick={() => navigateTo(menu.key)}>
-        {menu.icon}
+        {isUseWorkTabIcon && menu.icon}
         {menu.label}
       </Space>
     ),

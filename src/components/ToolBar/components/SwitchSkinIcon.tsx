@@ -131,38 +131,83 @@ const SkinDrawer = forwardRef<SkinDrawerRefProps, SkinDrawerProps>(
       },
     ];
 
+    const {
+      setIsFoldMenu,
+      isFoldMenu,
+
+      setIsUseAccordion,
+      isUseAccordion,
+
+      setIsShowWatermark,
+      isShowWatermark,
+
+      setIsShowBreadcrumb,
+      isShowBreadcrumb,
+
+      setIsShowBreadcrumbIcon,
+      isShowBreadcrumbIcon,
+
+      setIsUseWorkTab,
+      isUseWorkTab,
+
+      setIsUseWorkTabIcon,
+      isUseWorkTabIcon,
+
+      setIsShowFooter,
+      isShowFooter,
+    } = useThemeConfigStore();
+
+    const configMap = {
+      [SkinConfigEnum.MenuFold]: setIsFoldMenu,
+      [SkinConfigEnum.MenuAccordion]: setIsUseAccordion,
+      [SkinConfigEnum.Watermark]: setIsShowWatermark,
+      [SkinConfigEnum.Breadcrumb]: setIsShowBreadcrumb,
+      [SkinConfigEnum.BreadcrumbIcon]: setIsShowBreadcrumbIcon,
+      [SkinConfigEnum.WorkTab]: setIsUseWorkTab,
+      [SkinConfigEnum.WorkTabIcon]: setIsUseWorkTabIcon,
+      [SkinConfigEnum.Footer]: setIsShowFooter,
+    };
+
     const uiSettingList: SettingItem[] = [
       {
         key: SkinConfigEnum.MenuFold,
         label: '菜单折叠',
+        value: isFoldMenu,
       },
       {
         key: SkinConfigEnum.MenuAccordion,
         label: '菜单手风琴',
+        value: isUseAccordion,
       },
       {
         key: SkinConfigEnum.Watermark,
         label: '水印',
+        value: isShowWatermark,
       },
       {
         key: SkinConfigEnum.Breadcrumb,
         label: '面包屑',
+        value: isShowBreadcrumb,
       },
       {
         key: SkinConfigEnum.BreadcrumbIcon,
         label: '面包屑图标',
+        value: isShowBreadcrumbIcon,
       },
       {
         key: SkinConfigEnum.WorkTab,
         label: '标签栏',
+        value: isUseWorkTab,
       },
       {
         key: SkinConfigEnum.WorkTabIcon,
         label: '标签栏图标',
+        value: isUseWorkTabIcon,
       },
       {
         key: SkinConfigEnum.Footer,
         label: '页脚',
+        value: isShowFooter,
       },
     ];
 
@@ -207,6 +252,9 @@ const SkinDrawer = forwardRef<SkinDrawerRefProps, SkinDrawerProps>(
 
         setThemeMode(algorithm as ThemeMode[]);
       }
+
+      const setConfigFn = configMap[key];
+      setConfigFn?.(checked);
     };
 
     return (
