@@ -12,7 +12,7 @@ import WorkTab from '../WorkTab';
 const { Header, Content, Footer, Sider } = Layout;
 const { useToken } = theme;
 const MainLayout: React.FC = () => {
-  const { isMenuClosed, toggleMenuOpenStatus } = useMenuStore();
+  const { isMenuCollapsed, setIsMenuCollapsed } = useMenuStore();
 
   const { curOpenedMenuItems } = useMenuStore();
   const { token } = useToken();
@@ -35,11 +35,11 @@ const MainLayout: React.FC = () => {
 
   return (
     <Layout>
-      <Sider collapsible collapsed={isMenuClosed} onCollapse={() => toggleMenuOpenStatus()}>
+      <Sider collapsible collapsed={isMenuCollapsed} onCollapse={() => setIsMenuCollapsed()}>
         <Row justify="center" align="middle" className="h-[56px]">
           <Space size="small">
             <img src={Logo} alt="antd-logo" width={32} />
-            {!isMenuClosed && <h1 className="text-white text-size-lg">Vite-AntD-Admin</h1>}
+            {!isMenuCollapsed && <h1 className="text-white text-size-lg">Vite-AntD-Admin</h1>}
           </Space>
         </Row>
         <MainMenu />

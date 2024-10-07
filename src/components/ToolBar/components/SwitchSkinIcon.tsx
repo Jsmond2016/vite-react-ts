@@ -17,7 +17,7 @@ import {
 import { append, cond, equals, filter, pipe, uniq } from 'ramda';
 import React, { forwardRef, useImperativeHandle, useRef } from 'react';
 
-import { ThemeMode, useThemeConfigStore } from '@/store/global';
+import { ThemeMode, useMenuStore, useThemeConfigStore } from '@/store/global';
 
 const SwitchSkinIcon = () => {
   const skinDrawerRef = useRef<SkinDrawerRefProps>(null);
@@ -131,10 +131,9 @@ const SkinDrawer = forwardRef<SkinDrawerRefProps, SkinDrawerProps>(
       },
     ];
 
-    const {
-      setIsFoldMenu,
-      isFoldMenu,
+    const { isMenuCollapsed, setIsMenuCollapsed } = useMenuStore();
 
+    const {
       setIsUseAccordion,
       isUseAccordion,
 
@@ -158,7 +157,7 @@ const SkinDrawer = forwardRef<SkinDrawerRefProps, SkinDrawerProps>(
     } = useThemeConfigStore();
 
     const configMap = {
-      [SkinConfigEnum.MenuFold]: setIsFoldMenu,
+      [SkinConfigEnum.MenuFold]: setIsMenuCollapsed,
       [SkinConfigEnum.MenuAccordion]: setIsUseAccordion,
       [SkinConfigEnum.Watermark]: setIsShowWatermark,
       [SkinConfigEnum.Breadcrumb]: setIsShowBreadcrumb,
@@ -172,7 +171,7 @@ const SkinDrawer = forwardRef<SkinDrawerRefProps, SkinDrawerProps>(
       {
         key: SkinConfigEnum.MenuFold,
         label: '菜单折叠',
-        value: isFoldMenu,
+        value: isMenuCollapsed,
       },
       {
         key: SkinConfigEnum.MenuAccordion,

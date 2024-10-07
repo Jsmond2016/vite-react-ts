@@ -8,7 +8,7 @@ type IActions = {
   setColorPrimary: (color: string) => void;
   setBorderRadius: (size: number) => void;
   //
-  setIsFoldMenu: (foldMenu: boolean) => void; // 菜单折叠
+  // setIsFoldMenu: (foldMenu: boolean) => void; // 菜单折叠
   setIsUseAccordion: (useAccordion: boolean) => void; // 手风琴
   setIsShowWatermark: (waterMark: boolean) => void; // 水印
 
@@ -29,8 +29,8 @@ const initState = {
   colorPrimary: '#1677ff',
   borderRadius: 6,
 
-  // 界面设置
-  isFoldMenu: false, // 菜单折叠
+  // // 界面设置
+  // isFoldMenu: false, // 菜单折叠
   isUseAccordion: false, // 手风琴
   isShowWatermark: true, // 水印
 
@@ -53,7 +53,7 @@ export const useThemeConfigStore = create<IActions & typeof initState>()(
         setColorPrimary: (color: string) => set(() => ({ colorPrimary: color })),
         setBorderRadius: (size: number) => set(() => ({ borderRadius: size })),
 
-        setIsFoldMenu: (t: boolean) => set(() => ({ isFoldMenu: t })),
+        // setIsFoldMenu: (t: boolean) => set(() => ({ isFoldMenu: t })),
         setIsUseAccordion: (t: boolean) => set(() => ({ isUseAccordion: t })),
         setIsShowWatermark: (t: boolean) => set(() => ({ isShowWatermark: t })),
         setIsShowBreadcrumb: (t: boolean) => set(() => ({ isShowBreadcrumb: t })),
